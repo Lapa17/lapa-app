@@ -1,0 +1,8 @@
+.search{
+  grid-area: s;
+}
+
+.search input{
+  width: 80%;
+  height: 30px;
+}

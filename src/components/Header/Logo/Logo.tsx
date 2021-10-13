@@ -1,9 +1,11 @@
 import React from 'react';
+import s from './Logo.module.css'
 
-const Header = () => {
-    return <header className='header'>
+const Logo = () => {
+    return (
+    <div className={s.logo}>
         <img src="https://cdn.dribbble.com/users/8675/screenshots/2096468/lapa-dribbble.png" alt="" />
-    </header>
+    </div>)
 }
 
-export default Header;
+export default Logo;
