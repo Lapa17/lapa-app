@@ -3,7 +3,7 @@ import Posts from './Posts/Posts';
 import s from './Profile.module.css'
 
 const Profile = () => {
-  return <div className={s.content}>
+  return <div>
     <div>
       ava + description
     </div>

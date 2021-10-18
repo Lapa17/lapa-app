@@ -1,13 +1,14 @@
 import React from 'react';
 import s from './Friends.module.css'
+import Friend from './Friend/Friend'
 
 const Friends = () => {
   return <nav className={s.nav}>
-    <div className={s.item}><a>Profile</a></div>
-    <div className={s.item}><a>Messages</a></div>
-    <div className={s.item}><a>News</a></div>
-    <div className={s.item}><a>Music</a></div>
-    <div className={s.item}><a>Settings</a></div>
+    <Friend friend='Pavel'/>
+    <Friend friend='Maks'/>
+    <Friend friend='Artyom'/>
+    <Friend friend='Leha'/>
+  
   </nav>
 }
 

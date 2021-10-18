@@ -9,7 +9,7 @@ type PropsType = {
 
 
 
-const Posts = (props:PropsType) => {
+const Posts:React.FC<PropsType> = (props) => {
   return <div>
   {props.myPost}
   <div>

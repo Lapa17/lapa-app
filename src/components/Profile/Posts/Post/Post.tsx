@@ -5,7 +5,7 @@ type PropsType = {
   message: string;
 }
 
-const Post = (props:PropsType) => {
+const Post:React.FC<PropsType> = (props) => {
   return <div className={s.item}>
      {props.message}
     </div>
