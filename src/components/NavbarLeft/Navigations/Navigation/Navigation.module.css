@@ -1,8 +1,3 @@
-.nav{
-    grid-area: nl;
-    background-color: green;
-  }
-  
-  .item{
-    color: white;
-  }
+.itemLink {
+  color: black;
+}

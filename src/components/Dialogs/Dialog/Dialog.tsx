@@ -1,0 +1,17 @@
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { dialogsData, DialogsDataType } from '../Dialogs'
+import s from './Dialog.module.css'
+
+
+const Dialog: React.FC<DialogsDataType> = (props) => {
+
+
+    return (
+            <div className={s.dialog + ''+ s.active}>
+                <NavLink to={'/dialogs/'+ props.id}>{props.name}</NavLink>
+            </div>
+    )
+}
+
+export default Dialog;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css'
 
 type NavigationType ={
@@ -9,7 +10,7 @@ type NavigationType ={
 const Navigation: React.FC<NavigationType> = (props) => {
   return (
     <div className={s.item}>
-      <a href={props.link}>{props.menu}</a>
+      <NavLink to={props.link}>{props.menu}</NavLink>
     </div>
   )
 }

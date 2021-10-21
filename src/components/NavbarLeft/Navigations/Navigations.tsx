@@ -8,7 +8,7 @@ const Navigations = () => {
     <Navigation menu='Messages' link='/dialogs'/>
     <Navigation menu='News' link='/news'/>
     <Navigation menu='Music' link='/music'/>
-    <Navigation menu='Settings' link='settings'/>
+    <Navigation menu='Settings' link='/settings'/>
   </nav>
 }
 
