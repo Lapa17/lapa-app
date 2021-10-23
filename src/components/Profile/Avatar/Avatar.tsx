@@ -1,14 +1,10 @@
 import React from 'react';
+import { AvatarType } from '../../../state';
 import s from './Avatar.module.css'
 
 
 
-type AvatarType = {
-  imgAdress: string
-}
-
-
-const Avatar = (props:AvatarType) => {
+const Avatar:React.FC<AvatarType> = (props) => {
   return <div className={s.avatarWrapper}>
     <img src={props.imgAdress} />
   </div>

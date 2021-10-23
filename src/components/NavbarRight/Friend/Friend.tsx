@@ -1,13 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { FriendType } from '../../../state';
 import s from './Friend.module.css'
 
-type FriendType ={
-  friend:string;
-}
+
 
 const Friend:React.FC<FriendType> = (props) => {
   return <div className={s.item}>
-      <a>{props.friend}</a>
+      <NavLink to={props.friend}>{props.friend}</NavLink>
       </div>
 
 }

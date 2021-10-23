@@ -1,5 +1,5 @@
 import React from 'react';
-import { WidgetsType } from '../../../..';
+import { WidgetsType } from '../../../../state';
 import s from './Widget.module.css'
 
 

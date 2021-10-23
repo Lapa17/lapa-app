@@ -11,14 +11,3 @@
     z-index: 20;
   }
   
-.darkNav {
-  height: 300px;
-    background: #383a45;
-    position: fixed;
-    bottom: 0;
-    z-index: 3;
-    width: 12.5%;
-    margin-left: -10px;
-    padding: 10px;
-    min-width: 120px;
-}

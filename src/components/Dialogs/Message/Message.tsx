@@ -1,5 +1,5 @@
 import React from 'react'
-import { MessagesDataType } from '../../..';
+import { MessagesDataType } from '../../../state';
 import s from './Message.module.css'
 
 
