@@ -1,5 +1,5 @@
 import React from 'react'
-import { dialogsData, DialogsType, messagesData } from '../..'
+import { DialogsType } from '../..'
 import Dialog from './Dialog/Dialog'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'
@@ -9,8 +9,8 @@ import Message from './Message/Message'
 
 const Dialogs: React.FC<DialogsType> = (props) => {
 
-    const dialogsElements = dialogsData.map((dialogs)=><Dialog id={dialogs.id} name={dialogs.name} />)
-    const messageElements = messagesData.map((message) => <Message message={message.message} id={message.id}/> )
+    const dialogsElements = props.friends.map((dialogs)=><Dialog id={dialogs.id} name={dialogs.name} />)
+    const messageElements = props.messages.map((message) => <Message message={message.message} id={message.id}/> )
 
     return (
         <div className={s.dialogs}>

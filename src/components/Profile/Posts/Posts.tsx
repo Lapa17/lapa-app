@@ -1,5 +1,5 @@
 import React from 'react';
-import { postsData, PostType } from '../../..';
+import { PostType } from '../../..';
 import Post from './Post/Post';
 import s from './Posts.module.css'
 
@@ -10,7 +10,7 @@ import s from './Posts.module.css'
 
 const Posts: React.FC<PostType> = (props) => {
 
-  const postsElements = postsData.map((m) => <Post message={m.postMessage} likes={m.likes}/>)
+  const postsElements = props.postData.map((m) => <Post message={m.postMessage} likes={m.likes}/>)
   return <div>
     <div className={s.postHeader}>
       <div className={s.itemWrapper}>

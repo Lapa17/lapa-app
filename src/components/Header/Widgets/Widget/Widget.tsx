@@ -1,9 +1,7 @@
 import React from 'react';
+import { WidgetsType } from '../../../..';
 import s from './Widget.module.css'
 
-type WidgetsType ={
-    src: string
-}
 
 
 const Widget = (props: WidgetsType) => {

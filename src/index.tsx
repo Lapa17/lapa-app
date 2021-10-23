@@ -4,6 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+export type AppType = {
+  dialogs: Array<DialogsDataType>
+  messages: Array<MessagesDataType>
+  posts: Array<PostsDataType>
+}
+
+
 export type DialogsType = {
   
   friends: Array<DialogsDataType>
@@ -75,11 +82,17 @@ export type NavigationType ={
 } 
 
 
+export type WidgetsType ={
+  src: string
+}
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App dialogs={dialogsData}
+        messages={messagesData}
+        posts={postsData}
+    />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -9,10 +9,10 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import { DialogsType } from '.';
+import { AppType } from '.';
 
 
-const App = () => {
+const App:React.FC<AppType> = (props) => {
   return (
     <BrowserRouter>
     <div className='app-wrapper'>
@@ -20,11 +20,11 @@ const App = () => {
       <NavbarLeft />
       <NavbarRight />
       <div className='app-wrapper-content'>
-      <Route path='/profile' component={Profile}/>
-      <Route path='/dialogs' component={Dialogs}/>
-      <Route path='/news' component={News}/> 
-      <Route path='/music' component={Music}/> 
-      <Route path='/settings' component={Settings}/>      
+      <Route path='/profile' render={() => <Profile postData={props.posts} myPost={'My posts'} newPost={'New post'}/>}/>
+      <Route path='/dialogs' render={() => <Dialogs friends={props.dialogs} messages={props.messages}/>}/>
+      {/* <Route path='/news' render={() => <News />}/> 
+      <Route path='/music' render={() => <Music />}/> 
+      <Route path='/settings' render={() => <Settings />}/>       */}
       </div>
     </div>
     </BrowserRouter>
