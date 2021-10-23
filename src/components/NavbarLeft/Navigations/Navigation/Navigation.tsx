@@ -1,16 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css'
+import {NavigationType} from './../../../../index'
 
-type NavigationType ={
-  menu: string;
-  link: string;
-}
+
 
 const Navigation: React.FC<NavigationType> = (props) => {
   return (
     <div className={s.item}>
-      <NavLink to={props.link}>{props.menu}</NavLink>
+      <NavLink to={props.link} className={s.itemLink}>{props.menu}</NavLink>
     </div>
   )
 }

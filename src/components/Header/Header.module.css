@@ -1,13 +1,13 @@
 .header{
-    grid-area: h;
-    background-color: blue;
+  grid-area: h;
+    background-color: white;
     display: grid;
-
-    grid-template-areas: 
-    "l s w";
-
-  grid-template-columns: 2fr 5fr 2fr;
-  }
-  .header img{
-    width: 50px;
+    grid-template-areas: "l s w";
+    grid-template-columns: 3fr 6fr 2fr;
+    position: fixed;
+    width: 100%;
+    z-index: 20;
+    border-bottom: 1px solid #f5f6f8;
+    opacity: 0.95;
+    backdrop-filter: blur(10px);
   }

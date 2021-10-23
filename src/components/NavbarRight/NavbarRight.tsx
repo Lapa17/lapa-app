@@ -1,10 +1,13 @@
 import React from 'react';
-import Contacts from './Contacts/Contacts';
+import Friend from './Friend/Friend';
 import s from './NavbarRight.module.css'
 
 const NavbarRight = () => {
   return <nav className={s.nav}>
-    <Contacts />
+      <Friend friend='Pavel'/>
+      <Friend friend='Maks'/>
+      <Friend friend='Artyom'/>
+      <Friend friend='Leha'/>
   </nav>
 }
 

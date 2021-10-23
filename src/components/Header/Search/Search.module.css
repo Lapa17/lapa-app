@@ -1,8 +1,22 @@
 .search{
   grid-area: s;
+  display: grid;
+    align-items: center;
+    justify-items: start;
 }
 
 .search input{
-  width: 80%;
-  height: 30px;
+  width: 65%;
+    height: 30px;
+    border-radius: 20px;
+    background: #f5f6f8;
+    font-size: 22px;
+    border: 1px solid #a25bea;
+    padding: 5px 15px;
+    font-family: 'Circe Light';
+}
+
+
+.search input:focus-visible{
+  outline: none;
 }

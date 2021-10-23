@@ -1,11 +1,9 @@
 import React from 'react'
+import { MessagesDataType } from '../../..';
 import s from './Message.module.css'
 
-export type MessageType = {
-    message: string;
-}
 
-const Message:React.FC<MessageType> = (props) => {
+const Message:React.FC<MessagesDataType> = (props) => {
 
 
     return (

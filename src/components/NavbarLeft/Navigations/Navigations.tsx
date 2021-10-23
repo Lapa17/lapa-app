@@ -9,6 +9,7 @@ const Navigations = () => {
     <Navigation menu='News' link='/news'/>
     <Navigation menu='Music' link='/music'/>
     <Navigation menu='Settings' link='/settings'/>
+    <div className={s.darkNav}></div>
   </nav>
 }
 

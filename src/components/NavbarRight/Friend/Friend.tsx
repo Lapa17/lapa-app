@@ -6,11 +6,10 @@ type FriendType ={
 }
 
 const Friend:React.FC<FriendType> = (props) => {
-  return <nav className={s.nav}>
-    <div className={s.item}>
+  return <div className={s.item}>
       <a>{props.friend}</a>
       </div>
-  </nav>
+
 }
 
 export default Friend;

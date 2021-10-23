@@ -1,8 +1,50 @@
-.content{
-  grid-area: c;
-  background-color: red;
+.itemWrapper{
+  border: 1px solid #a25bea;
+  border-radius: 10px;
+  box-shadow: 2px 1px 9px 2px #f9f6fd;
+  width: 100%;
+  min-width: 200px;
+  text-align: center;
+  margin: 10px 20px;
+}
+.item{
+  display: grid;
+    justify-content: start;
+    align-items: center;
+    margin-left: 30px;
+}
+.item button {
+  border: 2px solid #a25bea;
+    box-shadow: 2px 1px 4px 2px #a25bea;
+    background: #a25bea;
+    color: white;
+    font-size: 22px;
+    transition: all 1.2s ease;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0.95;
+    border-radius: 100px;
+    height: 90px;
+    width: 90px;
 }
 
-.item{
-  font-size: 15px;
+
+.item button:hover{
+  background-color: white;
+  color: #a25bea;
+  transform: rotate(360deg);
+  cursor: pointer;
+}
+
+
+.postHeader{
+  display: grid;
+    grid-template-columns: 6fr 3fr;
+    column-gap: 10px;
+}
+
+.posts{
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+  margin: 0px 10px;
 }

@@ -1,3 +1,13 @@
 .itemLink {
-  color: black;
+  color: #838daa;
+  text-decoration: none;
+}
+.itemLink.active{
+  color: #8224e3 ;
+}
+
+
+
+.item{
+  margin: 20px 15px;
 }

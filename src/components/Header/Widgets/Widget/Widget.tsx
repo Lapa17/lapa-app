@@ -1,9 +1,14 @@
 import React from 'react';
 import s from './Widget.module.css'
 
-const Widget = () => {
+type WidgetsType ={
+    src: string
+}
+
+
+const Widget = (props: WidgetsType) => {
     return (
-        <img src="http://demo.foxthemes.net/socialitev2.1/assets/images/avatars/avatar-2.jpg" />
+        <img src={props.src}/>
         )
 }
 

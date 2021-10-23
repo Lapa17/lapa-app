@@ -1,13 +1,12 @@
 import React from 'react';
+import { PostMesageType } from '../../../..';
 import s from './Post.module.css'
 
-type PropsType = {
-  message: string;
-}
 
-const Post:React.FC<PropsType> = (props) => {
+const Post:React.FC<PostMesageType> = (props) => {
   return <div className={s.item}>
-     {props.message}
+     <div className={s.postMessage}>{props.message}</div>
+     <div className={s.postLikes}>Likes: {props.likes}</div>
     </div>
   
 }

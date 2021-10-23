@@ -1,43 +1,16 @@
 import React from 'react'
+import { dialogsData, DialogsType, messagesData } from '../..'
 import Dialog from './Dialog/Dialog'
 import s from './Dialogs.module.css'
-import Message, { MessageType } from './Message/Message'
+import Message from './Message/Message'
 
-export type DialogsType = {
-    message: string;
-    friends: Array<DialogsDataType>
-}
 
-export type DialogsDataType = {
-    id: number;
-    name: string;
-
-}
-
-export type MessagesDataType ={
-    id: number;
-    name: string;
-}
-
-export const dialogsData = [
-    { id: 1, name: 'Pashka' },
-    { id: 2, name: 'Maks' },
-    { id: 3, name: 'Vlados' },
-    { id: 4, name: 'Leha' },
-    { id: 5, name: 'Dima' }
-]
-
-export const messagesData = [
-    { id: 1, message: 'Hi' },
-    { id: 2, message: 'How are you?' },
-    { id: 3, message: 'I am fine' }
-]
 
 
 const Dialogs: React.FC<DialogsType> = (props) => {
 
-    let dialogsElements = dialogsData.map((dialogs)=><Dialog id={dialogs.id} name={dialogs.name} />)
-    let messageElements = messagesData.map((message) => <Message message={message.message} /> )
+    const dialogsElements = dialogsData.map((dialogs)=><Dialog id={dialogs.id} name={dialogs.name} />)
+    const messageElements = messagesData.map((message) => <Message message={message.message} id={message.id}/> )
 
     return (
         <div className={s.dialogs}>

@@ -1,8 +1,15 @@
 .nav{
   grid-area: nr;
-  background-color: green;
-}
-
-.item{
-  color: white;
-}
+    background: #f9f6fd;
+    padding: 10px;
+    border-radius: 10px;
+    position: fixed;
+    right: 0;
+    height: max-content;
+    margin: 20px 20px 10px 10px;
+    top: 60px;
+    min-width: 150px;
+    display: grid;
+    justify-content: center;
+    align-items: stretch;
+  }
