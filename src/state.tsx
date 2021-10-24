@@ -1,4 +1,11 @@
-export type StateType = {
+import { renderAll } from "./render"
+
+export type StateType ={
+  state:StateDataType;
+  addPost: (postMessage:string) => void
+}
+
+export type StateDataType = {
     dialogsPage:DialogsType
     profilePage:PostType
     navbarRight:NavbarRightType
@@ -31,7 +38,7 @@ export type DialogsType = {
   export type PostType = {
     myPost: string;
     newPost:string;
-    posts:Array<PostsDataType>  
+    posts:Array<PostsDataType>
   }
   
   export type PostsDataType ={
@@ -71,8 +78,14 @@ export type DialogsType = {
  export type FriendType ={
     friend:string;
   }
-
-  export const state:StateType ={
+export type AddPostType ={
+  myPost: string;
+  newPost:string;
+  posts:Array<PostsDataType>
+    addPost: (postMessage:string) => void
+  }
+  
+  export const state:StateDataType ={
       dialogsPage: {dialogs:[
         { id: 1, name: 'Pashka' },
         { id: 2, name: 'Maks' },
@@ -89,14 +102,7 @@ export type DialogsType = {
         {id:1, postMessage:"Hi, I'm Pavel", likes:10},
         {id:2, postMessage:"Let's go to learn a React", likes:9},
         {id:3, postMessage:"Also we need improve our html/css skills", likes:11},
-        {id:4, postMessage:"Then we'll learn Redux", likes:22},
-        {id:5, postMessage:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non id, voluptatibus amet veri", likes:12},
-        {id:6, postMessage:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non id, voluptatibus amet veri", likes:22},
-        {id:7, postMessage:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non id, voluptatibus amet veri", likes:4},
-        {id:8, postMessage:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non id, voluptatibus amet veri", likes:6},
-        {id:9, postMessage:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non id, voluptatibus amet veri", likes:8},
-        {id:10, postMessage:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non id, voluptatibus amet veri", likes:43},
-        {id:11, postMessage:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non id, voluptatibus amet veri", likes:19}
+        {id:4, postMessage:"Then we'll learn Redux", likes:22}
       ], myPost:'My posts', newPost:'New post'},
       navbarRight:{friends:[
           {id:1, name: 'Pashka'},
@@ -105,3 +111,16 @@ export type DialogsType = {
           {id:4, name: 'Leha'}
       ]}
   }
+
+
+  export let addPost = (postMessage:string) =>{
+    let newPost = {
+      id:5,
+      postMessage:postMessage,
+      likes:0
+    }
+    state.profilePage.posts.push(newPost)
+    renderAll(state, addPost)
+  }
+
+ 

@@ -18,10 +18,10 @@ const App:React.FC<StateType> = (props) => {
     <div className='app-wrapper'>
       <Header />
       <NavbarLeft />
-      <NavbarRight friends={props.navbarRight.friends}/>
+      <NavbarRight friends={props.state.navbarRight.friends}/>
       <div className='app-wrapper-content'>
-      <Route path='/profile' render={() => <Profile posts={props.profilePage.posts} myPost={props.profilePage.myPost} newPost={props.profilePage.newPost}/>}/>
-      <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogsPage.dialogs} messages={props.dialogsPage.messages}/>}/>
+      <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts} myPost={props.state.profilePage.myPost} newPost={props.state.profilePage.newPost} addPost={props.addPost}/>}/>
+      <Route path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs} messages={props.state.dialogsPage.messages}/>}/>
       {/* <Route path='/news' render={() => <News />}/> 
       <Route path='/music' render={() => <Music />}/> 
       <Route path='/settings' render={() => <Settings />}/>       */}

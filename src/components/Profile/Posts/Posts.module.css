@@ -1,5 +1,5 @@
 .itemWrapper{
-  border: 1px solid #a25bea;
+  border: 1px solid #f9f6fd;
   border-radius: 10px;
   box-shadow: 2px 1px 9px 2px #f9f6fd;
   width: 100%;
@@ -12,21 +12,22 @@
     justify-content: start;
     align-items: center;
     margin-left: 30px;
+    grid-template-columns: 5fr 1fr;
 }
 .item button {
   border: 2px solid #a25bea;
-    box-shadow: 2px 1px 4px 2px #a25bea;
-    background: #a25bea;
-    color: white;
-    font-size: 22px;
-    transition: all 1.2s ease;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    opacity: 0.95;
-    border-radius: 100px;
-    height: 90px;
-    width: 90px;
-    font-family: 'Circe Light';
+  box-shadow: 2px 1px 4px 2px #a25bea;
+  background: #a25bea;
+  color: white;
+  font-size: 22px;
+  transition: all 1.2s ease;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  opacity: 0.95;
+  border-radius: 10px;
+  height: 70px;
+  width: 70px;
+  font-family: 'Circe Light';
 }
 
 
@@ -37,10 +38,23 @@
   cursor: pointer;
 }
 
-
+.item textarea{
+  max-width: 90%;
+    height: 70px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #a763eb;
+    box-shadow: 2px 1px 4px 2px #f5f6f8;
+    font-family: 'Circe Light';
+    font-size: 22px;
+}
+.item textarea:focus-visible{
+  box-shadow: 2px 1px 4px 2px #a25bea;
+  outline:none
+}
 .postHeader{
   display: grid;
-    grid-template-columns: 6fr 3fr;
+    grid-template-columns: 5fr 5fr;
     column-gap: 10px;
 }
 
