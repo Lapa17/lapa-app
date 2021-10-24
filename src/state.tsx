@@ -3,12 +3,14 @@ import { renderAll } from "./render"
 export type StateType ={
   state:StateDataType;
   addPost: (postMessage:string) => void
+  textareaChange: (value:string) => void
 }
 
 export type StateDataType = {
     dialogsPage:DialogsType
     profilePage:PostType
     navbarRight:NavbarRightType
+    textareaData:string
   }
 
 export type NavbarRightType ={
@@ -52,7 +54,15 @@ export type DialogsType = {
     likes:number
   }
   
+  export type TextAreaDataType ={
+    array: Array<TextAreaArrayDataType>
+  }
   
+  export type TextAreaArrayDataType ={
+    value: string
+  }
+
+
   
   
   export type NavigationType ={
@@ -83,6 +93,8 @@ export type AddPostType ={
   newPost:string;
   posts:Array<PostsDataType>
     addPost: (postMessage:string) => void
+    textareaChange: (value:string) => void
+    textareaData:string
   }
   
   export const state:StateDataType ={
@@ -109,8 +121,11 @@ export type AddPostType ={
           {id:2, name: 'Maks'},
           {id:3, name: 'Vlad'},
           {id:4, name: 'Leha'}
-      ]}
-  }
+      ]
+  },
+  textareaData:''
+}
+
 
 
   export let addPost = (postMessage:string) =>{
@@ -120,7 +135,13 @@ export type AddPostType ={
       likes:0
     }
     state.profilePage.posts.push(newPost)
-    renderAll(state, addPost)
+    renderAll(state, addPost,textareaChange)
   }
 
+
+  export let textareaChange = (value:string) => {
+    state.textareaData = value;
+    // state.textareaData.array.map((a)=> a.value = value)
+    renderAll(state, addPost, textareaChange);
+  }
  

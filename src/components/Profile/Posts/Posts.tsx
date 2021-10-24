@@ -14,14 +14,30 @@ const Posts: React.FC<AddPostType> = (props) => {
 
   let textAreaElement = React.createRef<HTMLTextAreaElement>();
 
-  let addPost = () => {
+  
+  
+  
+  
 
+  let changeTextAreaDataValue = () => {
     if (textAreaElement.current !== null) {
       let text = textAreaElement.current.value
-      if (text !== '') {
+        props.textareaChange(text)
+        console.log(state.textareaData)
+      
+    }
+  }
+
+  let addPost = () => {
+
+    if (props.textareaData !== '' && textAreaElement.current !== null) {
+      let text = props.textareaData
         props.addPost(text)
         console.log(state.profilePage.posts)
-      }
+        console.log(state)
+        textAreaElement.current.value = ''
+        changeTextAreaDataValue();
+      
     }
 
   }
@@ -33,7 +49,7 @@ const Posts: React.FC<AddPostType> = (props) => {
         <h2 >{props.myPost} </h2>
       </div>
       <div className={s.item}>
-        <textarea placeholder="What's new?" ref={textAreaElement} ></textarea>
+        <textarea placeholder="What's new?" ref={textAreaElement} onChange={changeTextAreaDataValue}></textarea>
         <button onClick={addPost}>{props.newPost}</button>
       </div>
     </div>

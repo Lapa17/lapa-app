@@ -1,12 +1,12 @@
 import './index.css';
 import { renderAll } from './render';
 import reportWebVitals from './reportWebVitals';
-import {addPost, state} from './state'
+import {addPost, state, textareaChange} from './state'
 
 
 
 
-renderAll(state, addPost);
+renderAll(state, addPost, textareaChange);
 
 
 // If you want to start measuring performance in your app, pass a function

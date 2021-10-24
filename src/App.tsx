@@ -20,7 +20,7 @@ const App:React.FC<StateType> = (props) => {
       <NavbarLeft />
       <NavbarRight friends={props.state.navbarRight.friends}/>
       <div className='app-wrapper-content'>
-      <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts} myPost={props.state.profilePage.myPost} newPost={props.state.profilePage.newPost} addPost={props.addPost}/>}/>
+      <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts} myPost={props.state.profilePage.myPost} newPost={props.state.profilePage.newPost} addPost={props.addPost} textareaChange={props.textareaChange} textareaData={props.state.textareaData}/>}/>
       <Route path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs} messages={props.state.dialogsPage.messages}/>}/>
       {/* <Route path='/news' render={() => <News />}/> 
       <Route path='/music' render={() => <Music />}/> 

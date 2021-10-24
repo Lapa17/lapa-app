@@ -7,10 +7,11 @@ import { StateDataType } from './state';
 
 
 
-export let renderAll = (state:StateDataType, addPost:(postMessage:string) => void) =>{
-ReactDOM.render(
+export let renderAll = (state:StateDataType, addPost:(postMessage:string) => void,textareaChange: (value:string) => void ) =>{
+
+  ReactDOM.render(
   <React.StrictMode>
-    <App state={state} addPost={addPost}/>
+    <App state={state} addPost={addPost} textareaChange={textareaChange}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
