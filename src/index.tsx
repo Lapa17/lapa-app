@@ -1,12 +1,26 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 import './index.css';
-import { renderAll } from './render';
 import reportWebVitals from './reportWebVitals';
-import {addPost, state, textareaChange} from './state'
+import { addPost, state, StateDataType, subscribe, textareaChange } from './state';
 
 
 
 
-renderAll(state, addPost, textareaChange);
+
+export let renderAll = (state:StateDataType) =>{
+
+    ReactDOM.render(
+    <React.StrictMode>
+      <App state={state} addPost={addPost} textareaChange={textareaChange}/>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+  }
+  renderAll(state)
+
+  subscribe(renderAll)
 
 
 // If you want to start measuring performance in your app, pass a function

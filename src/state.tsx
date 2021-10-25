@@ -1,8 +1,10 @@
-import { renderAll } from "./render"
+let renderAll = (state:StateDataType) => {
+  console.log('State changed')
+}
 
 export type StateType ={
   state:StateDataType;
-  addPost: (postMessage:string) => void
+  addPost: () => void
   textareaChange: (value:string) => void
 }
 
@@ -92,7 +94,7 @@ export type AddPostType ={
   myPost: string;
   newPost:string;
   posts:Array<PostsDataType>
-    addPost: (postMessage:string) => void
+    addPost: () => void
     textareaChange: (value:string) => void
     textareaData:string
   }
@@ -128,20 +130,23 @@ export type AddPostType ={
 
 
 
-  export let addPost = (postMessage:string) =>{
+  export const addPost = () =>{
     let newPost = {
       id:5,
-      postMessage:postMessage,
+      postMessage:state.textareaData,
       likes:0
     }
     state.profilePage.posts.push(newPost)
-    renderAll(state, addPost,textareaChange)
+    renderAll(state)
+    
   }
 
 
-  export let textareaChange = (value:string) => {
+  export const textareaChange = (value:string) => {
     state.textareaData = value;
-    // state.textareaData.array.map((a)=> a.value = value)
-    renderAll(state, addPost, textareaChange);
+    renderAll(state);
   }
  
+  export const subscribe = (observer:(state:StateDataType) => void) =>{
+    renderAll = observer
+  }
