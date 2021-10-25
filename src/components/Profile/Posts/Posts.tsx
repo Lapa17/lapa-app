@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler, MouseEventHandler } from 'react';
 import { AddPostType, state } from '../../../state';
 import Post from './Post/Post';
 import s from './Posts.module.css'
@@ -19,7 +19,7 @@ const Posts: React.FC<AddPostType> = (props) => {
   
   
 
-  let changeTextAreaDataValue = (e:any) => {
+  let changeTextAreaDataValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
   let text = e.currentTarget.value
   props.textareaChange(text)
   console.log(state.textareaData)
