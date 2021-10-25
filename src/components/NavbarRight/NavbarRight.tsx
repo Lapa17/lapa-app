@@ -5,7 +5,7 @@ import s from './NavbarRight.module.css'
 
 const NavbarRight:React.FC<NavbarRightType> = (props) => {
 
-  const friendList = props.friends.map((friend)=> <Friend friend={friend.name}/>)
+  const friendList = props.friends.map((friend)=> <Friend key={friend.id} id={friend.id} name={friend.name}/>)
 
   return <nav className={s.nav}>
       {friendList}

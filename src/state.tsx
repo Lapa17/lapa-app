@@ -54,6 +54,7 @@ export type DialogsType = {
   export type PostMesageType = {
     message: string;
     likes:number
+    id:number
   }
   
   export type TextAreaDataType ={
@@ -87,9 +88,6 @@ export type DialogsType = {
   }
 
 
- export type FriendType ={
-    friend:string;
-  }
 export type AddPostType ={
   myPost: string;
   newPost:string;

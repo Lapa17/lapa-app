@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FriendType } from '../../../state';
+import { DialogsDataType } from '../../../state';
 import s from './Friend.module.css'
 
 
 
-const Friend:React.FC<FriendType> = (props) => {
-  return <div className={s.item}>
-      <NavLink to={props.friend}>{props.friend}</NavLink>
+const Friend:React.FC<DialogsDataType> = (props) => {
+  return <div className={s.item} key={props.id}>
+      <NavLink to={props.name}>{props.name}</NavLink>
       </div>
 
 }

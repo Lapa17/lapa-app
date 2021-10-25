@@ -8,7 +8,7 @@ const Dialog: React.FC<DialogsDataType> = (props) => {
 
 
     return (
-            <div className={s.dialog + '' + s.active}>
+            <div className={s.dialog + '' + s.active} key={props.id}>
                 <NavLink to={'/dialogs/'+ props.id}>{props.name}</NavLink>
             </div>
     )

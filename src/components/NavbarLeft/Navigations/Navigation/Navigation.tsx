@@ -8,7 +8,7 @@ import {NavigationType} from './../../../../state'
 const Navigation: React.FC<NavigationType> = (props) => {
   return (
     <div className={s.item}>
-      <NavLink to={props.link} className={s.itemLink}>{props.menu}</NavLink>
+      <NavLink to={props.link} activeClassName={s.active} className={s.itemLink}>{props.menu}</NavLink>
     </div>
   )
 }

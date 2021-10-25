@@ -10,36 +10,35 @@ import s from './Posts.module.css'
 
 const Posts: React.FC<AddPostType> = (props) => {
 
-  const postsElements = props.posts.map((m) => <Post message={m.postMessage} likes={m.likes} />)
+  const postsElements = props.posts.map((m) => <Post key={m.id} message={m.postMessage} likes={m.likes} id={m.id}/>)
 
-  let textAreaElement = React.createRef<HTMLTextAreaElement>();
+  // let textAreaElement = React.createRef<HTMLTextAreaElement>();
 
   
   
   
   
 
-  let changeTextAreaDataValue = () => {
-    if (textAreaElement.current !== null) {
-      let text = textAreaElement.current.value
-        props.textareaChange(text)
-        console.log(state.textareaData)
-      
-    }
+  let changeTextAreaDataValue = (e:any) => {
+  let text = e.currentTarget.value
+  props.textareaChange(text)
+  console.log(state.textareaData)
+    //event (e) 
   }
 
-  let addPost = () => {
-
-    if (props.textareaData !== '' && textAreaElement.current !== null) {
+  let addPost = (e:any) => {
+    if (props.textareaData !== '') {
         props.addPost()
         console.log(state.profilePage.posts)
         console.log(state)
-        textAreaElement.current.value = ''
-        changeTextAreaDataValue();
+        changeTextAreaDataValue(e);
+        console.log(state)
       
     }
 
   }
+  
+ 
 
 
   return <div>
@@ -48,7 +47,7 @@ const Posts: React.FC<AddPostType> = (props) => {
         <h2 >{props.myPost} </h2>
       </div>
       <div className={s.item}>
-        <textarea placeholder="What's new?" ref={textAreaElement} onChange={changeTextAreaDataValue} value={props.textareaData}/>
+        <textarea placeholder="What's new?" onChange={changeTextAreaDataValue} value={props.textareaData}/>
         <button onClick={addPost}>{props.newPost}</button>
       </div>
     </div>
