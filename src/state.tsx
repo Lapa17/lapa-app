@@ -1,3 +1,5 @@
+import { v1 } from "uuid"
+
 let renderAll = (state:StateDataType) => {
   console.log('State changed')
 }
@@ -27,13 +29,13 @@ export type DialogsType = {
   }
   
   export type DialogsDataType = {
-    id: number;
+    id: string;
     name: string;
   
   }
   
   export type MessagesDataType ={
-    id: number;
+    id: string;
     message: string;
   }
   
@@ -46,7 +48,7 @@ export type DialogsType = {
   }
   
   export type PostsDataType ={
-    id:number
+    id:string
     postMessage: string
     likes:number
   } 
@@ -54,7 +56,7 @@ export type DialogsType = {
   export type PostMesageType = {
     message: string;
     likes:number
-    id:number
+    id:string
   }
   
   export type TextAreaDataType ={
@@ -99,28 +101,28 @@ export type AddPostType ={
   
   export const state:StateDataType ={
       dialogsPage: {dialogs:[
-        { id: 1, name: 'Pashka' },
-        { id: 2, name: 'Maks' },
-        { id: 3, name: 'Vlados' },
-        { id: 4, name: 'Leha' },
-        { id: 5, name: 'Dima' }
+        { id: v1(), name: 'Pashka' },
+        { id: v1(), name: 'Maks' },
+        { id: v1(), name: 'Vlados' },
+        { id: v1(), name: 'Leha' },
+        { id: v1(), name: 'Dima' }
       ],
       messages:[
-        { id: 1, message: 'Hi' },
-        { id: 2, message: 'How are you?' },
-        { id: 3, message: 'I am fine' }
+        { id: v1(), message: 'Hi' },
+        { id: v1(), message: 'How are you?' },
+        { id: v1(), message: 'I am fine' }
       ]},
       profilePage:{posts:[
-        {id:1, postMessage:"Hi, I'm Pavel", likes:10},
-        {id:2, postMessage:"Let's go to learn a React", likes:9},
-        {id:3, postMessage:"Also we need improve our html/css skills", likes:11},
-        {id:4, postMessage:"Then we'll learn Redux", likes:22}
+        {id: v1(), postMessage:"Hi, I'm Pavel", likes:10},
+        {id: v1(), postMessage:"Let's go to learn a React", likes:9},
+        {id: v1(), postMessage:"Also we need improve our html/css skills", likes:11},
+        {id: v1(), postMessage:"Then we'll learn Redux", likes:22}
       ], myPost:'My posts', newPost:'New post'},
       navbarRight:{friends:[
-          {id:1, name: 'Pashka'},
-          {id:2, name: 'Maks'},
-          {id:3, name: 'Vlad'},
-          {id:4, name: 'Leha'}
+          {id:v1(), name: 'Pashka'},
+          {id:v1(), name: 'Maks'},
+          {id:v1(), name: 'Vlad'},
+          {id:v1(), name: 'Leha'}
       ]
   },
   textareaData:''
@@ -130,7 +132,7 @@ export type AddPostType ={
 
   export const addPost = () =>{
     let newPost = {
-      id:5,
+      id:v1(),
       postMessage:state.textareaData,
       likes:0
     }
