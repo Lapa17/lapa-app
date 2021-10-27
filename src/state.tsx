@@ -1,21 +1,22 @@
 import { v1 } from "uuid"
 
 export type StoreType = {
-  store: StateType;
+  store: StoreDataType;
  
 }
 
-export type StateType = {
+export type StoreDataType = {
+  _state: StateDataType
   addPost: () => void
   textareaChange: (value: string) => void
-  getState:StateDataType
-  getPosts:Array<PostsDataType>
-  getFriends:Array<DialogsDataType>
-  getDialogs:Array<DialogsDataType>
-  getTextareaData:string
-  getNewPostText: string
-  getMyPostText: string
-  getMessages: Array<MessagesDataType>
+  getState:() => StateDataType
+  getPosts:() => Array<PostsDataType>
+  getFriends:() => Array<DialogsDataType>
+  getDialogs:() => Array<DialogsDataType>
+  getTextareaData:() => string
+  getNewPostText:() =>  string
+  getMyPostText:() =>  string
+  getMessages:() =>  Array<MessagesDataType>
   subscribe: (observer: (state: StateDataType)=>void) => void
   _renderAll: (state: StateDataType) => void
 }
@@ -103,7 +104,7 @@ export type AddPostType = {
 
 
 
-export const store = {
+export const store:StoreDataType = {
   _state: {
     dialogsPage: {
       dialogs: [
