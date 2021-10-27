@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler, MouseEventHandler } from 'react';
-import { AddPostType, state } from '../../../state';
+import { AddPostType} from '../../../state';
 import Post from './Post/Post';
 import s from './Posts.module.css'
 

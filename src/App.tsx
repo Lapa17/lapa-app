@@ -9,19 +9,19 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import { StateType } from './state';
+import {StoreType} from './state';
 
 
-const App:React.FC<StateType> = (props) => {
+const App:React.FC<StoreType> = (props) => {
   return (
     <BrowserRouter>
     <div className='app-wrapper'>
       <Header />
       <NavbarLeft />
-      <NavbarRight friends={props.state.navbarRight.friends}/>
+      <NavbarRight friends={props.store.getFriends}/>
       <div className='app-wrapper-content'>
-      <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts} myPost={props.state.profilePage.myPost} newPost={props.state.profilePage.newPost} addPost={props.addPost} textareaChange={props.textareaChange} textareaData={props.state.textareaData}/>}/>
-      <Route path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs} messages={props.state.dialogsPage.messages}/>}/>
+      <Route path='/profile' render={() => <Profile posts={props.store.getPosts} myPost={props.store.getMyPostText} newPost={props.store.getNewPostText} addPost={props.store.addPost} textareaChange={props.store.textareaChange} textareaData={props.store.getTextareaData}/>}/>
+      <Route path='/dialogs' render={() => <Dialogs dialogs={props.store.getDialogs} messages={props.store.getMessages}/>}/>
       {/* <Route path='/news' render={() => <News />}/> 
       <Route path='/music' render={() => <Music />}/> 
       <Route path='/settings' render={() => <Settings />}/>       */}
