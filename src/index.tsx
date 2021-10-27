@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { addPost, state, StateDataType, subscribe, textareaChange } from './state';
+import {StateDataType, store} from './state';
 
 
 
@@ -13,14 +13,14 @@ export let renderAll = (state:StateDataType) =>{
 
     ReactDOM.render(
     <React.StrictMode>
-      <App state={state} addPost={addPost} textareaChange={textareaChange}/>
+      <App store={store} />
     </React.StrictMode>,
     document.getElementById('root')
   );
   }
-  renderAll(state)
+  renderAll(store.getState())
 
-  subscribe(renderAll)
+  store.subscribe(renderAll)
 
 
 // If you want to start measuring performance in your app, pass a function
