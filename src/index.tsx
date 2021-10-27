@@ -13,7 +13,7 @@ export let renderAll = (state:StateDataType) =>{
 
     ReactDOM.render(
     <React.StrictMode>
-      <App store={store} />
+      <App store={store} /> 
     </React.StrictMode>,
     document.getElementById('root')
   );

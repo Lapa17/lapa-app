@@ -16,9 +16,8 @@ export type StateType = {
   getNewPostText: string
   getMyPostText: string
   getMessages: Array<MessagesDataType>
-  // pushProfilePagePosts:(value:{id:string, postMessage:string, likes: number}) => void
-  // subscribe: (observer: (state: StateDataType)=>void) => void
-  // _renderAll: (state: StateDataType) => void
+  subscribe: (observer: (state: StateDataType)=>void) => void
+  _renderAll: (state: StateDataType) => void
 }
 
 export type StateDataType = {
@@ -148,16 +147,16 @@ export const store = {
     return this._state.dialogsPage.dialogs
   },
   getMessages(){
-    store._state.dialogsPage.messages
+    return store._state.dialogsPage.messages
   },
   getFriends(){
     return this._state.navbarRight.friends
   },
   getNewPostText(){
-    store._state.profilePage.newPost
+    return store._state.profilePage.newPost
   },
   getMyPostText(){
-    store._state.profilePage.myPost
+    return store._state.profilePage.myPost
   },
   getTextareaData(){
     return this._state.textareaData
