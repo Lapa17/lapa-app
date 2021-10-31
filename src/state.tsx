@@ -148,16 +148,16 @@ export const store:StoreDataType = {
     return this._state.dialogsPage.dialogs
   },
   getMessages(){
-    return store._state.dialogsPage.messages
+    return this._state.dialogsPage.messages
   },
   getFriends(){
     return this._state.navbarRight.friends
   },
   getNewPostText(){
-    return store._state.profilePage.newPost
+    return this._state.profilePage.newPost
   },
   getMyPostText(){
-    return store._state.profilePage.myPost
+    return this._state.profilePage.myPost
   },
   getTextareaData(){
     return this._state.textareaData
@@ -168,19 +168,19 @@ export const store:StoreDataType = {
   addPost() {
     let newPost = {
       id: v1(),
-      postMessage:store.getTextareaData(),
+      postMessage:this.getTextareaData(),
       likes: 0
     }
-    store._state.profilePage.posts.push(newPost)
-    store._renderAll(store.getState())
+    this._state.profilePage.posts.push(newPost)
+    this._renderAll(this.getState())
 
   },
   textareaChange(value: string) {
-    store._state.textareaData = value;
-    store._renderAll(store.getState());
+    this._state.textareaData = value;
+    this._renderAll(this.getState());
   },
 
   subscribe(observer: (state: StateDataType) => void) {
-    store._renderAll = observer
+    this._renderAll = observer
   }
 }
