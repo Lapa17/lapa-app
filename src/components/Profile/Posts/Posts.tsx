@@ -1,7 +1,8 @@
 import React, { ChangeEventHandler, MouseEventHandler } from 'react';
-import { AddPostType} from '../../../state';
+import { addPostActionCreator, AddPostType, changeTextAreaDataValueActionCreator} from '../../../state';
 import Post from './Post/Post';
 import s from './Posts.module.css'
+
 
 
 
@@ -15,13 +16,13 @@ const Posts: React.FC<AddPostType> = (props) => {
   const changeTextAreaDataValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     let text = e.currentTarget.value
     // props.textareaChange(text)
-    props.dispatch({type:'TEXAREA-CHANGE',value:text})
+    props.dispatch(changeTextAreaDataValueActionCreator(text))
   }
 
-  const addPost: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const addPost: MouseEventHandler<HTMLButtonElement> = () => {
     if (props.textareaData !== '') {
-      props.dispatch({type:'ADD-POST',value:''})
-      props.dispatch({type:'TEXAREA-CHANGE',value:''})
+      props.dispatch(addPostActionCreator())
+      props.dispatch(changeTextAreaDataValueActionCreator(''))
       // props.addPost()
       // props.textareaChange('')
     }

@@ -1,5 +1,11 @@
 import { v1 } from "uuid"
 
+
+const ADD_POST:string = 'ADD-POST'
+const TEXTAREA_CHANGE:string  ='TEXAREA-CHANGE'
+
+
+
 export type StoreType = {
   store: StoreDataType;
  
@@ -188,7 +194,7 @@ export const store:StoreDataType = {
     this._renderAll = observer
   }, 
   dispatch(action:ActionType) {
-    if (action.type === 'ADD-POST'){
+    if (action.type === ADD_POST){
       let newPost = {
         id: v1(),
         postMessage:this.getTextareaData(),
@@ -197,9 +203,12 @@ export const store:StoreDataType = {
       this._state.profilePage.posts.push(newPost)
       this._renderAll(this.getState())
     }
-    else if (action.type === 'TEXAREA-CHANGE'){
+    else if (action.type === TEXTAREA_CHANGE){
       this._state.textareaData = action.value;
       this._renderAll(this.getState());
     }
   }
 }
+
+export const addPostActionCreator = () => ({type:ADD_POST,value:''})
+export const changeTextAreaDataValueActionCreator = (text:string) => ({type:TEXTAREA_CHANGE,value:text})
