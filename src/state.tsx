@@ -7,18 +7,18 @@ export type StoreType = {
 
 export type StoreDataType = {
   _state: StateDataType
-  addPost: () => void
-  textareaChange: (value: string) => void
   getState:() => StateDataType
   getPosts:() => Array<PostsDataType>
   getFriends:() => Array<DialogsDataType>
   getDialogs:() => Array<DialogsDataType>
-  getTextareaData:() => string
   getNewPostText:() =>  string
   getMyPostText:() =>  string
+  getTextareaData:()=> string
   getMessages:() =>  Array<MessagesDataType>
   subscribe: (observer: (state: StateDataType)=>void) => void
   _renderAll: (state: StateDataType) => void
+  dispatch: (action:ActionType) => void
+
 }
 
 export type StateDataType = {
@@ -26,6 +26,11 @@ export type StateDataType = {
   profilePage: PostType
   navbarRight: NavbarRightType
   textareaData: string
+}
+
+export type ActionType = {
+  type: string
+  value:string
 }
 
 export type NavbarRightType = {
@@ -97,8 +102,7 @@ export type AddPostType = {
   myPost: string;
   newPost: string;
   posts: Array<PostsDataType>
-  addPost: () => void
-  textareaChange: (value: string) => void
+  dispatch: (action:ActionType) => void
   textareaData: string
 }
 
@@ -165,22 +169,37 @@ export const store:StoreDataType = {
   _renderAll (state: StateDataType){
     console.log('State changed')
   },
-  addPost() {
-    let newPost = {
-      id: v1(),
-      postMessage:this.getTextareaData(),
-      likes: 0
-    }
-    this._state.profilePage.posts.push(newPost)
-    this._renderAll(this.getState())
+  // addPost() {
+  //   let newPost = {
+  //     id: v1(),
+  //     postMessage:this.getTextareaData(),
+  //     likes: 0
+  //   }
+  //   this._state.profilePage.posts.push(newPost)
+  //   this._renderAll(this.getState())
 
-  },
-  textareaChange(value: string) {
-    this._state.textareaData = value;
-    this._renderAll(this.getState());
-  },
+  // },
+  // textareaChange(value: string) {
+  //   this._state.textareaData = value;
+  //   this._renderAll(this.getState());
+  // },
 
   subscribe(observer: (state: StateDataType) => void) {
     this._renderAll = observer
+  }, 
+  dispatch(action:ActionType) {
+    if (action.type === 'ADD-POST'){
+      let newPost = {
+        id: v1(),
+        postMessage:this.getTextareaData(),
+        likes: 0
+      }
+      this._state.profilePage.posts.push(newPost)
+      this._renderAll(this.getState())
+    }
+    else if (action.type === 'TEXAREA-CHANGE'){
+      this._state.textareaData = action.value;
+      this._renderAll(this.getState());
+    }
   }
 }

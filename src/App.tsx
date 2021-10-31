@@ -20,7 +20,7 @@ const App:React.FC<StoreType> = (props) => {
       <NavbarLeft />
       <NavbarRight friends={props.store.getFriends()}/>
       <div className='app-wrapper-content'>
-      <Route path='/profile' render={() => <Profile posts={props.store.getPosts()} myPost={props.store.getMyPostText()} newPost={props.store.getNewPostText()} addPost={props.store.addPost.bind(store)} textareaChange={props.store.textareaChange.bind(store)} textareaData={props.store.getTextareaData()}/>}/>
+      <Route path='/profile' render={() => <Profile posts={props.store.getPosts()} myPost={props.store.getMyPostText()} newPost={props.store.getNewPostText()} dispatch={props.store.dispatch.bind(store)} textareaData={props.store.getTextareaData()}/>}/>
       <Route path='/dialogs' render={() => <Dialogs dialogs={props.store.getDialogs()} messages={props.store.getMessages()}/>}/>
       {/* <Route path='/news' render={() => <News />}/> 
       <Route path='/music' render={() => <Music />}/> 

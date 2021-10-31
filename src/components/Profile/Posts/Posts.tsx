@@ -14,13 +14,16 @@ const Posts: React.FC<AddPostType> = (props) => {
 
   const changeTextAreaDataValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     let text = e.currentTarget.value
-    props.textareaChange(text)
+    // props.textareaChange(text)
+    props.dispatch({type:'TEXAREA-CHANGE',value:text})
   }
 
   const addPost: MouseEventHandler<HTMLButtonElement> = (e) => {
     if (props.textareaData !== '') {
-      props.addPost()
-      props.textareaChange('')
+      props.dispatch({type:'ADD-POST',value:''})
+      props.dispatch({type:'TEXAREA-CHANGE',value:''})
+      // props.addPost()
+      // props.textareaChange('')
     }
 
   }
