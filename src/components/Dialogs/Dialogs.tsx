@@ -1,5 +1,5 @@
-import React from 'react'
-import { DialogsType } from '../../state'
+import React, { ChangeEventHandler, MouseEventHandler } from 'react'
+import { addMessageActionCreator, changeMessageTextareaDataValueActionCreator, PostMessageType } from '../../state'
 import Dialog from './Dialog/Dialog'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'
@@ -7,18 +7,26 @@ import Message from './Message/Message'
 
 
 
-const Dialogs: React.FC<DialogsType> = (props) => {
+const Dialogs: React.FC<PostMessageType> = (props) => {
 
     const dialogsElements = props.dialogs.map((dialogs) => <Dialog id={dialogs.id} name={dialogs.name} />)
     const messageElements = props.messages.map((message) => <Message message={message.message} id={message.id} />)
 
-    let textAreaElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost = () => {
-
-        let text = textAreaElement.current?.value
-        alert(text)
-    }
+    const changeMessageTextareaDataValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+        let text = e.currentTarget.value
+        // props.textareaChange(text)
+        props.dispatch(changeMessageTextareaDataValueActionCreator(text))
+      }
+    
+    let addMessage:MouseEventHandler<HTMLButtonElement> = () => {
+        if (props.messagetTextareaData !== '') {
+          props.dispatch(addMessageActionCreator())
+          props.dispatch(changeMessageTextareaDataValueActionCreator(''))
+        }
+    
+      }
+    
 
 
     return (
@@ -30,8 +38,8 @@ const Dialogs: React.FC<DialogsType> = (props) => {
                 {messageElements}
             </div>
             <div className={s.item}>
-                <textarea ref={textAreaElement} ></textarea>
-                <button onClick={addPost}>Send message</button>
+                <textarea onChange={changeMessageTextareaDataValue} value={props.messagetTextareaData}></textarea>
+                <button onClick={addMessage}>Send message</button>
             </div>
         </div>
     )

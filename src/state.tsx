@@ -2,7 +2,9 @@ import { v1 } from "uuid"
 
 
 const ADD_POST:string = 'ADD-POST'
-const TEXTAREA_CHANGE:string  ='TEXAREA-CHANGE'
+const PROFILE_TEXTAREA_CHANGE:string  ='PROFILE-TEXAREA-CHANGE'
+const ADD_MESSAGE:string = 'ADD-MESSAGE'
+const MESSAGE_TEXTAREA_CHANGE:string  ='MESSAGE-TEXAREA-CHANGE'
 
 
 
@@ -19,7 +21,8 @@ export type StoreDataType = {
   getDialogs:() => Array<DialogsDataType>
   getNewPostText:() =>  string
   getMyPostText:() =>  string
-  getTextareaData:()=> string
+  getProfileTextareaData:()=> string
+  getMessageTextareaData:()=> string
   getMessages:() =>  Array<MessagesDataType>
   subscribe: (observer: (state: StateDataType)=>void) => void
   _renderAll: (state: StateDataType) => void
@@ -31,7 +34,8 @@ export type StateDataType = {
   dialogsPage: DialogsType
   profilePage: PostType
   navbarRight: NavbarRightType
-  textareaData: string
+  profileTextareaData: string
+  messageTextareaData:string
 }
 
 export type ActionType = {
@@ -41,6 +45,13 @@ export type ActionType = {
 
 export type NavbarRightType = {
   friends: Array<DialogsDataType>
+}
+export type PostMessageType = {
+  dialogs: Array<DialogsDataType>
+  messages: Array<MessagesDataType>
+  dispatch: (action:ActionType) => void
+  messagetTextareaData: string
+
 }
 
 export type DialogsType = {
@@ -52,6 +63,7 @@ export type DialogsType = {
 export type DialogsDataType = {
   id: string;
   name: string;
+  
 
 }
 
@@ -109,7 +121,7 @@ export type AddPostType = {
   newPost: string;
   posts: Array<PostsDataType>
   dispatch: (action:ActionType) => void
-  textareaData: string
+  postTextareaData: string
 }
 
 
@@ -146,7 +158,8 @@ export const store:StoreDataType = {
         { id: v1(), name: 'Leha' }
       ]
     },
-    textareaData: ''
+    profileTextareaData: '',
+    messageTextareaData:''
   },
   getState() {
     return this._state
@@ -169,8 +182,11 @@ export const store:StoreDataType = {
   getMyPostText(){
     return this._state.profilePage.myPost
   },
-  getTextareaData(){
-    return this._state.textareaData
+  getProfileTextareaData(){
+    return this._state.profileTextareaData
+  },
+  getMessageTextareaData(){
+    return this._state.messageTextareaData
   },
   _renderAll (state: StateDataType){
     console.log('State changed')
@@ -197,18 +213,32 @@ export const store:StoreDataType = {
     if (action.type === ADD_POST){
       let newPost = {
         id: v1(),
-        postMessage:this.getTextareaData(),
+        postMessage:this.getProfileTextareaData(),
         likes: 0
       }
       this._state.profilePage.posts.push(newPost)
       this._renderAll(this.getState())
     }
-    else if (action.type === TEXTAREA_CHANGE){
-      this._state.textareaData = action.value;
+    else if (action.type === PROFILE_TEXTAREA_CHANGE){
+      this._state.profileTextareaData = action.value;
+      this._renderAll(this.getState());
+    }
+    else if (action.type === ADD_MESSAGE){
+      let newMessage = {
+        id: v1(),
+        message:this.getMessageTextareaData(),
+      }
+      this._state.dialogsPage.messages.push(newMessage)
+      this._renderAll(this.getState())
+    }
+    else if (action.type === MESSAGE_TEXTAREA_CHANGE){
+      this._state.messageTextareaData = action.value;
       this._renderAll(this.getState());
     }
   }
 }
 
 export const addPostActionCreator = () => ({type:ADD_POST,value:''})
-export const changeTextAreaDataValueActionCreator = (text:string) => ({type:TEXTAREA_CHANGE,value:text})
+export const changeProfileTextareaDataValueActionCreator = (text:string) => ({type:PROFILE_TEXTAREA_CHANGE,value:text})
+export const addMessageActionCreator = () => ({type:ADD_MESSAGE,value:''})
+export const changeMessageTextareaDataValueActionCreator = (text:string) => ({type:MESSAGE_TEXTAREA_CHANGE,value:text})

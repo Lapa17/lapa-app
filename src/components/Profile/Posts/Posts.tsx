@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler, MouseEventHandler } from 'react';
-import { addPostActionCreator, AddPostType, changeTextAreaDataValueActionCreator} from '../../../state';
+import { addPostActionCreator, AddPostType, changeProfileTextareaDataValueActionCreator, } from '../../../state';
 import Post from './Post/Post';
 import s from './Posts.module.css'
 
@@ -16,13 +16,13 @@ const Posts: React.FC<AddPostType> = (props) => {
   const changeTextAreaDataValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     let text = e.currentTarget.value
     // props.textareaChange(text)
-    props.dispatch(changeTextAreaDataValueActionCreator(text))
+    props.dispatch(changeProfileTextareaDataValueActionCreator(text))
   }
 
   const addPost: MouseEventHandler<HTMLButtonElement> = () => {
-    if (props.textareaData !== '') {
+    if (props.postTextareaData !== '') {
       props.dispatch(addPostActionCreator())
-      props.dispatch(changeTextAreaDataValueActionCreator(''))
+      props.dispatch(changeProfileTextareaDataValueActionCreator(''))
       // props.addPost()
       // props.textareaChange('')
     }
@@ -38,7 +38,7 @@ const Posts: React.FC<AddPostType> = (props) => {
         <h2 >{props.myPost} </h2>
       </div>
       <div className={s.item}>
-        <textarea placeholder="What's new?" onChange={changeTextAreaDataValue} value={props.textareaData} />
+        <textarea placeholder="What's new?" onChange={changeTextAreaDataValue} value={props.postTextareaData} />
         <button onClick={addPost}>{props.newPost}</button>
       </div>
     </div>
