@@ -1,5 +1,5 @@
 import React from 'react';
-import { AvatarType } from '../../../state';
+import { AvatarType } from '../../../redux/state';
 import s from './Avatar.module.css'
 
 

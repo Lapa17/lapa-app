@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css'
-import {NavigationType} from './../../../../state'
+import {NavigationType} from '../../../../redux/state'
 
 
 

@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler, MouseEventHandler } from 'react'
-import { addMessageActionCreator, changeMessageTextareaDataValueActionCreator, PostMessageType } from '../../state'
+import { addMessageActionCreator, changeMessageTextareaDataValueActionCreator } from '../../redux/dialogs-reduser'
+import { PostMessageType } from '../../redux/state'
 import Dialog from './Dialog/Dialog'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'

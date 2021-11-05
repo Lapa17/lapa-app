@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavbarRightType } from '../../state';
+import { NavbarRightType } from '../../redux/state';
 import Friend from './Friend/Friend';
 import s from './NavbarRight.module.css'
 

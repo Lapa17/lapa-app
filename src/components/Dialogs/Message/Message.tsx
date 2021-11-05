@@ -1,5 +1,5 @@
 import React from 'react'
-import { MessagesDataType } from '../../../state';
+import { MessagesDataType } from '../../../redux/state';
 import s from './Message.module.css'
 
 

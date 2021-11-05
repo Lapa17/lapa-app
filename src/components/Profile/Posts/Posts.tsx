@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler, MouseEventHandler } from 'react';
-import { addPostActionCreator, AddPostType, changeProfileTextareaDataValueActionCreator, } from '../../../state';
+import { addPostActionCreator, changeProfileTextareaDataValueActionCreator } from '../../../redux/profile-reduser';
+import { AddPostType} from '../../../redux/state';
 import Post from './Post/Post';
 import s from './Posts.module.css'
 
