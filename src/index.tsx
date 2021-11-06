@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {StateDataType, store} from './redux/state';
+import {StateDataType} from './redux/store';
+import store from './redux/redux-store';
 
 
 
@@ -20,7 +21,10 @@ export let renderAll = (state:StateDataType) =>{
   }
   renderAll(store.getState())
 
-  store.subscribe(renderAll)
+  store.subscribe(()=>{
+    let state = store.getState()
+    renderAll(state)
+  })
 
 
 // If you want to start measuring performance in your app, pass a function

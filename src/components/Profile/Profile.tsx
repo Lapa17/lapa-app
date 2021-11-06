@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddPostType} from '../../redux/state';
+import { AddPostType} from '../../redux/store';
 import Avatar from './Avatar/Avatar';
 import ProfileDescription from './Description/Description';
 import Posts from './Posts/Posts';

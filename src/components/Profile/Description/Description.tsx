@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileDescriptionType } from '../../../redux/state';
+import { ProfileDescriptionType } from '../../../redux/store';
 import s from './Description.module.css'
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { WidgetsType } from '../../../../redux/state';
+import { WidgetsType } from '../../../../redux/store';
 import s from './Widget.module.css'
 
 

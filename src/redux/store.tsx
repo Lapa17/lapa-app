@@ -2,6 +2,20 @@ import { v1 } from "uuid"
 import  dialogsReduser  from "./dialogs-reduser"
 import  profileReduser  from "./profile-reduser"
 
+
+export type ReduxStoreType ={
+  store: ReduxStoreDataType;
+}
+
+export type ReduxStoreDataType = {
+  getState:() => StateDataType
+  // subscribe: (observer: (state: StateDataType)=>void) => void
+  // _renderAll: (state: StateDataType) => void
+  dispatch: (action:ActionType) => void
+
+}
+
+
 export type StoreType = {
   store: StoreDataType;
  
