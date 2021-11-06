@@ -11,12 +11,14 @@ import Posts from './Posts';
 
 const PostsContainer: React.FC<ReduxStoreType> = (props) => {
 
+  let state = props.store.getState().profilePage
+
   const changeTextAreaDataValue = (text:string) => {
     props.store.dispatch(changeProfileTextareaDataValueActionCreator(text))
   }
 
   const addPost = () => {
-    if (props.store.getState().profilePage.profileTextareaData !== '') {
+    if (state.profileTextareaData !== '') {
       props.store.dispatch(addPostActionCreator())
       props.store.dispatch(changeProfileTextareaDataValueActionCreator(''))
     }
@@ -24,7 +26,7 @@ const PostsContainer: React.FC<ReduxStoreType> = (props) => {
   }
 
   return (
-    <Posts addPost={addPost} textareaChange={changeTextAreaDataValue} myPost={props.store.getState().profilePage.myPost} newPost={props.store.getState().profilePage.newPost} posts={props.store.getState().profilePage.posts} postTextareaData={props.store.getState().profilePage.profileTextareaData}/>
+    <Posts addPost={addPost} textareaChange={changeTextAreaDataValue} myPost={state.myPost} newPost={state.newPost} posts={state.posts} postTextareaData={state.profileTextareaData}/>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { addMessageActionCreator, changeMessageTextareaDataValueActionCreator } from '../../redux/dialogs-reduser'
-import { PostMessageType, ReduxStoreType } from '../../redux/store'
+import { ReduxStoreType } from '../../redux/store'
 import Dialogs from './Dialogs'
 
 
@@ -8,13 +8,14 @@ import Dialogs from './Dialogs'
 
 const DialogsContainer: React.FC<ReduxStoreType> = (props) => {
 
+    let state = props.store.getState().dialogsPage
 
     const changeMessageTextareaDataValue = (text:string) => {
         props.store.dispatch(changeMessageTextareaDataValueActionCreator(text))
       }
     
     let addMessage = () => {
-        if (props.store.getState().dialogsPage.messageTextareaData !== '') {
+        if (state.messageTextareaData !== '') {
           props.store.dispatch(addMessageActionCreator())
           props.store.dispatch(changeMessageTextareaDataValueActionCreator(''))
         }
@@ -24,7 +25,7 @@ const DialogsContainer: React.FC<ReduxStoreType> = (props) => {
 
 
     return (
-       <Dialogs addMessage={addMessage} textareaChange={changeMessageTextareaDataValue} dialogs={props.store.getState().dialogsPage.dialogs} messages={props.store.getState().dialogsPage.messages} messagetTextareaData={props.store.getState().dialogsPage.messageTextareaData}/>
+       <Dialogs addMessage={addMessage} textareaChange={changeMessageTextareaDataValue} dialogs={state.dialogs} messages={state.messages} messagetTextareaData={state.messageTextareaData}/>
     )
 }
 
