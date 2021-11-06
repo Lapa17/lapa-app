@@ -14,20 +14,19 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 const App:React.FC<ReduxStoreType> = (props) => {
   return (
-    <BrowserRouter>
+    
     <div className='app-wrapper'>
       <Header />
       <NavbarLeft />
       <NavbarRight friends={props.store.getState().navbarRight.friends}/>
       <div className='app-wrapper-content'>
-      <Route path='/profile' render={() => <Profile store={props.store}/>}/>
-      <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
+      <Route path='/profile' render={() => <Profile/>}/>
+      <Route path='/dialogs' render={() => <DialogsContainer />}/>
       {/* <Route path='/news' render={() => <News />}/> 
       <Route path='/music' render={() => <Music />}/> 
       <Route path='/settings' render={() => <Settings />}/>       */}
       </div>
     </div>
-    </BrowserRouter>
   );
 }
 
