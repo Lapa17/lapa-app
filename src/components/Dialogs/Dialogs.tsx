@@ -16,15 +16,11 @@ const Dialogs: React.FC<PostMessageType> = (props) => {
 
     const changeMessageTextareaDataValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
         let text = e.currentTarget.value
-        // props.textareaChange(text)
-        props.dispatch(changeMessageTextareaDataValueActionCreator(text))
+        props.textareaChange(text)
       }
     
-    let addMessage:MouseEventHandler<HTMLButtonElement> = () => {
-        if (props.messagetTextareaData !== '') {
-          props.dispatch(addMessageActionCreator())
-          props.dispatch(changeMessageTextareaDataValueActionCreator(''))
-        }
+    let onaAddMessage:MouseEventHandler<HTMLButtonElement> = () => {
+        props.addMessage()
     
       }
     
@@ -40,7 +36,7 @@ const Dialogs: React.FC<PostMessageType> = (props) => {
             </div>
             <div className={s.item}>
                 <textarea onChange={changeMessageTextareaDataValue} value={props.messagetTextareaData}></textarea>
-                <button onClick={addMessage}>Send message</button>
+                <button onClick={onaAddMessage}>Send message</button>
             </div>
         </div>
     )

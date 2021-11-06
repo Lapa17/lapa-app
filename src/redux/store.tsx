@@ -55,8 +55,9 @@ export type NavbarRightType = {
 export type PostMessageType = {
   dialogs: Array<DialogsDataType>
   messages: Array<MessagesDataType>
-  dispatch: (action:ActionType) => void
   messagetTextareaData: string
+  addMessage: ()=> void
+  textareaChange:(text:string)=> void
 
 }
 
@@ -125,8 +126,10 @@ export type AddPostType = {
   myPost: string;
   newPost: string;
   posts: Array<PostsDataType>
-  dispatch: (action:ActionType) => void
+  addPost:()=> void
+  textareaChange:(text:string)=>void
   postTextareaData: string
+
 }
 
 

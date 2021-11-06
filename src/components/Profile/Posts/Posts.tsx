@@ -10,24 +10,18 @@ import s from './Posts.module.css'
 
 
 
-const Posts: React.FC<AddPostType> = (props) => {
+const Posts: React.FC<AddPostType> = ({addPost, textareaChange, myPost, newPost, posts,postTextareaData, ...props}) => {
 
-  const postsElements = props.posts.map((m) => <Post key={m.id} message={m.postMessage} likes={m.likes} id={m.id} />)
+  const postsElements = posts.map((m) => <Post key={m.id} message={m.postMessage} likes={m.likes} id={m.id} />)
 
   const changeTextAreaDataValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     let text = e.currentTarget.value
-    // props.textareaChange(text)
-    props.dispatch(changeProfileTextareaDataValueActionCreator(text))
+    textareaChange(text)
   }
 
-  const addPost: MouseEventHandler<HTMLButtonElement> = () => {
-    if (props.postTextareaData !== '') {
-      props.dispatch(addPostActionCreator())
-      props.dispatch(changeProfileTextareaDataValueActionCreator(''))
-      // props.addPost()
-      // props.textareaChange('')
-    }
-
+  const onAddPost: MouseEventHandler<HTMLButtonElement> = () => {
+      addPost()
+      textareaChange('')
   }
 
 
@@ -36,11 +30,11 @@ const Posts: React.FC<AddPostType> = (props) => {
   return <div>
     <div className={s.postHeader}>
       <div className={s.itemWrapper}>
-        <h2 >{props.myPost} </h2>
+        <h2 >{myPost} </h2>
       </div>
       <div className={s.item}>
-        <textarea placeholder="What's new?" onChange={changeTextAreaDataValue} value={props.postTextareaData} />
-        <button onClick={addPost}>{props.newPost}</button>
+        <textarea placeholder="What's new?" onChange={changeTextAreaDataValue} value={postTextareaData} />
+        <button onClick={onAddPost}>{newPost}</button>
       </div>
     </div>
     <div className={s.posts}>
