@@ -6,28 +6,27 @@ import reportWebVitals from './reportWebVitals';
 import { StateDataType } from './redux/store';
 import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
-import StoreContext from './StoreContext';
+import { Provider } from 'react-redux';
 
 
 
 
 
-export let renderAll = (state: StateDataType) => {
+export let renderAll = () => {
 
   ReactDOM.render(
     <BrowserRouter>
-      <StoreContext.Provider value={store}>
+      <Provider store={store}>
         <App store={store} />
-      </StoreContext.Provider>
+      </Provider>
     </BrowserRouter>,
     document.getElementById('root')
   );
 }
-renderAll(store.getState())
+renderAll()
 
 store.subscribe(() => {
-  let state = store.getState()
-  renderAll(state)
+  renderAll()
 })
 
 

@@ -14,6 +14,7 @@ const Dialogs: React.FC<PostMessageType> = ({dialogs, messages, addMessage, text
 
 
     const changeMessageTextareaDataValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+        
         let text = e.currentTarget.value
         textareaChange(text)
       }
