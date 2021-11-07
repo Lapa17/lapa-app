@@ -3,16 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { StateDataType } from './redux/store';
 import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
-
-
-
-
-export let renderAll = () => {
 
   ReactDOM.render(
     <BrowserRouter>
@@ -22,12 +15,8 @@ export let renderAll = () => {
     </BrowserRouter>,
     document.getElementById('root')
   );
-}
-renderAll()
 
-store.subscribe(() => {
-  renderAll()
-})
+
 
 
 // If you want to start measuring performance in your app, pass a function

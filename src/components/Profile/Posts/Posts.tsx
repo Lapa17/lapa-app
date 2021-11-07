@@ -20,8 +20,9 @@ const Posts: React.FC<AddPostType> = ({addPost, textareaChange, myPost, newPost,
   }
 
   const onAddPost: MouseEventHandler<HTMLButtonElement> = () => {
+    if (postTextareaData){
       addPost()
-      textareaChange('')
+    }
   }
 
 

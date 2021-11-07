@@ -22,17 +22,23 @@ const initialProfileState = {
 
 const profileReduser = (state: PostType = initialProfileState, action: ActionType) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST:{
             let newPost = {
                 id: v1(),
                 postMessage: state.profileTextareaData,
                 likes: 0
             }
-            state.posts.push(newPost);
-            return state;
-        case PROFILE_TEXTAREA_CHANGE:
-            state.profileTextareaData = action.value;
-            return state;
+            let stateCopy = {...state}
+            stateCopy.posts = [...state.posts]
+            stateCopy.posts.push(newPost);
+            stateCopy.profileTextareaData = ''
+            return stateCopy;
+        }
+        case PROFILE_TEXTAREA_CHANGE:{
+            let stateCopy = {...state}
+            stateCopy.profileTextareaData = action.value;
+            return stateCopy;
+        }
         default: 
         return state;
     }
