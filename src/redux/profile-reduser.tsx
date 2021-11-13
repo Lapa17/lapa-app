@@ -28,16 +28,18 @@ const profileReduser = (state: PostType = initialProfileState, action: ActionTyp
                 postMessage: state.profileTextareaData,
                 likes: 0
             }
-            let stateCopy = {...state}
-            stateCopy.posts = [...state.posts]
-            stateCopy.posts.push(newPost);
-            stateCopy.profileTextareaData = ''
-            return stateCopy;
+            // let stateCopy = {...state}
+            // stateCopy.posts = [...state.posts]
+            // stateCopy.posts.push(newPost);
+            // stateCopy.profileTextareaData = ''
+            // return stateCopy;
+            return {...state, posts: [...state.posts, newPost], profileTextareaData: ''}
         }
         case PROFILE_TEXTAREA_CHANGE:{
-            let stateCopy = {...state}
-            stateCopy.profileTextareaData = action.value;
-            return stateCopy;
+            // let stateCopy = {...state}
+            // stateCopy.profileTextareaData = action.value;
+            // return stateCopy;
+            return {...state,profileTextareaData: action.value }
         }
         default: 
         return state;

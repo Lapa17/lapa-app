@@ -30,16 +30,19 @@ const dialogsReduser = (state: DialogsType = initialDialogState, action: ActionT
         id: v1(),
         message: state.messageTextareaData,
       }
-      let stateCopy = {...state}
-      stateCopy.messages = [...state.messages]
-      stateCopy.messages.push(newMessage)
-      stateCopy.messageTextareaData = ''
-      return stateCopy;
+      // let stateCopy = {...state}
+      // stateCopy.messages = [...state.messages]
+      // stateCopy.messages.push(newMessage)
+      // stateCopy.messageTextareaData = ''
+      // return stateCopy;
+      return {...state, messages: [...state.messages, newMessage], messageTextareaData: '' }
+
     }
     case MESSAGE_TEXTAREA_CHANGE: {
-      let stateCopy = {...state}
-      stateCopy.messageTextareaData = action.value;
-      return stateCopy;
+      // let stateCopy = {...state}
+      // stateCopy.messageTextareaData = action.value;
+      // return stateCopy;
+      return {...state, messageTextareaData: action.value}
     }
     default:
       return state;
