@@ -1,0 +1,24 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    margin: 20px;
+}
+
+img {
+    width: 50px;
+}
+
+.info{
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    width: 90%;
+    border: 1px solid ;
+    padding: 5px;
+}
+
+.items{
+    border: 1px solid ;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}

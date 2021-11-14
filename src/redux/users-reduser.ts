@@ -1,22 +1,36 @@
 import { v1 } from "uuid"
-import { UsersActionType,UsersStateType, UsersType} from "./store"
+import { UsersStateType, UsersType} from "./store"
 
-const FOLLOW: string = 'FOLLOW'
-const UNFOLLOW: string = 'UNFOLLOW'
-const SET_USERS: string = 'SET_USERS'
+const FOLLOW = 'FOLLOW'
+const UNFOLLOW = 'UNFOLLOW'
+const SET_USERS = 'SET_USERS'
 
-export const followActionCreator = (userID:string) => ({type:FOLLOW, userID})
-export const unFollowActionCreator = (userID:string) => ({type:UNFOLLOW, userID})
-export const setUsersAC = (users:Array<UsersType>) => ({type:SET_USERS, users })
+export const followAC = (userID:string) => ({type:FOLLOW, userID} as const)
+export const unFollowAC = (userID:string) => ({type:UNFOLLOW, userID} as const)
+export const setUsersAC = (users:Array<UsersType>) => ({type:SET_USERS, users } as const)
 
+//export type FollowActionCreatorType = ReturnType<typeof followActionCreator> + добавляем as const в сам AC
+export type FollowACType = {
+    type: typeof FOLLOW
+    userID: string
+}
+export type UnFollowACType = {
+    type: typeof UNFOLLOW
+    userID: string
+}
+export type SetUsersACType = {
+    type: typeof SET_USERS
+    users: Array<UsersType>
+}
 
+export type UsersActionType = FollowACType | UnFollowACType | SetUsersACType
 
 const initialUsersState = {
     users: [
-      { id: v1(), name: "Pashka", message:'Hi', country: 'Belarus', city:'Minsk', follow: true},
-      { id: v1(), name: "Leha", message:'Hello', country: 'Belarus', city:'Minsk', follow: true},
-      { id: v1(), name: "Maks", message:'Bonjur', country: 'Belarus', city:'Minsk', follow: false },
-      { id: v1(), name: "Vlad", message:'Aloha', country: 'Belarus', city:'Minsk', follow: false }
+    //   { id: v1(), name: "Pashka", message:'Hi', country: 'Belarus', city:'Minsk', follow: true},
+    //   { id: v1(), name: "Leha", message:'Hello', country: 'Belarus', city:'Minsk', follow: true},
+    //   { id: v1(), name: "Maks", message:'Bonjur', country: 'Belarus', city:'Minsk', follow: false },
+    //   { id: v1(), name: "Vlad", message:'Aloha', country: 'Belarus', city:'Minsk', follow: false }
     ]
     
   }
