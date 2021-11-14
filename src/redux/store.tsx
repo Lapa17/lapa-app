@@ -16,37 +16,40 @@ export type ReduxStoreDataType = {
 }
 
 
-export type StoreType = {
-  store: StoreDataType;
+// export type StoreType = {
+//   store: StoreDataType;
  
-}
+// }
 
-export type StoreDataType = {
-  _state: StateDataType
-  getState:() => StateDataType
-  getPosts:() => Array<PostsDataType>
-  getFriends:() => Array<DialogsDataType>
-  getDialogs:() => Array<DialogsDataType>
-  getNewPostText:() =>  string
-  getMyPostText:() =>  string
-  getProfileTextareaData: ()=> string
-  getMessageTextareaData:()=> string
-  getMessages:() =>  Array<MessagesDataType>
-  subscribe: (observer: (state: StateDataType)=>void) => void
-  _renderAll: (state: StateDataType) => void
-  dispatch: (action:ActionType) => void
+// export type StoreDataType = {
+//   _state: StateDataType
+//   getState:() => StateDataType
+//   getPosts:() => Array<PostsDataType>
+//   getFriends:() => Array<DialogsDataType>
+//   getDialogs:() => Array<DialogsDataType>
+//   getNewPostText:() =>  string
+//   getMyPostText:() =>  string
+//   getProfileTextareaData: ()=> string
+//   getMessageTextareaData:()=> string
+//   getMessages:() =>  Array<MessagesDataType>
+//   subscribe: (observer: (state: StateDataType)=>void) => void
+//   _renderAll: (state: StateDataType) => void
+//   dispatch: (action:ActionType) => void
 
-}
+// }
 
 export type StateDataType = {
   dialogsPage: DialogsType
   profilePage: PostType
   navbarRight: NavbarRightType
+  users:UsersStateType
 }
+
+
 
 export type ActionType = {
   type: string
-  value:string
+  value:string 
 }
 
 export type NavbarRightType = {
@@ -131,10 +134,29 @@ export type AddPostType = {
   postTextareaData: string
 
 }
+export type UsersStateType ={
+  users: Array<UsersType>
+}
+
+
+export type UsersType = {
+  id: string
+  name: string
+  message:string
+  country:string
+  city:string
+  follow: boolean
+}
+
+export type UsersActionType ={
+  type: string
+  userID:string
+  users: Array<UsersType>
+}
 
 
 
-export const store:StoreDataType = {
+export const store = {
   _state: {
     dialogsPage: {
       dialogs: [
@@ -210,8 +232,6 @@ export const store:StoreDataType = {
     
     this._state.profilePage = profileReduser(this._state.profilePage, action)
     this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
-
-    this._renderAll(this.getState());
     
   }
 }
