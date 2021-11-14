@@ -1,4 +1,5 @@
 import { v1 } from "uuid"
+import { NewUsersType } from "../components/Users/Users"
 import  dialogsReduser  from "./dialogs-reduser"
 import  profileReduser  from "./profile-reduser"
 
@@ -135,7 +136,7 @@ export type AddPostType = {
 
 }
 export type UsersStateType ={
-  users: Array<UsersType>
+  users: Array<NewUsersType>
 }
 
 

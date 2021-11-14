@@ -1,26 +1,27 @@
 import { v1 } from "uuid"
+import { NewUsersType } from "../components/Users/Users"
 import { UsersStateType, UsersType} from "./store"
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 
-export const followAC = (userID:string) => ({type:FOLLOW, userID} as const)
-export const unFollowAC = (userID:string) => ({type:UNFOLLOW, userID} as const)
-export const setUsersAC = (users:Array<UsersType>) => ({type:SET_USERS, users } as const)
+export const followAC = (userID:number) => ({type:FOLLOW, userID} as const)
+export const unFollowAC = (userID:number) => ({type:UNFOLLOW, userID} as const)
+export const setUsersAC = (users:Array<NewUsersType>) => ({type:SET_USERS, users } as const)
 
 //export type FollowActionCreatorType = ReturnType<typeof followActionCreator> + добавляем as const в сам AC
 export type FollowACType = {
     type: typeof FOLLOW
-    userID: string
+    userID: number
 }
 export type UnFollowACType = {
     type: typeof UNFOLLOW
-    userID: string
+    userID: number
 }
 export type SetUsersACType = {
     type: typeof SET_USERS
-    users: Array<UsersType>
+    users: Array<NewUsersType>
 }
 
 export type UsersActionType = FollowACType | UnFollowACType | SetUsersACType
