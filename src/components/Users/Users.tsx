@@ -3,6 +3,7 @@ import * as axios from 'axios'
 import userPhoto from './../../assets/images/user.png'
 import React from "react";
 import Preloader from '../common/Preloader/Preloader';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -22,34 +23,36 @@ export type NewUsersType = {
 }
 
 
-type UsersPropsType ={
+type UsersPropsType = {
     users: Array<NewUsersType>
-    pageSize:number
-    totalUserCounter:number
-    currentPage:number
-    isFetching:boolean
+    pageSize: number
+    totalUserCounter: number
+    currentPage: number
+    isFetching: boolean
     follow: (userID: number) => void
     unFollow: (userID: number) => void
-    onPageClick:(currentPage:number) =>void
+    onPageClick: (currentPage: number) => void
 }
 
-const Users = (props:UsersPropsType) => {
+const Users = (props: UsersPropsType) => {
 
-    let pagesCount = Math.ceil(props.totalUserCounter/100/props.pageSize)
-        let pages = []
-        for(let i=1; i<=pagesCount;i++){
-            pages.push(i)
-        }
+    let pagesCount = Math.ceil(props.totalUserCounter / 100 / props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
 
     return (<div>
-        {props.isFetching ? <Preloader />: null}
-        {pages.map(p=>{
-           return <span className={props.currentPage===p ? s.selected : ''} onClick={() => props.onPageClick(p)}>{p}</span>
+        {props.isFetching ? <Preloader /> : null}
+        {pages.map(p => {
+            return <span className={props.currentPage === p ? s.selected : ''} onClick={() => props.onPageClick(p)}>{p}</span>
         })}
         {props.users.map(u => {
             return (<div className={s.wrapper}>
                 <div className={s.items}>
-                    <img src={u.photos.small != null ? u.photos.small : userPhoto} />
+                    <NavLink to={'/profile/' + u.id}>
+                        <img src={u.photos.small != null ? u.photos.small : userPhoto} />
+                    </NavLink>
                     {u.followed
                         ? <button onClick={() => props.unFollow(u.id)}>Unfollow</button>
                         : <button onClick={() => props.follow(u.id)}>Follow</button>}

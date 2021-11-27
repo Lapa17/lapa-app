@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPostActionCreator, changeProfileTextareaDataValueActionCreator } from '../../../redux/profile-reduser';
+import { addPostActionCreator, changeProfileTextareaDataValueActionCreator, ProfileActionType } from '../../../redux/profile-reduser';
 import { ActionType, StateDataType } from '../../../redux/store';
 import Posts from './Posts';
 
@@ -44,7 +44,7 @@ const mapStateProps = (state:StateDataType) =>{
 
   }
 }
-const mapDispatchProps = (dispatch:(action:ActionType) => void)=>{
+const mapDispatchProps = (dispatch:(action:ProfileActionType) => void)=>{
   return {
     addPost:()=> dispatch(addPostActionCreator()),
     textareaChange:(text:string)=> dispatch(changeProfileTextareaDataValueActionCreator(text)),

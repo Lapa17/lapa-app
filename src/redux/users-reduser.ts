@@ -65,7 +65,6 @@ const initialUsersState = {
 const usersReduser = (state:UsersStateType = initialUsersState, action: UsersActionType) => {
     switch (action.type){
         case FOLLOW :{
-            debugger
             return {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed:true}: u )}
         }
         case UNFOLLOW :{

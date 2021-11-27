@@ -1,11 +1,36 @@
 import { v1 } from "uuid"
-import { ActionType,PostType } from "./store"
+import { ActionType,PostsDataType } from "./store"
 
-const ADD_POST: string = 'ADD-POST'
-const PROFILE_TEXTAREA_CHANGE: string = 'PROFILE-TEXAREA-CHANGE'
 
-export const addPostActionCreator = () => ({type:ADD_POST,value:''})
-export const changeProfileTextareaDataValueActionCreator = (text:string) => ({type:PROFILE_TEXTAREA_CHANGE,value:text})
+export type ProfileStateType = {
+    myPost: string;
+    newPost: string;
+    posts: Array<PostsDataType>;
+    profileTextareaData: string;
+    profile: any
+}
+
+export type UserProfileACType = {
+    type: typeof USER_PROFILE
+    profile:any
+}
+export type AddPostACType = {
+    type: typeof ADD_POST
+}
+export type ProfileTextareaDataACType = {
+    type: typeof PROFILE_TEXTAREA_CHANGE
+    value:string
+}
+
+export type ProfileActionType = UserProfileACType | AddPostACType | ProfileTextareaDataACType
+
+const ADD_POST = 'ADD-POST'
+const PROFILE_TEXTAREA_CHANGE= 'PROFILE-TEXAREA-CHANGE'
+const USER_PROFILE = 'USER_PROFILE'
+
+export const addPostActionCreator = () => ({type:ADD_POST} as const)
+export const changeProfileTextareaDataValueActionCreator = (value:string) => ({type:PROFILE_TEXTAREA_CHANGE,value} as const)
+export const setUserProfile = (profile:any) => ({type:USER_PROFILE, profile} as const)
 
 
 const initialProfileState = {
@@ -18,9 +43,10 @@ const initialProfileState = {
     myPost: 'My posts', 
     newPost: 'New post',
     profileTextareaData: '',
+    profile: null
   }
 
-const profileReduser = (state: PostType = initialProfileState, action: ActionType) => {
+const profileReduser = (state: ProfileStateType = initialProfileState, action: ProfileActionType) => {
     switch (action.type) {
         case ADD_POST:{
             let newPost = {
@@ -28,19 +54,16 @@ const profileReduser = (state: PostType = initialProfileState, action: ActionTyp
                 postMessage: state.profileTextareaData,
                 likes: 0
             }
-            // let stateCopy = {...state}
-            // stateCopy.posts = [...state.posts]
-            // stateCopy.posts.push(newPost);
-            // stateCopy.profileTextareaData = ''
-            // return stateCopy;
             return {...state, posts: [...state.posts, newPost], profileTextareaData: ''}
         }
         case PROFILE_TEXTAREA_CHANGE:{
-            // let stateCopy = {...state}
-            // stateCopy.profileTextareaData = action.value;
-            // return stateCopy;
-            return {...state,profileTextareaData: action.value }
+            return {...state, profileTextareaData: action.value}
         }
+        case USER_PROFILE:{
+            return {...state,profile: action.profile }
+        }
+        
+        
         default: 
         return state;
     }

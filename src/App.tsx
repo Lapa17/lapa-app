@@ -11,6 +11,7 @@ import Settings from './components/Settings/Settings';
 import {ReduxStoreType, store} from './redux/store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 
 const App:React.FC<ReduxStoreType> = (props) => {
@@ -21,7 +22,7 @@ const App:React.FC<ReduxStoreType> = (props) => {
       <NavbarLeft />
       <NavbarRight friends={props.store.getState().navbarRight.friends}/>
       <div className='app-wrapper-content'>
-      <Route path='/profile' render={() => <Profile/>}/>
+      <Route path='/profile' render={() => <ProfileContainer/>}/>
       <Route path='/dialogs' render={() => <DialogsContainer />}/>
       <Route path='/users' render={() => <UsersContainer />}/>
       {/* <Route path='/news' render={() => <News />}/> 

@@ -237,7 +237,7 @@ export const store = {
   }, 
   dispatch(action:ActionType) {
     
-    this._state.profilePage = profileReduser(this._state.profilePage, action)
+
     this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
     
   }
