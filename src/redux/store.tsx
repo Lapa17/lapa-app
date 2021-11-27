@@ -141,6 +141,7 @@ export type UsersStateType ={
   pageSize: number
   totalUserCounter: number
   currentPage:number
+  isFetching: boolean
 
 }
 

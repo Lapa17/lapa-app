@@ -2,6 +2,9 @@ import s from './Users.module.css'
 import * as axios from 'axios'
 import userPhoto from './../../assets/images/user.png'
 import React from "react";
+import Preloader from '../common/Preloader/Preloader';
+
+
 
 
 type PhotosType = {
@@ -24,6 +27,7 @@ type UsersPropsType ={
     pageSize:number
     totalUserCounter:number
     currentPage:number
+    isFetching:boolean
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     onPageClick:(currentPage:number) =>void
@@ -38,6 +42,7 @@ const Users = (props:UsersPropsType) => {
         }
 
     return (<div>
+        {props.isFetching ? <Preloader />: null}
         {pages.map(p=>{
            return <span className={props.currentPage===p ? s.selected : ''} onClick={() => props.onPageClick(p)}>{p}</span>
         })}
