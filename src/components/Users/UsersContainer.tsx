@@ -3,6 +3,62 @@ import { Dispatch } from "redux";
 import { StateDataType, UsersType } from "../../redux/store";
 import { followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unFollowAC, UsersActionType } from "../../redux/users-reduser";
 import Users, { NewUsersType } from "./Users";
+import * as axios from 'axios'
+import React from "react";
+
+
+export interface Items {
+    items: Array<NewUsersType>
+    totalCount:number
+}
+
+
+export type UsersComponentPropsType = {
+    users: Array<NewUsersType>
+    pageSize:number
+    totalUserCounter:number
+    currentPage:number
+    follow: (userID: number) => void
+    unFollow: (userID: number) => void
+    setUsers: (users: Array<NewUsersType>) => void
+    setCurrentPage:(currentPage:number)=> void
+    setTotalUsersCount:(totalCount:number)=>void
+}
+
+
+
+
+
+class UsersClassContainer extends React.Component<UsersComponentPropsType> {
+
+    componentDidMount() {
+        axios.default.get<Items>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
+        })
+    }
+    onPageClick =(currentPage:number) =>{
+        this.props.setCurrentPage(currentPage)
+        axios.default.get<Items>(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+        })
+    }
+
+    render() {
+        return  <Users users={this.props.users} 
+        pageSize={this.props.pageSize}
+        totalUserCounter={this.props.totalUserCounter}
+        currentPage={this.props.currentPage}
+        follow={this.props.follow}
+        unFollow={this.props.unFollow}
+        onPageClick={this.onPageClick}
+        />
+    }
+}
+
+
+
+
 
 let mapStateProps = (state:StateDataType) => {
     return {
@@ -27,6 +83,6 @@ let mapDispatchProps = (dispatch:Dispatch<UsersActionType>) => {
 }
 
 
-const UsersContainer = connect (mapStateProps,mapDispatchProps) (Users);
+const UsersContainer = connect (mapStateProps,mapDispatchProps) (UsersClassContainer);
 
 export default UsersContainer;
