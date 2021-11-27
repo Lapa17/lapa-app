@@ -22,3 +22,7 @@ img {
     justify-items: center;
     align-items: center;
 }
+
+.selected{
+    font-weight: bold;
+}

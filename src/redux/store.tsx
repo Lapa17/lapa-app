@@ -137,6 +137,10 @@ export type AddPostType = {
 }
 export type UsersStateType ={
   users: Array<NewUsersType>
+  pageSize: number
+  totalUserCounter: number
+  currentPage:number
+
 }
 
 

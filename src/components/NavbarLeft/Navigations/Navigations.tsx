@@ -6,6 +6,7 @@ const Navigations = () => {
   return <nav className={s.nav}>
     <Navigation menu='Profile' link='/profile'/>
     <Navigation menu='Messages' link='/dialogs'/>
+    <Navigation menu='Users' link='/users'/>
     <Navigation menu='News' link='/news'/>
     <Navigation menu='Music' link='/music'/>
     <Navigation menu='Settings' link='/settings'/>
