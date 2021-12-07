@@ -17,7 +17,6 @@ type ProfilePropsType ={
 
 
 const Profile = (props:ProfilePropsType) => {
-  debugger
   return <div>
     <ProfileInfo profile={props.profile}/>
     {/* <Posts myPost={props.myPost} newPost={props.newPost} posts={props.posts} dispatch={props.dispatch} postTextareaData={props.postTextareaData}/> */}
