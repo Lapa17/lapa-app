@@ -2,7 +2,7 @@ import { v1 } from "uuid"
 import { NewUsersType } from "../components/Users/Users"
 
 import  dialogsReduser  from "./dialogs-reduser"
-import  profileReduser  from "./profile-reduser"
+import  profileReduser, { APIProfileType }  from "./profile-reduser"
 
 
 export type ReduxStoreType ={
@@ -87,6 +87,7 @@ export type PostType = {
   newPost: string;
   posts: Array<PostsDataType>
   profileTextareaData:string
+  profile:APIProfileType
 }
 
 export type PostsDataType = {

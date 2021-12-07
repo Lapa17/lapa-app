@@ -2,21 +2,21 @@ import React from 'react';
 import Profile from './Profile';
 import * as axios from 'axios'
 import { connect } from 'react-redux';
-import { ProfileStateType, setUserProfile } from '../../redux/profile-reduser';
+import { APIProfileType, ProfileStateType, setUserProfile } from '../../redux/profile-reduser';
+import { StateDataType } from '../../redux/store';
 
 
 type ProfileContainerType ={
-  profile: any
-  setUserProfile:(profile:any) => void
+  profile: APIProfileType
+  setUserProfile:(profile:APIProfileType) => void
 }
 
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
-
+  
   componentDidMount() {
-    debugger
+    
     axios.default.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
-      debugger
       this.props.setUserProfile(response.data)
     })
 }
@@ -27,8 +27,8 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
   }
 }
 
-let mapStateToProps= (state:ProfileStateType) => ({
-  profile: state.profile
+let mapStateToProps= (state:StateDataType) => ({
+  profile: state.profilePage.profile
 })
 
 export default connect(mapStateToProps, {setUserProfile})(ProfileContainer);
