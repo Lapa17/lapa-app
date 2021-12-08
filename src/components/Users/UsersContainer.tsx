@@ -35,7 +35,9 @@ class UsersClassContainer extends React.Component<UsersComponentPropsType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.default.get<Items>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.default.get<Items>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials:true
+        }).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -45,7 +47,9 @@ class UsersClassContainer extends React.Component<UsersComponentPropsType> {
     onPageClick = (currentPage: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(currentPage)
-        axios.default.get<Items>(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.default.get<Items>(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
         })

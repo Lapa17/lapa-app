@@ -22,7 +22,6 @@ type RouterPropType = RouteComponentProps<UserId> & {
 class ProfileContainer extends React.Component<RouterPropType> {
   
   componentDidMount() {
-    debugger
     let userId = this.props.match.params.userId
     if(!userId){
       userId = '21095'

@@ -54,8 +54,28 @@ const Users = (props: UsersPropsType) => {
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} />
                     </NavLink>
                     {u.followed
-                        ? <button onClick={() => props.unFollow(u.id)}>Unfollow</button>
-                        : <button onClick={() => props.follow(u.id)}>Follow</button>}
+                        ? <button onClick={() => {
+                            axios.default.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                withCredentials:true ,
+                                headers: {"API-KEY" : "ed0fa8fa-ddbb-478a-b370-1f41a9c286be"}
+                            }).then(response => {
+                                if(response.data.resultCode === 0){
+                                    props.unFollow(u.id)
+                                }
+                            })
+                            
+                        }}>Unfollow</button>
+                        : <button onClick={() => {
+                            axios.default.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
+                                withCredentials:true,
+                                headers: {"API-KEY" : "ed0fa8fa-ddbb-478a-b370-1f41a9c286be"}
+                            }).then(response => {
+                                if(response.data.resultCode === 0){
+                                    props.follow(u.id)
+                                }
+                            })
+                            
+                        }}>Follow</button>}
 
                 </div>
                 <div className={s.info}>

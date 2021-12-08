@@ -1,5 +1,6 @@
 import { v1 } from "uuid"
 import { NewUsersType } from "../components/Users/Users"
+import { AuthDataType } from "./auth-reduser"
 
 import  dialogsReduser  from "./dialogs-reduser"
 import  profileReduser, { APIProfileType }  from "./profile-reduser"
@@ -45,6 +46,7 @@ export type StateDataType = {
   profilePage: PostType
   navbarRight: NavbarRightType
   users:UsersStateType
+  auth:AuthDataType
 }
 
 

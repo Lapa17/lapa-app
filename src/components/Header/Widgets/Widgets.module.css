@@ -1,5 +1,4 @@
 .widgets{
-  grid-area: w;
     display: grid;
     justify-content: center;
     align-items: center;

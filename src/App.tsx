@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
 import NavbarLeft from './components/NavbarLeft/NavbarLeft';
 import NavbarRight from './components/NavbarRight/NavbarRight';
-import Profile from './components/Profile/Profile';
 import {BrowserRouter, Route} from 'react-router-dom'
 import News from './components/News/News';
 import Music from './components/Music/Music';
@@ -12,13 +10,14 @@ import {ReduxStoreType, store} from './redux/store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 
 const App:React.FC<ReduxStoreType> = (props) => {
   return (
     
     <div className='app-wrapper'>
-      <Header />
+      <HeaderContainer />
       <NavbarLeft />
       <NavbarRight friends={props.store.getState().navbarRight.friends}/>
       <div className='app-wrapper-content'>
