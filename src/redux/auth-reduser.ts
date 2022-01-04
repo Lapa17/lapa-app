@@ -47,7 +47,6 @@ const initialProfileState = {
 }
 
 const authReduser = (state: AuthDataType = initialProfileState, action: AuthActionType) => {
-    debugger
     switch (action.type) {
         case SET_AUTH_DATA: {
             return { ...state,...action.data, isAuth:true }

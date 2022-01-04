@@ -145,6 +145,7 @@ export type UsersStateType ={
   totalUserCounter: number
   currentPage:number
   isFetching: boolean
+  followInProgress: Array<number>
 
 }
 

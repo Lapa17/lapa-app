@@ -1,7 +1,16 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { StateDataType, UsersType } from "../../redux/store";
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unFollow, UsersActionType } from "../../redux/users-reduser";
+import {
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    toggleIsFollowingProgress,
+    unFollow,
+    UsersActionType
+} from "../../redux/users-reduser";
 import Users, { NewUsersType } from "./Users";
 import * as axios from 'axios'
 import React from "react";
@@ -26,6 +35,8 @@ export type UsersComponentPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleIsFollowingProgress:(isFetching:boolean, userId:number) => void
+    followInProgress: Array<number>
 }
 
 
@@ -58,6 +69,9 @@ class UsersClassContainer extends React.Component<UsersComponentPropsType> {
             unFollow={this.props.unFollow}
             onPageClick={this.onPageClick}
             isFetching={this.props.isFetching}
+            toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+            followInProgress={this.props.followInProgress}
+
         />
     }
 }
@@ -72,7 +86,8 @@ let mapStateProps = (state: StateDataType) => {
         pageSize: state.users.pageSize,
         totalUserCounter: state.users.totalUserCounter,
         currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching
+        isFetching: state.users.isFetching,
+        followInProgress: state.users.followInProgress
     }
 }
 
@@ -98,7 +113,8 @@ const UsersContainer = connect(mapStateProps,
         setUsers,
         setCurrentPage,
         setTotalUsersCount,
-        toggleIsFetching
+        toggleIsFetching,
+        toggleIsFollowingProgress
     })(UsersClassContainer);
 
 export default UsersContainer;

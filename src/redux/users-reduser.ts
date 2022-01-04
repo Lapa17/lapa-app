@@ -9,6 +9,7 @@ const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 export const follow = (userID:number) => ({type:FOLLOW, userID} as const)
 export const unFollow = (userID:number) => ({type:UNFOLLOW, userID} as const)
@@ -16,6 +17,7 @@ export const setUsers = (users:Array<NewUsersType>) => ({type:SET_USERS, users }
 export const setCurrentPage = (currentPage:number) => ({type:SET_CURRENT_PAGE, currentPage } as const)
 export const setTotalUsersCount = (totalCount:number) => ({type:SET_TOTAL_USERS_COUNT, totalCount:totalCount } as const)
 export const toggleIsFetching = (isFetching:boolean) => ({type:TOGGLE_IS_FETCHING, isFetching } as const)
+export const toggleIsFollowingProgress = (isFetching:boolean, userId:number) => ({type:TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId } as const)
 
 //export type FollowActionCreatorType = ReturnType<typeof followActionCreator> + добавляем as const в сам AC
 export type FollowACType = {
@@ -45,14 +47,22 @@ export type ToggleIsFetchingACType = {
     isFetching: boolean
 }
 
-export type UsersActionType = FollowACType | UnFollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType
+export type ToggleIsFollowingProgress = {
+    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
+    isFetching: boolean
+    followInProgress: Array<number>
+    userId: number
+}
+
+export type UsersActionType = FollowACType | UnFollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleIsFollowingProgress
 
 const initialUsersState = {
     users: [],
     pageSize: 5,
     totalUserCounter:0,
     currentPage:1,
-    isFetching: false
+    isFetching: false,
+    followInProgress: []
 
     //   { id: v1(), name: "Pashka", message:'Hi', country: 'Belarus', city:'Minsk', follow: true},
     //   { id: v1(), name: "Leha", message:'Hello', country: 'Belarus', city:'Minsk', follow: true},
@@ -81,6 +91,12 @@ const usersReduser = (state:UsersStateType = initialUsersState, action: UsersAct
         }
         case TOGGLE_IS_FETCHING:{
             return {...state, isFetching:action.isFetching}
+        }
+        case TOGGLE_IS_FOLLOWING_PROGRESS:{
+            return {...state,
+                followInProgress: action.isFetching
+                    ? [...state.followInProgress, action.userId]
+                    : state.followInProgress.filter(id => id !== action.userId)}
         }
         default:
         return state;
