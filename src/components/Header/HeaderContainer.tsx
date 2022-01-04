@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { AuthDataType, setAuthData, setUserPhoto } from '../../redux/auth-reduser';
 import { StateDataType } from '../../redux/store';
 import Header from './Header';
+import {authAPI} from "../../api/authAPI";
+import {profileAPI} from "../../api/profileAPI";
 
 
 type HeaderContainerPropsType = {
@@ -17,15 +19,13 @@ type HeaderContainerPropsType = {
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType>  {
     componentDidMount() {
-        axios.default.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true
-        }).then(response => {
-            if (response.data.resultCode === 0) {
-                let { id, login, email } = response.data.data
+        authAPI.getAuth().then(data => {
+            if (data.resultCode === 0) {
+                let { id, login, email } = data.data
                 this.props.setAuthData(id, login, email)
                 
-                axios.default.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`).then(response=>{
-                   this.props.setUserPhoto(response.data.photos)
+                profileAPI.getProfile(id).then(data=>{
+                   this.props.setUserPhoto(data.photos)
                    
                 })
             }

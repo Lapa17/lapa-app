@@ -5,6 +5,7 @@ import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching,
 import Users, { NewUsersType } from "./Users";
 import * as axios from 'axios'
 import React from "react";
+import {usersAPI} from "../../api/usersAPI";
 
 
 export interface Items {
@@ -28,30 +29,23 @@ export type UsersComponentPropsType = {
 }
 
 
-
-
-
 class UsersClassContainer extends React.Component<UsersComponentPropsType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.default.get<Items>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials:true
-        }).then(response => {
+        usersAPI.getUsers(this.props.currentPage,this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
+            this.props.setUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
 
         })
     }
     onPageClick = (currentPage: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(currentPage)
-        axios.default.get<Items>(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
+        usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         })
     }
 
