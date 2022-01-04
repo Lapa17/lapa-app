@@ -1,3 +1,8 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/usersAPI";
+import {setCurrentPage, setUsers, toggleIsFetching, UsersActionType} from "./users-reduser";
+import {authAPI} from "../api/authAPI";
+import {profileAPI} from "../api/profileAPI";
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA'
 const SET_USER_PHOTO= 'SET_USER_PHOTO'
@@ -46,7 +51,7 @@ const initialProfileState = {
     }
 }
 
-const authReduser = (state: AuthDataType = initialProfileState, action: AuthActionType) => {
+export const authReduser = (state: AuthDataType = initialProfileState, action: AuthActionType) => {
     switch (action.type) {
         case SET_AUTH_DATA: {
             return { ...state,...action.data, isAuth:true }
@@ -61,4 +66,19 @@ const authReduser = (state: AuthDataType = initialProfileState, action: AuthActi
     }
 }
 
-export default authReduser;
+export const authMe = () => {
+    return (dispatch: Dispatch<AuthActionType>) => {
+        authAPI.getAuth().then(data => {
+            if (data.resultCode === 0) {
+                let { id, login, email } = data.data
+                // @ts-ignore
+                dispatch(setAuthData(id, login, email))
+
+                profileAPI.getProfile(id).then(data=>{
+                    dispatch(setUserPhoto(data.photos))
+
+                })
+            }
+        })
+    }
+}

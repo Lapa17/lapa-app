@@ -1,5 +1,9 @@
 import { v1 } from "uuid"
 import { ActionType, PostsDataType } from "./store"
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/usersAPI";
+import {toggleIsFollowingProgress, unFollow, UsersActionType} from "./users-reduser";
+import {profileAPI} from "../api/profileAPI";
 
 
 export type ProfileStateType = {
@@ -56,7 +60,7 @@ const initialProfileState = {
     profile: { aboutMe: '', userId: 0, fullName: '', photos: { small: '', large: '' } }
 }
 
-const profileReduser = (state: ProfileStateType = initialProfileState, action: ProfileActionType) => {
+export const profileReduser = (state: ProfileStateType = initialProfileState, action: ProfileActionType) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
@@ -79,4 +83,15 @@ const profileReduser = (state: ProfileStateType = initialProfileState, action: P
     }
 }
 
-export default profileReduser;
+export const getProfile = (profileUserId: string) => {
+
+    return (dispatch: Dispatch<ProfileActionType>) => {
+        let userId = profileUserId
+        if (!userId) {
+            userId = '21095'
+        }
+        profileAPI.getProfile(userId).then(data => {
+            dispatch(setUserProfile(data))
+        })
+    }
+}
