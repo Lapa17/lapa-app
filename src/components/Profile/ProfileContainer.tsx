@@ -17,6 +17,7 @@ type ProfileContainerType ={
 }
 type RouterPropType = RouteComponentProps<UserId> & {
   profile: APIProfileType
+  isAuth: boolean
   setUserProfile:(profile:APIProfileType) => void
   getProfile:(profileUserId: string)=> void
 }
@@ -36,12 +37,13 @@ class ProfileContainer extends React.Component<RouterPropType> {
 
   render()
   {
-    return <Profile {...this.props} profile={this.props.profile}/>
+    return <Profile {...this.props} profile={this.props.profile} isAuth={this.props.isAuth}/>
   }
 }
 
 let mapStateToProps= (state:StateDataType) => ({
-  profile: state.profilePage.profile
+  profile: state.profilePage.profile,
+  isAuth: state.auth.isAuth
 
 })
 

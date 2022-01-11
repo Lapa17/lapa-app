@@ -63,8 +63,10 @@ export type PostMessageType = {
   dialogs: Array<DialogsDataType>
   messages: Array<MessagesDataType>
   messagetTextareaData: string
+  isAuth: boolean
   addMessage: ()=> void
   textareaChange:(text:string)=> void
+
 
 }
 

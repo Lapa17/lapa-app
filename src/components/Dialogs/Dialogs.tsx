@@ -1,4 +1,5 @@
 import React, { ChangeEventHandler, MouseEventHandler } from 'react'
+import { Redirect } from 'react-router-dom'
 import { PostMessageType } from '../../redux/store'
 import Dialog from './Dialog/Dialog'
 import s from './Dialogs.module.css'
@@ -24,7 +25,7 @@ const Dialogs: React.FC<PostMessageType> = ({dialogs, messages, addMessage, text
     
       }
     
-
+    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>
