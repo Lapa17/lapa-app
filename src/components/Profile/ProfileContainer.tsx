@@ -1,11 +1,13 @@
 import React from 'react';
 import Profile from './Profile';
 import * as axios from 'axios'
-import { connect } from 'react-redux';
+import { connect, ConnectedComponent } from 'react-redux';
 import {APIProfileType, getProfile, ProfileStateType, setUserProfile} from '../../redux/profile-reduser';
 import { StateDataType } from '../../redux/store';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, StaticContext, withRouter, WithRouterStatics } from 'react-router';
 import {profileAPI} from "../../api/profileAPI";
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 type UserId = {
   userId:string
@@ -47,6 +49,14 @@ let mapStateToProps= (state:StateDataType) => ({
 
 })
 
-let ProfileContainerWithUrl = withRouter(ProfileContainer)
+// let wiathAuthContainer  = withAuthRedirect(ProfileContainer)
 
-export default connect(mapStateToProps, {setUserProfile, getProfile})(ProfileContainerWithUrl);
+// let ProfileContainerWithUrl = withRouter(wiathAuthContainer)
+
+// export default connect(mapStateToProps, {setUserProfile, getProfile})(ProfileContainerWithUrl);
+
+export default compose<React.ComponentClass<Pick<RouteComponentProps<any, StaticContext, unknown>, never>, any> & WithRouterStatics<ConnectedComponent<(props: any) => JSX.Element, Omit<any, "isAuth" | "dispatch">>>>(
+  connect(mapStateToProps, {setUserProfile, getProfile}),
+  withRouter,
+  withAuthRedirect,
+)(ProfileContainer)

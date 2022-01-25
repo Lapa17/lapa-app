@@ -1,5 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, ConnectedComponent } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { compose } from 'redux'
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import { addMessageActionCreator, changeMessageTextareaDataValueActionCreator } from '../../redux/dialogs-reduser'
 import { ActionType, StateDataType } from '../../redux/store'
 import Dialogs from './Dialogs'
@@ -12,7 +15,6 @@ let mapStateProps = (state:StateDataType) => {
     dialogs: state.dialogsPage.dialogs,
     messages: state.dialogsPage.messages,
     messagetTextareaData: state.dialogsPage.messageTextareaData,
-    isAuth: state.auth.isAuth
   }
 }
 
@@ -24,6 +26,8 @@ let mapDispatchProps = (dispatch:(action:ActionType) => void) => {
   }
 }
 
-const DialogsContainer = connect (mapStateProps,mapDispatchProps) (Dialogs);
+const DialogsContainer = compose<ConnectedComponent<(props: any) => JSX.Element, Omit<any, "isAuth" | "dispatch">>>(
+  connect (mapStateProps,mapDispatchProps),
+  withAuthRedirect)(Dialogs);
 
 export default DialogsContainer;
