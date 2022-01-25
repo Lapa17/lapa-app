@@ -74,8 +74,8 @@ export const authMe = () => {
                 // @ts-ignore
                 dispatch(setAuthData(id, login, email))
 
-                profileAPI.getProfile(id).then(data=>{
-                    dispatch(setUserPhoto(data.photos))
+                profileAPI.getProfile(id).then(response=>{
+                    dispatch(setUserPhoto(response.data.photos))
 
                 })
             }

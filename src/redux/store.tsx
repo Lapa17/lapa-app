@@ -92,6 +92,7 @@ export type PostType = {
   posts: Array<PostsDataType>
   profileTextareaData:string
   profile:APIProfileType
+  status: string
 }
 
 export type PostsDataType = {

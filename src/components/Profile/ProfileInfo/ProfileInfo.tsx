@@ -3,19 +3,22 @@ import s from '../Profile.module.css';
 import ProfileDescription from "./Description/Description";
 import { APIProfileType } from "../../../redux/profile-reduser";
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 type ProfileInfoType = {
     profile: APIProfileType
+    status: string
 }
 
 const ProfileInfo = (props:ProfileInfoType) => {
     if(!props.profile) {
         <Preloader />
     }
-
+    debugger
     return (<div className={s.wrapper}>
             <Avatar imgAdress={props.profile.photos.large} />
             <ProfileDescription title={props.profile.fullName} description={props.profile.aboutMe}/>
+            <ProfileStatus status={props.status} />
             </div>)
     
     

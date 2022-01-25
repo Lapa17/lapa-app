@@ -13,17 +13,15 @@ import { Redirect } from 'react-router-dom';
 type ProfilePropsType ={
   children?: ReactNode
   profile:APIProfileType
-  isAuth:boolean
+  status: string
 }
 
 
 
 const Profile = (props:ProfilePropsType) => {
-  
-  if (!props.isAuth) return <Redirect to={'/login'}/>
-
+ 
   return <div>
-    <ProfileInfo profile={props.profile}/>
+    <ProfileInfo profile={props.profile} status={props.status}/>
     {/* <Posts myPost={props.myPost} newPost={props.newPost} posts={props.posts} dispatch={props.dispatch} postTextareaData={props.postTextareaData}/> */}
     <PostsContainer/>
   </div>

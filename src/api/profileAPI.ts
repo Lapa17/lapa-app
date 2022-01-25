@@ -8,6 +8,12 @@ const instance = axios.default.create({
 
 export const profileAPI = {
     getProfile (userId:string){
-        return instance.get(`profile/${userId}`).then(response => response.data)
+        return instance.get(`profile/${userId}`)
+    },
+    getProfileStatus (userId:string){
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus (status: string){
+        return instance.put('status', {status})
     }
 }

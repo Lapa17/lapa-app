@@ -12,6 +12,7 @@ export type ProfileStateType = {
     posts: Array<PostsDataType>;
     profileTextareaData: string;
     profile: APIProfileType
+    status:string
 }
 
 export type APIProfileType = {
@@ -28,6 +29,10 @@ export type UserProfileACType = {
     type: typeof SET_USER_PROFILE
     profile: APIProfileType
 }
+export type UserStatusACType = {
+    type: typeof SET_STATUS
+    status: string
+}
 export type AddPostACType = {
     type: typeof ADD_POST
 }
@@ -36,15 +41,17 @@ export type ProfileTextareaDataACType = {
     value: string
 }
 
-export type ProfileActionType = UserProfileACType | AddPostACType | ProfileTextareaDataACType
+export type ProfileActionType = UserProfileACType | AddPostACType | ProfileTextareaDataACType | UserStatusACType
 
 const ADD_POST = 'ADD-POST'
 const PROFILE_TEXTAREA_CHANGE = 'PROFILE-TEXAREA-CHANGE'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 export const addPostActionCreator = () => ({ type: ADD_POST } as const)
 export const changeProfileTextareaDataValueActionCreator = (value: string) => ({ type: PROFILE_TEXTAREA_CHANGE, value } as const)
 export const setUserProfile = (profile: APIProfileType) => ({ type: SET_USER_PROFILE, profile } as const)
+export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
 
 
 const initialProfileState = {
@@ -57,7 +64,9 @@ const initialProfileState = {
     myPost: 'My posts',
     newPost: 'New post',
     profileTextareaData: '',
-    profile: { aboutMe: '', userId: 0, fullName: '', photos: { small: '', large: '' } }
+    profile: { aboutMe: '', userId: 0, fullName: '', photos: { small: '', large: '' }
+    },
+    status:'',
 }
 
 export const profileReduser = (state: ProfileStateType = initialProfileState, action: ProfileActionType) => {
@@ -76,6 +85,9 @@ export const profileReduser = (state: ProfileStateType = initialProfileState, ac
         case SET_USER_PROFILE: {
             return { ...state, profile: action.profile }
         }
+        case SET_STATUS: {
+            return { ...state, status: action.status  }
+        }
 
 
         default:
@@ -84,14 +96,30 @@ export const profileReduser = (state: ProfileStateType = initialProfileState, ac
 }
 
 export const getProfile = (profileUserId: string) => {
+    return (dispatch: Dispatch<ProfileActionType>) => {
+        profileAPI.getProfile(profileUserId).then(response => {
+            dispatch(setUserProfile(response.data))
+        })
+    }
+}
+
+export const getStatus = (profileUserId: string) => {
 
     return (dispatch: Dispatch<ProfileActionType>) => {
-        let userId = profileUserId
-        if (!userId) {
-            userId = '21095'
-        }
-        profileAPI.getProfile(userId).then(data => {
-            dispatch(setUserProfile(data))
+        profileAPI.getProfileStatus(profileUserId).then(response => {
+            dispatch(setStatus(response.data))
+        })
+    }
+}
+
+export const updateStatus = (status: string) => {
+
+    return (dispatch: Dispatch<ProfileActionType>) => {
+        profileAPI.updateStatus(status).then(response => {
+            if (response.data.resultCode === 0){
+                dispatch(setStatus(status))
+            }
+           
         })
     }
 }
