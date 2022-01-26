@@ -25,9 +25,14 @@ class ProfileStatus extends React.Component<ProfileStatusType>  {
             status: e.currentTarget.value
         })
     }
-    // componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>, snapshot?: any) {
-    //     this.state.status = this.props.status
-    // }
+    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.status
+            })
+        }
+        
+    }
 
     render(): React.ReactNode {
         return (
