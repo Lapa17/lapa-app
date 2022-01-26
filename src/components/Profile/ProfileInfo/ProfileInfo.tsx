@@ -8,17 +8,17 @@ import ProfileStatus from "./ProfileStatus";
 type ProfileInfoType = {
     profile: APIProfileType
     status: string
+    updateStatus:(status:string)=> void
 }
 
 const ProfileInfo = (props:ProfileInfoType) => {
     if(!props.profile) {
         <Preloader />
     }
-    debugger
     return (<div className={s.wrapper}>
             <Avatar imgAdress={props.profile.photos.large} />
             <ProfileDescription title={props.profile.fullName} description={props.profile.aboutMe}/>
-            <ProfileStatus status={props.status} />
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>)
     
     
