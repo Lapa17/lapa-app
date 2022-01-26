@@ -3,6 +3,7 @@ import { NewUsersType } from "../components/Users/Users"
 import { AuthDataType } from "./auth-reduser"
 
 import  dialogsReduser  from "./dialogs-reduser"
+import { LoginType } from "./login-reduser"
 import {APIProfileType }  from "./profile-reduser"
 
 
@@ -47,6 +48,7 @@ export type StateDataType = {
   navbarRight: NavbarRightType
   users:UsersStateType
   auth:AuthDataType
+  login:LoginType
 }
 
 

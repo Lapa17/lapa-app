@@ -5,6 +5,7 @@ import navbarRightReduser from './navbar-right-reduser';
 import {profileReduser} from './profile-reduser';
 import {usersReduser} from './users-reduser';
 import thunkMiddleware from 'redux-thunk'
+import { loginReduser } from './login-reduser';
 
 
 const reducers = combineReducers({
@@ -12,7 +13,8 @@ const reducers = combineReducers({
     dialogsPage:dialogsReduser,
     navbarRight:navbarRightReduser,
     users:usersReduser,
-    auth:authReduser
+    auth:authReduser,
+    login:loginReduser
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
