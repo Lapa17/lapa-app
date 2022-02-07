@@ -13,7 +13,13 @@ export type AuthActionType = AuthDataActionType | UserPhotoActionType | AuthChan
 
 export type AuthDataActionType = {
     type: typeof SET_AUTH_DATA
-    data: AuthDataType
+    data: TypeForAuthData
+}
+
+type TypeForAuthData = {
+    userId: number
+    login: string
+    email: string
 }
 
 export type UserPhotoActionType = {
@@ -42,8 +48,8 @@ export type AuthDataType = {
 
 
 
-export const setAuthData = (userId: number, login: string, email: string) => ({ type: SET_AUTH_DATA, data: { userId, login, email } } as const)
-export const setUserPhoto = (photos: { large: string, small: string }) => ({ type: SET_USER_PHOTO, photos } as const)
+export const setAuthData = (userId: number, login: string, email: string):AuthDataActionType => ({ type: SET_AUTH_DATA, data: { userId, login, email } })
+export const setUserPhoto = (photos: { large: string, small: string }): UserPhotoActionType => ({ type: SET_USER_PHOTO, photos } )
 export const setAuthChange = (isAuth: boolean) => ({ type: SET_AUTH_CHANGE, isAuth } as const)
 
 
@@ -80,9 +86,7 @@ export const authMe = () => {
         authAPI.getAuth().then(data => {
             if (data.resultCode === 0) {
                 let { id, login, email } = data.data
-                // @ts-ignore
                 dispatch(setAuthData(id, login, email))
-
                 profileAPI.getProfile(id).then(response => {
                     dispatch(setUserPhoto(response.data.photos))
 
@@ -96,8 +100,6 @@ export const setAuth = (email:string, password:string) => {
     return (dispatch: Dispatch<AuthActionType>) => {
         authAPI.logining({ email, password }).then(res => {
             if (res.data.data.userId === 21095) {
-                debugger
-                // @ts-ignore
                 dispatch(setAuthChange(true))
             }
 
