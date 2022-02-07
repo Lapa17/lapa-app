@@ -10,11 +10,8 @@ const instance = axios.default.create({
 export const authAPI = {
     getAuth (){
         return instance.get(`auth/me`).then(response => response.data)
-    }
-}
-
-export const loginAPI = {
-    logining (){
-        return instance.get(`auth/me`).then(response => response.data)
+    },
+    logining(params: {email: string, password: string}){
+        return instance.post(`/auth/login`, {...params})
     }
 }
