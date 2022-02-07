@@ -13,5 +13,8 @@ export const authAPI = {
     },
     logining(params: {email: string, password: string}){
         return instance.post(`/auth/login`, {...params})
+    },
+    setUnlogging(){
+        return instance.delete(`/auth/login`)
     }
 }

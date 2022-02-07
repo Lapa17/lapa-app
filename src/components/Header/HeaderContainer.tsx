@@ -1,7 +1,7 @@
 import * as axios from 'axios'
 import React from 'react';
 import { connect } from 'react-redux';
-import {AuthDataType, authMe, setAuthData, setUserPhoto} from '../../redux/auth-reduser';
+import {AuthDataType, authMe, setAuthData, setLogOut, setUserPhoto} from '../../redux/auth-reduser';
 import { StateDataType } from '../../redux/store';
 import Header from './Header';
 import {authAPI} from "../../api/authAPI";
@@ -15,6 +15,7 @@ type HeaderContainerPropsType = {
     isAuth: boolean
     smallPhoto: string
     authMe: () => void
+    setLogOut: ()=> void
 }
 
 
@@ -36,7 +37,7 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType>  {
 
 
     render() {
-        return <Header {...this.props} login={this.props.login} isAuth={this.props.isAuth} smallPhoto={this.props.smallPhoto}/>
+        return <Header {...this.props} login={this.props.login} isAuth={this.props.isAuth} smallPhoto={this.props.smallPhoto} setLogOut={this.props.setLogOut}/>
     }
 }
 
@@ -46,4 +47,4 @@ const mapStateToProps = (state: StateDataType) => ({
     smallPhoto: state.auth.photos.small
 })
 
-export default connect(mapStateToProps, { setAuthData, setUserPhoto , authMe})(HeaderContainer)
+export default connect(mapStateToProps, { setAuthData, setUserPhoto , authMe, setLogOut})(HeaderContainer)

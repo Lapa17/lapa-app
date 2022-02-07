@@ -48,8 +48,8 @@ export type AuthDataType = {
 
 
 
-export const setAuthData = (userId: number, login: string, email: string):AuthDataActionType => ({ type: SET_AUTH_DATA, data: { userId, login, email } })
-export const setUserPhoto = (photos: { large: string, small: string }): UserPhotoActionType => ({ type: SET_USER_PHOTO, photos } )
+export const setAuthData = (userId: number, login: string, email: string): AuthDataActionType => ({ type: SET_AUTH_DATA, data: { userId, login, email } })
+export const setUserPhoto = (photos: { large: string, small: string }): UserPhotoActionType => ({ type: SET_USER_PHOTO, photos })
 export const setAuthChange = (isAuth: boolean) => ({ type: SET_AUTH_CHANGE, isAuth } as const)
 
 
@@ -96,13 +96,23 @@ export const authMe = () => {
     }
 }
 
-export const setAuth = (email:string, password:string) => {
+export const setAuth = (email: string, password: string) => {
     return (dispatch: Dispatch<AuthActionType>) => {
         authAPI.logining({ email, password }).then(res => {
             if (res.data.data.userId === 21095) {
                 dispatch(setAuthChange(true))
             }
 
+        })
+    }
+}
+
+export const setLogOut = () => {
+    return (dispatch: Dispatch<AuthActionType>) => {
+        authAPI.setUnlogging().then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setAuthChange(false))
+            }
         })
     }
 }
