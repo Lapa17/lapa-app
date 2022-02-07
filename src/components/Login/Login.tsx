@@ -45,11 +45,11 @@ const Login: React.FC<LoginPropsType> = (props) => {
             <h1>LOGIN PAGE</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <input defaultValue={'laparevichpavel@gmail.com'} {...register("login", { required: true })} />
+                    <input defaultValue={''} {...register("login", { required: true })} />
                 </div>
                 {errors.login && <span>This field is required</span>}
                 <div>
-                    <input defaultValue={'suldafon171197'} {...register("password", { required: true })} />
+                    <input defaultValue={''} {...register("password", { required: true })} />
                 </div>
                 {errors.password && <span>This field is required</span>}
                 <div>

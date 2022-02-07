@@ -1,11 +1,23 @@
+import { Dispatch } from "redux"
 import { v1 } from "uuid"
 import { ActionType, DialogsType, } from "./store"
 
-const ADD_MESSAGE: string = 'ADD-MESSAGE'
-const MESSAGE_TEXTAREA_CHANGE: string = 'MESSAGE-TEXAREA-CHANGE'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const MESSAGE_TEXTAREA_CHANGE = 'MESSAGE-TEXAREA-CHANGE'
 
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE, value: '' })
-export const changeMessageTextareaDataValueActionCreator = (text: string) => ({ type: MESSAGE_TEXTAREA_CHANGE, value: text })
+
+type DialogsActionType = AddMesageActionType 
+
+type AddMesageActionType = {
+  type: typeof ADD_MESSAGE
+  message: string
+}
+
+
+
+// export const addMessageActionCreator = () => ({ type: ADD_MESSAGE, value: '' })
+
+export const addMessage = (message: string):AddMesageActionType => ({ type: ADD_MESSAGE, message })
 
 const initialDialogState = {
   dialogs: [
@@ -20,32 +32,28 @@ const initialDialogState = {
     { id: v1(), message: 'How are you?' },
     { id: v1(), message: 'I am fine' }
   ],
-  messageTextareaData: ''
+
 }
 
-const dialogsReduser = (state: DialogsType = initialDialogState, action: ActionType) => {
+const dialogsReduser = (state: DialogsType = initialDialogState, action: DialogsActionType) => {
   switch (action.type) {
     case ADD_MESSAGE: {
       let newMessage = {
         id: v1(),
-        message: state.messageTextareaData,
+        message: action.message
       }
-      // let stateCopy = {...state}
-      // stateCopy.messages = [...state.messages]
-      // stateCopy.messages.push(newMessage)
-      // stateCopy.messageTextareaData = ''
-      // return stateCopy;
-      return {...state, messages: [...state.messages, newMessage], messageTextareaData: '' }
+      return {...state, messages: [...state.messages, newMessage] }
 
-    }
-    case MESSAGE_TEXTAREA_CHANGE: {
-      // let stateCopy = {...state}
-      // stateCopy.messageTextareaData = action.value;
-      // return stateCopy;
-      return {...state, messageTextareaData: action.value}
     }
     default:
       return state;
   }
 }
 export default dialogsReduser;
+
+
+export const AddMessage = (message:string) => {
+  return (dispatch: Dispatch<DialogsActionType>) => {
+    dispatch(addMessage(message))
+  }
+}

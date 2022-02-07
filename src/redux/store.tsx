@@ -73,7 +73,6 @@ export type PostMessageType = {
 }
 
 export type DialogsType = {
-  messageTextareaData:string
   dialogs: Array<DialogsDataType>
   messages: Array<MessagesDataType>
 }
@@ -210,44 +209,44 @@ export const store = {
     },
     
   },
-  getState() {
-    return this._state
-  },
-  getPosts() {
-    return this._state.profilePage.posts
-  },
-  getDialogs(){
-    return this._state.dialogsPage.dialogs
-  },
-  getMessages(){
-    return this._state.dialogsPage.messages
-  },
-  getFriends(){
-    return this._state.navbarRight.friends
-  },
-  getNewPostText(){
-    return this._state.profilePage.newPost
-  },
-  getMyPostText(){
-    return this._state.profilePage.myPost
-  },
-  getMessageTextareaData(){
-    return this._state.dialogsPage.messageTextareaData
-  },
-  getProfileTextareaData(){
-    return this._state.profilePage.profileTextareaData
-  },
-  _renderAll (state: StateDataType){
-    console.log('State changed')
-  },
+//   getState() {
+//     return this._state
+//   },
+//   getPosts() {
+//     return this._state.profilePage.posts
+//   },
+//   getDialogs(){
+//     return this._state.dialogsPage.dialogs
+//   },
+//   getMessages(){
+//     return this._state.dialogsPage.messages
+//   },
+//   getFriends(){
+//     return this._state.navbarRight.friends
+//   },
+//   getNewPostText(){
+//     return this._state.profilePage.newPost
+//   },
+//   getMyPostText(){
+//     return this._state.profilePage.myPost
+//   },
+//   getMessageTextareaData(){
+//     return this._state.dialogsPage.messageTextareaData
+//   },
+//   getProfileTextareaData(){
+//     return this._state.profilePage.profileTextareaData
+//   },
+//   _renderAll (state: StateDataType){
+//     console.log('State changed')
+//   },
 
-  subscribe(observer: (state: StateDataType) => void) {
-    this._renderAll = observer
-  }, 
-  dispatch(action:ActionType) {
+//   subscribe(observer: (state: StateDataType) => void) {
+//     this._renderAll = observer
+//   }, 
+//   dispatch(action:ActionType) {
     
 
-    this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
+//     this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
     
-  }
-}
+//   }
+ }
