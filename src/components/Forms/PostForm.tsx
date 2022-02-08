@@ -1,5 +1,7 @@
 import {ErrorMessage, Field, Form, Formik, FormikHelpers} from "formik";
+import * as yup from 'yup'
 import React from "react";
+import {postValidationSchema} from "../../utilits/validations/validationScheme";
 
 type PostFormValueType = {
     post: string
@@ -8,6 +10,8 @@ type PostFormValueType = {
 type PostFormType = {
     addPost: (post: string) => void
 }
+
+
 
 export const PostForm = ({addPost, ...props}: PostFormType) => {
 
@@ -20,17 +24,27 @@ export const PostForm = ({addPost, ...props}: PostFormType) => {
     return (
         <Formik
             initialValues={{post: ''}}
-            validate={values => {
-                const errors = {};
-                return errors;
-            }}
+            validateOnBlur
+            validationSchema={postValidationSchema}
             onSubmit={formSubmit}
         >
-            {({isSubmitting}) => (
+            {({isSubmitting,
+                  errors,
+                  touched,
+                  dirty,
+                  isValid,
+
+            }) => (
                 <Form>
-                    <Field name="post" as="textarea" className="form-textarea" placeholder='Enter a post...'/>
-                    <ErrorMessage name="textarea" component="div"/>
-                    <button type="submit" disabled={isSubmitting}>
+                    <Field name="post"
+                           as="textarea"
+                           className="form-textarea"
+                           placeholder='Enter a post...'
+                    />
+                    {touched.post && errors.post && <ErrorMessage name="post" component="div" />}
+                    <button type="submit"
+                            disabled={isSubmitting && !isValid && !dirty}
+                    >
                         Send
                     </button>
                 </Form>

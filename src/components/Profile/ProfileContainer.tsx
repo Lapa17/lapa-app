@@ -6,7 +6,7 @@ import {
   APIProfileType,
   getProfile,
   getStatus,
-  setUserProfile,
+  setUserProfile, updateLargePhoto,
   updateStatus
 } from '../../redux/profile-reduser';
 import { StateDataType } from '../../redux/store';
@@ -31,6 +31,7 @@ type RouterPropType = RouteComponentProps<UserId> & {
   getProfile:(profileUserId: string)=> void
   getStatus:(profileUserId: string) => void
   updateStatus:(status:string)=> void
+  updateLargePhoto:(photo: string)=> void
 }
 
 class ProfileContainer extends React.Component<RouterPropType> {
@@ -46,7 +47,13 @@ class ProfileContainer extends React.Component<RouterPropType> {
 
   render()
   {
-    return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+    return <Profile
+        {...this.props}
+        profile={this.props.profile}
+        status={this.props.status}
+        updateStatus={this.props.updateStatus}
+        updateLargePhoto={this.props.updateLargePhoto}
+    />
   }
 }
 
@@ -58,7 +65,7 @@ let mapStateToProps= (state:StateDataType) => ({
 })
 
 export default compose<React.ComponentClass<Pick<RouteComponentProps<any, StaticContext, unknown>, never>, any> & WithRouterStatics<ConnectedComponent<(props: any) => JSX.Element, Omit<any, "isAuth" | "dispatch">>>>(
-  connect(mapStateToProps, {setUserProfile, getProfile, getStatus, updateStatus}),
+  connect(mapStateToProps, {setUserProfile, getProfile, getStatus, updateStatus, updateLargePhoto}),
   withRouter,
   withAuthRedirect,
 )(ProfileContainer)

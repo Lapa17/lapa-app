@@ -64,13 +64,6 @@ const initialUsersState = {
     currentPage: 1,
     isFetching: false,
     followInProgress: []
-
-    //   { id: v1(), name: "Pashka", message:'Hi', country: 'Belarus', city:'Minsk', follow: true},
-    //   { id: v1(), name: "Leha", message:'Hello', country: 'Belarus', city:'Minsk', follow: true},
-    //   { id: v1(), name: "Maks", message:'Bonjur', country: 'Belarus', city:'Minsk', follow: false },
-    //   { id: v1(), name: "Vlad", message:'Aloha', country: 'Belarus', city:'Minsk', follow: false }
-
-
 }
 
 export const usersReduser = (state: UsersStateType = initialUsersState, action: UsersActionType) => {
@@ -105,17 +98,17 @@ export const usersReduser = (state: UsersStateType = initialUsersState, action: 
             return state;
     }
 }
-export const follow = (userID: number) => ({type: FOLLOW, userID} as const)
-export const unFollow = (userID: number) => ({type: UNFOLLOW, userID} as const)
-export const setUsers = (users: Array<NewUsersType>) => ({type: SET_USERS, users} as const)
-export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
-export const setTotalUsersCount = (totalCount: number) => ({
+export const follow = (userID: number):FollowACType => ({type: FOLLOW, userID})
+export const unFollow = (userID: number):UnFollowACType => ({type: UNFOLLOW, userID} )
+export const setUsers = (users: Array<NewUsersType>):SetUsersACType => ({type: SET_USERS, users} )
+export const setCurrentPage = (currentPage: number):SetCurrentPageACType => ({type: SET_CURRENT_PAGE, currentPage})
+export const setTotalUsersCount = (totalCount: number):SetTotalUsersCountACType => ({
     type: SET_TOTAL_USERS_COUNT,
     totalCount: totalCount
-} as const)
-export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
-export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) =>
-    ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId} as const)
+})
+export const toggleIsFetching = (isFetching: boolean):ToggleIsFetchingACType => ({type: TOGGLE_IS_FETCHING, isFetching})
+export const toggleIsFollowingProgress = (isFetching: boolean, userId: number):ToggleIsFollowingProgress =>
+    ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})
 
 export const getUsers = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch<UsersActionType>) => {

@@ -1,5 +1,6 @@
 import {ErrorMessage, Field, Form, Formik, FormikHelpers} from "formik";
 import React from "react";
+import {messageValidationSchema} from "../../utilits/validations/validationScheme";
 
 type MessageFormValueType = {
     message: string
@@ -18,16 +19,18 @@ export const MessageForm = ({addMessage, ...props}: MessageFormType) => {
     return (
         <Formik
             initialValues={{message: ''}}
-            validate={values => {
-                const errors = {};
-                return errors;
-            }}
+            validateOnBlur
+            validationSchema={messageValidationSchema}
             onSubmit={formSubmit}
         >
-            {({isSubmitting}) => (
+            {({isSubmitting,
+                  errors,
+                  touched,
+                  dirty,
+                  isValid,}) => (
                 <Form>
                     <Field name="message" as="textarea" className="form-textarea" placeholder='Enter a message...'/>
-                    <ErrorMessage name="textarea" component="div"/>
+                    {touched.message && errors.message && <ErrorMessage name="message" component="div" />}
                     <button type="submit" disabled={isSubmitting}>
                         Send
                     </button>

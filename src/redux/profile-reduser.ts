@@ -36,21 +36,25 @@ export type AddPostACType = {
     type: typeof ADD_POST
     post:string
 }
-export type ProfileTextareaDataACType = {
-    type: typeof PROFILE_TEXTAREA_CHANGE
-    value: string
+
+export type UpdatePhotoACType = {
+    type: typeof UPDATE_PHOTO
+    photo:string
 }
 
-export type ProfileActionType = UserProfileACType | AddPostACType | ProfileTextareaDataACType | UserStatusACType
+
+
+export type ProfileActionType = UserProfileACType | AddPostACType | UserStatusACType | UpdatePhotoACType
 
 const ADD_POST = 'ADD-POST'
-const PROFILE_TEXTAREA_CHANGE = 'PROFILE-TEXAREA-CHANGE'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
+const UPDATE_PHOTO = 'UPDATE_PHOTO'
 
 export const addPostAC = (post:string):AddPostACType => ({ type: ADD_POST, post })
 export const setUserProfile = (profile: APIProfileType) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
+export const updatePhoto = (photo: string):UpdatePhotoACType=> ({ type: UPDATE_PHOTO, photo } )
 
 
 const initialProfileState = {
@@ -77,17 +81,16 @@ export const profileReduser = (state: ProfileStateType = initialProfileState, ac
             }
             return { ...state, posts: [...state.posts, newPost]}
         }
-        case PROFILE_TEXTAREA_CHANGE: {
-            return { ...state, profileTextareaData: action.value }
-        }
         case SET_USER_PROFILE: {
             return { ...state, profile: action.profile }
         }
         case SET_STATUS: {
             return { ...state, status: action.status  }
         }
-
-
+        case UPDATE_PHOTO: {
+            debugger
+            return {...state, profile: {photos:{large: action.photo}}}
+        }
         default:
             return state;
     }
@@ -118,6 +121,19 @@ export const updateStatus = (status: string) => {
                 dispatch(setStatus(status))
             }
            
+        })
+    }
+}
+
+export const updateLargePhoto = (photo: string) => {
+
+    return (dispatch: Dispatch<ProfileActionType>) => {
+        profileAPI.updatePhoto(photo).then(response => {
+            debugger
+            if (response.data.resultCode === 0){
+                dispatch(updatePhoto(photo))
+            }
+
         })
     }
 }

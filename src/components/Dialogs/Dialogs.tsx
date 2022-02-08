@@ -6,7 +6,7 @@ import Message from './Message/Message'
 import {MessageForm} from "../Forms/MessageForm";
 
 
-const Dialogs: React.FC<PostMessageType> = ({ dialogs, messages, addMessage, textareaChange, messagetTextareaData, ...props }) => {
+const Dialogs: React.FC<PostMessageType> = ({ dialogs, messages, addMessage, textareaChange,  ...props }) => {
 
     const dialogsElements = dialogs.map((dialogs) => <Dialog id={dialogs.id} name={dialogs.name} />)
     const messageElements = messages.map((message) => <Message message={message.message} id={message.id} />)

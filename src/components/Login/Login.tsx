@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { authAPI } from '../../api/authAPI';
-import { setAuth, setAuthChange } from '../../redux/auth-reduser';
+import { setAuth } from '../../redux/auth-reduser';
 import { setLoginData } from '../../redux/login-reduser';
 import { StateDataType } from '../../redux/store';
 
@@ -29,9 +28,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         loginRequest(data.login, data.password);
         props.setLoginData(data)
-
     }
-
     const loginRequest = (email: string, password: string) => {
         props.setAuth(email, password)
     }
@@ -49,7 +46,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
                 </div>
                 {errors.login && <span>This field is required</span>}
                 <div>
-                    <input defaultValue={''} {...register("password", { required: true })} />
+                    <input defaultValue={''} type='password' {...register("password", { required: true })} />
                 </div>
                 {errors.password && <span>This field is required</span>}
                 <div>
