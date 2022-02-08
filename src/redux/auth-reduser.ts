@@ -9,7 +9,7 @@ const SET_USER_PHOTO = 'SET_USER_PHOTO'
 const SET_AUTH_CHANGE = 'SET_AUTH_CHANGE'
 
 
-export type AuthActionType = AuthDataActionType | UserPhotoActionType | AuthChangeActionType
+export type AuthActionType = AuthDataActionType | UserPhotoActionType | AuthChangeActionType 
 
 export type AuthDataActionType = {
     type: typeof SET_AUTH_DATA
@@ -50,7 +50,7 @@ export type AuthDataType = {
 
 export const setAuthData = (userId: number, login: string, email: string): AuthDataActionType => ({ type: SET_AUTH_DATA, data: { userId, login, email } })
 export const setUserPhoto = (photos: { large: string, small: string }): UserPhotoActionType => ({ type: SET_USER_PHOTO, photos })
-export const setAuthChange = (isAuth: boolean) => ({ type: SET_AUTH_CHANGE, isAuth } as const)
+export const setAuthChange = (isAuth: boolean):AuthChangeActionType => ({ type: SET_AUTH_CHANGE, isAuth })
 
 
 const initialProfileState = {
@@ -96,13 +96,12 @@ export const authMe = () => {
     }
 }
 
-export const setAuth = (email: string, password: string) => {
+export const setAuth = (email: string, password: string, rememberMe:boolean) => {
     return (dispatch: Dispatch<AuthActionType>) => {
-        authAPI.logining({ email, password }).then(res => {
+        authAPI.logining({ email, password, rememberMe }).then(res => {
             if (res.data.data.userId === 21095) {
                 dispatch(setAuthChange(true))
             }
-
         })
     }
 }
