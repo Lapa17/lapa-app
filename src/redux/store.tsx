@@ -4,7 +4,7 @@ import { AuthDataType } from "./auth-reduser"
 
 import  dialogsReduser  from "./dialogs-reduser"
 import { LoginType } from "./login-reduser"
-import {APIProfileType }  from "./profile-reduser"
+import {addPost, APIProfileType} from "./profile-reduser"
 
 
 export type ReduxStoreType ={
@@ -91,7 +91,6 @@ export type PostType = {
   myPost: string;
   newPost: string;
   posts: Array<PostsDataType>
-  profileTextareaData:string
   profile:APIProfileType
   status: string
 }
@@ -138,9 +137,7 @@ export type AddPostType = {
   myPost: string;
   newPost: string;
   posts: Array<PostsDataType>
-  addPost:()=> void
-  textareaChange:(text:string)=>void
-  postTextareaData: string
+  addPost:(post:string)=> void
 
 }
 export type UsersStateType ={

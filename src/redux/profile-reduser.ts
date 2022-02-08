@@ -10,7 +10,6 @@ export type ProfileStateType = {
     myPost: string;
     newPost: string;
     posts: Array<PostsDataType>;
-    profileTextareaData: string;
     profile: APIProfileType
     status:string
 }
@@ -35,6 +34,7 @@ export type UserStatusACType = {
 }
 export type AddPostACType = {
     type: typeof ADD_POST
+    post:string
 }
 export type ProfileTextareaDataACType = {
     type: typeof PROFILE_TEXTAREA_CHANGE
@@ -48,8 +48,7 @@ const PROFILE_TEXTAREA_CHANGE = 'PROFILE-TEXAREA-CHANGE'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
-export const addPostActionCreator = () => ({ type: ADD_POST } as const)
-export const changeProfileTextareaDataValueActionCreator = (value: string) => ({ type: PROFILE_TEXTAREA_CHANGE, value } as const)
+export const addPostAC = (post:string):AddPostACType => ({ type: ADD_POST, post })
 export const setUserProfile = (profile: APIProfileType) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
 
@@ -63,7 +62,6 @@ const initialProfileState = {
     ],
     myPost: 'My posts',
     newPost: 'New post',
-    profileTextareaData: '',
     profile: { aboutMe: '', userId: 0, fullName: '', photos: { small: '', large: '' }
     },
     status:'',
@@ -74,10 +72,10 @@ export const profileReduser = (state: ProfileStateType = initialProfileState, ac
         case ADD_POST: {
             let newPost = {
                 id: v1(),
-                postMessage: state.profileTextareaData,
+                postMessage: action.post,
                 likes: 0
             }
-            return { ...state, posts: [...state.posts, newPost], profileTextareaData: '' }
+            return { ...state, posts: [...state.posts, newPost]}
         }
         case PROFILE_TEXTAREA_CHANGE: {
             return { ...state, profileTextareaData: action.value }
@@ -121,5 +119,11 @@ export const updateStatus = (status: string) => {
             }
            
         })
+    }
+}
+
+export const addPost = (post: string) => {
+    return (dispatch: Dispatch<ProfileActionType>) => {
+                dispatch(addPostAC(post))
     }
 }
