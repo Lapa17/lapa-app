@@ -10,13 +10,10 @@ export const authAPI = {
     getAuth (){
         return instance.get(`auth/me`).then(response => response.data)
     },
-    logining(params: {email: string, password: string, rememberMe:boolean, captcha: boolean}){
-        return instance.post(`/auth/login`, {...params, captcha: true})
+    logining(params: {email: string, password: string, rememberMe:boolean}){
+        return instance.post(`/auth/login`, {...params})
     },
     setUnlogging(){
         return instance.delete(`/auth/login`)
-    },
-    getCaptcha (){
-        return instance.get(`/security/get-captcha-url`).then(response => response.data)
     },
 }

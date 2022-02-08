@@ -7,10 +7,9 @@ import { profileAPI } from "../api/profileAPI";
 const SET_AUTH_DATA = 'SET_AUTH_DATA'
 const SET_USER_PHOTO = 'SET_USER_PHOTO'
 const SET_AUTH_CHANGE = 'SET_AUTH_CHANGE'
-const SET_CAPCHA_URL = 'SET_CAPCHA_URL'
 
 
-export type AuthActionType = AuthDataActionType | UserPhotoActionType | AuthChangeActionType | SetCaptchaUrlActionType
+export type AuthActionType = AuthDataActionType | UserPhotoActionType | AuthChangeActionType 
 
 export type AuthDataActionType = {
     type: typeof SET_AUTH_DATA
@@ -36,11 +35,6 @@ export type AuthChangeActionType = {
     isAuth: boolean
 }
 
-export type SetCaptchaUrlActionType = {
-    type: typeof SET_CAPCHA_URL
-    value: string
-}
-
 export type AuthDataType = {
     userId: number
     login: string
@@ -56,8 +50,7 @@ export type AuthDataType = {
 
 export const setAuthData = (userId: number, login: string, email: string): AuthDataActionType => ({ type: SET_AUTH_DATA, data: { userId, login, email } })
 export const setUserPhoto = (photos: { large: string, small: string }): UserPhotoActionType => ({ type: SET_USER_PHOTO, photos })
-export const setAuthChange = (isAuth: boolean) => ({ type: SET_AUTH_CHANGE, isAuth } as const)
-export const setCaptchaUrl = (value:string):SetCaptchaUrlActionType=> ({ type: SET_CAPCHA_URL, value })
+export const setAuthChange = (isAuth: boolean):AuthChangeActionType => ({ type: SET_AUTH_CHANGE, isAuth })
 
 
 const initialProfileState = {
@@ -83,9 +76,6 @@ export const authReduser = (state: AuthDataType = initialProfileState, action: A
         case SET_AUTH_CHANGE: {
             return { ...state, isAuth: action.isAuth }
         }
-        case SET_CAPCHA_URL: {
-            return {...state, captchaURL: action.value}
-        }
         default:
             return state;
     }
@@ -106,18 +96,12 @@ export const authMe = () => {
     }
 }
 
-export const setAuth = (email: string, password: string, rememberMe:boolean, captcha: boolean) => {
+export const setAuth = (email: string, password: string, rememberMe:boolean) => {
     return (dispatch: Dispatch<AuthActionType>) => {
-        authAPI.logining({ email, password, rememberMe, captcha }).then(res => {
+        authAPI.logining({ email, password, rememberMe }).then(res => {
             if (res.data.data.userId === 21095) {
                 dispatch(setAuthChange(true))
             }
-            if (res.data.resultCode === 10){
-                authAPI.getCaptcha().then(res => {
-                    dispatch(setCaptchaUrl(res.url))
-                })
-            }
-
         })
     }
 }

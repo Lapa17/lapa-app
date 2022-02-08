@@ -13,3 +13,9 @@ export const messageValidationSchema = yup.object().shape({
         .max(100, 'Max length is 100 symbols!')
         .required('Required field'),
 })
+
+
+export const loginningValidationSchema = yup.object({
+    login: yup.string().email('Enter valid email'),
+    password: yup.string().min(6,'Min length is 6 symbols!' )
+}).required('Required field')

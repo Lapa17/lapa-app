@@ -5,16 +5,16 @@ import { Redirect } from 'react-router-dom';
 import { setAuth } from '../../redux/auth-reduser';
 import { setLoginData } from '../../redux/login-reduser';
 import { StateDataType } from '../../redux/store';
+import { loginningValidationSchema } from '../../utilits/validations/validationScheme';
+import { yupResolver } from '@hookform/resolvers/yup'
 
 type Inputs = {
     login: string,
     password: string,
     rememberMe: boolean
-    captcha: boolean
 };
 
 type LoginPropsType = {
-    captcha: string
     isAuth: boolean
     login: string,
     password: string,
@@ -22,18 +22,20 @@ type LoginPropsType = {
         login: string,
         password: string,
     }) => void
-    setAuth: (email: string, password: string, rememberMe:boolean, captcha: boolean) => void
+    setAuth: (email: string, password: string, rememberMe:boolean,) => void
 }
 
 const Login: React.FC<LoginPropsType> = (props) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
+        resolver: yupResolver (loginningValidationSchema)
+    });
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        loginRequest(data.login, data.password, data.rememberMe, data.captcha);
+        loginRequest(data.login, data.password, data.rememberMe);
         props.setLoginData(data)
     }
-    const loginRequest = (email: string, password: string, rememberMe:boolean, captcha:boolean) => {
-        props.setAuth(email, password, rememberMe, captcha)
+    const loginRequest = (email: string, password: string, rememberMe:boolean) => {
+        props.setAuth(email, password, rememberMe)
     }
 
     if (props.isAuth) {
@@ -45,17 +47,16 @@ const Login: React.FC<LoginPropsType> = (props) => {
             <h1>LOGIN PAGE</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <input defaultValue={''} {...register("login", { required: true })} />
+                    <input defaultValue={''} {...register("login", { required: true, pattern: /^[A-Za-z]+$/i })} />
                 </div>
-                {errors.login && <span>This field is required</span>}
+                {errors.login && <span>{errors.login.message}</span>}
                 <div>
                     <input defaultValue={''} type='password' {...register("password", { required: true })} />
                 </div>
-                {errors.password && <span>This field is required</span>}
+                {errors.password && <span>{errors.password.message}</span>}
                 <div>
                     <input type='checkbox' {...register("rememberMe")} />
                 </div>
-                <div><img src={props.captcha}/></div>
                 <div>
                     <input type="submit" />
                 </div>
@@ -65,11 +66,10 @@ const Login: React.FC<LoginPropsType> = (props) => {
 }
 
 
-let mapStateToProps = (state: StateDataType | any) => ({
+let mapStateToProps = (state: StateDataType) => ({
     login: state.login.data.login,
     password: state.login.data.password,
     isAuth: state.auth.isAuth,
-    captcha: state.auth.captcha
 })
 
 export default connect(mapStateToProps, { setLoginData, setAuth })(Login);;
