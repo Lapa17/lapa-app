@@ -9,9 +9,12 @@ import { StateDataType } from '../../redux/store';
 type Inputs = {
     login: string,
     password: string,
+    rememberMe: boolean
+    captcha: boolean
 };
 
 type LoginPropsType = {
+    captcha: string
     isAuth: boolean
     login: string,
     password: string,
@@ -19,18 +22,18 @@ type LoginPropsType = {
         login: string,
         password: string,
     }) => void
-    setAuth: (email: string, password: string) => void
+    setAuth: (email: string, password: string, rememberMe:boolean, captcha: boolean) => void
 }
 
 const Login: React.FC<LoginPropsType> = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        loginRequest(data.login, data.password);
+        loginRequest(data.login, data.password, data.rememberMe, data.captcha);
         props.setLoginData(data)
     }
-    const loginRequest = (email: string, password: string) => {
-        props.setAuth(email, password)
+    const loginRequest = (email: string, password: string, rememberMe:boolean, captcha:boolean) => {
+        props.setAuth(email, password, rememberMe, captcha)
     }
 
     if (props.isAuth) {
@@ -50,6 +53,10 @@ const Login: React.FC<LoginPropsType> = (props) => {
                 </div>
                 {errors.password && <span>This field is required</span>}
                 <div>
+                    <input type='checkbox' {...register("rememberMe")} />
+                </div>
+                <div><img src={props.captcha}/></div>
+                <div>
                     <input type="submit" />
                 </div>
             </form>
@@ -58,10 +65,11 @@ const Login: React.FC<LoginPropsType> = (props) => {
 }
 
 
-let mapStateToProps = (state: StateDataType) => ({
+let mapStateToProps = (state: StateDataType | any) => ({
     login: state.login.data.login,
     password: state.login.data.password,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captcha: state.auth.captcha
 })
 
 export default connect(mapStateToProps, { setLoginData, setAuth })(Login);;
