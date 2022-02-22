@@ -39,7 +39,7 @@ export type AddPostACType = {
 
 export type UpdatePhotoACType = {
     type: typeof UPDATE_PHOTO
-    photo:string
+    photo:File
 }
 
 
@@ -54,7 +54,7 @@ const UPDATE_PHOTO = 'UPDATE_PHOTO'
 export const addPostAC = (post:string):AddPostACType => ({ type: ADD_POST, post })
 export const setUserProfile = (profile: APIProfileType) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
-export const updatePhoto = (photo: string):UpdatePhotoACType=> ({ type: UPDATE_PHOTO, photo } )
+export const updatePhoto = (photo: File):UpdatePhotoACType=> ({ type: UPDATE_PHOTO, photo } )
 
 
 const initialProfileState = {
@@ -125,7 +125,7 @@ export const updateStatus = (status: string) => {
     }
 }
 
-export const updateLargePhoto = (photo: string) => {
+export const updateLargePhoto = (photo: File) => {
 
     return (dispatch: Dispatch<ProfileActionType>) => {
         profileAPI.updatePhoto(photo).then(response => {

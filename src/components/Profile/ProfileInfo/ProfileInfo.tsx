@@ -4,27 +4,31 @@ import ProfileDescription from "./Description/Description";
 import {APIProfileType, updateLargePhoto} from "../../../redux/profile-reduser";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
+import { ChangeEvent } from "react";
 
 type ProfileInfoType = {
     profile: APIProfileType
     status: string
     updateStatus:(status:string)=> void
-    updateLargePhoto: (photo:string)=> void
+    updateLargePhoto: (photo:File)=> void
 }
 
 const ProfileInfo = (props:ProfileInfoType) => {
     if(!props.profile) {
         <Preloader />
     }
-    const addPhoto = () => {
-        props.updateLargePhoto('https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg')
+    const addPhoto = (e:ChangeEvent<HTMLInputElement>) => {
+            debugger
+            //@ts-ignore
+            props.updateLargePhoto(e.target.files[0])
+        
     }
 
     return (<div className={s.wrapper}>
             <Avatar imgAdress={props.profile.photos.large} />
-            {/*<button onClick={addPhoto}>add photo</button>*/}
             <ProfileDescription title={props.profile.fullName} description={props.profile.aboutMe}/>
             <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            <input type='file' name="myImg" onChange={addPhoto}/>
             </div>)
     
     
@@ -36,5 +40,7 @@ const ProfileInfo = (props:ProfileInfoType) => {
     
     
 }
+
+
 
 export default ProfileInfo;

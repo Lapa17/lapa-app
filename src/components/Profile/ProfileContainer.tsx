@@ -31,7 +31,7 @@ type RouterPropType = RouteComponentProps<UserId> & {
   getProfile:(profileUserId: string)=> void
   getStatus:(profileUserId: string) => void
   updateStatus:(status:string)=> void
-  updateLargePhoto:(photo: string)=> void
+  updateLargePhoto:(photo: File)=> void
 }
 
 class ProfileContainer extends React.Component<RouterPropType> {

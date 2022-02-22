@@ -17,7 +17,8 @@ export const profileAPI = {
     updateStatus (status: string){
         return instance.put(`profile/status`, {status})
     },
-    updatePhoto (photo: string){
-        return instance.put(`profile/photo`, {image:photo})
+    updatePhoto (image: File){
+        debugger
+        return instance.put(`profile/photo`, {image})
     }
 }
