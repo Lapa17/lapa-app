@@ -89,7 +89,7 @@ export const profileReduser = (state: ProfileStateType = initialProfileState, ac
         }
         case UPDATE_PHOTO: {
             debugger
-            return {...state, profile: {photos:{large: action.photo}}}
+            return {...state, profile: {...state.profile, photos:action.photo}}
         }
         default:
             return state;
@@ -131,7 +131,7 @@ export const updateLargePhoto = (photo: File) => {
         profileAPI.updatePhoto(photo).then(response => {
             debugger
             if (response.data.resultCode === 0){
-                dispatch(updatePhoto(photo))
+                dispatch(updatePhoto(response.data.data.photos))
             }
 
         })
