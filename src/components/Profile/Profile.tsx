@@ -10,7 +10,7 @@ type ProfilePropsType ={
   profile:APIProfileType
   status: string
   updateStatus:(status:string)=> void
-  updateLargePhoto: (photo:string)=> void
+  updateLargePhoto: (photo:File)=> void
 }
 
 
