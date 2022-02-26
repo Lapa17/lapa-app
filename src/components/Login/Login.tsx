@@ -18,6 +18,7 @@ type LoginPropsType = {
     isAuth: boolean
     login: string,
     password: string,
+    errorMessage?:string
     setLoginData: (data: {
         login: string,
         password: string,
@@ -49,7 +50,8 @@ const Login: React.FC<LoginPropsType> = (props) => {
                 <div>
                     <input defaultValue={''} {...register("login", { required: true, pattern: /^[A-Za-z]+$/i })} />
                 </div>
-                {errors.login && <span>{errors.login.message}</span>}
+                {props.errorMessage && <span>{props.errorMessage}</span>}
+                {errors.login && <span>This field is required</span>}
                 <div>
                     <input defaultValue={''} type='password' {...register("password", { required: true })} />
                 </div>
@@ -70,6 +72,7 @@ let mapStateToProps = (state: StateDataType) => ({
     login: state.login.data.login,
     password: state.login.data.password,
     isAuth: state.auth.isAuth,
+    errorMessage: state.auth.errorMessage
 })
 
 export default connect(mapStateToProps, { setLoginData, setAuth })(Login);;
