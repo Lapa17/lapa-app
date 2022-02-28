@@ -94,8 +94,7 @@ export const authReduser = (state: AuthDataType = initialProfileState, action: A
 
 export const authMe = () => {
     return (dispatch: Dispatch<AuthActionType>) => {
-        authAPI.getAuth().then(data => {
-            debugger
+        return authAPI.getAuth().then(data => {
             if (data.resultCode === 0) {
                 let { id, login, email } = data.data
                 dispatch(setAuthData(id, login, email))
@@ -111,7 +110,6 @@ export const authMe = () => {
 export const setAuth = (email: string, password: string, rememberMe:boolean) => {
     return (dispatch: Dispatch<AuthActionType>) => {
         authAPI.logining({ email, password}).then(res => {
-            debugger
             if (res.data.data.userId === 21095) {
                 dispatch(setAuthChange(true))
             }

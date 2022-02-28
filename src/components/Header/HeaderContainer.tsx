@@ -14,26 +14,12 @@ type HeaderContainerPropsType = {
     login: string
     isAuth: boolean
     smallPhoto: string
-    authMe: () => void
     setLogOut: ()=> void
 }
 
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType>  {
-    componentDidMount() {
-        // authAPI.getAuth().then(data => {
-        //     if (data.resultCode === 0) {
-        //         let { id, login, email } = data.data
-        //         this.props.setAuthData(id, login, email)
-        //
-        //         profileAPI.getProfile(id).then(data=>{
-        //            this.props.setUserPhoto(data.photos)
-        //
-        //         })
-        //     }
-        // })
-        this.props.authMe()
-    }
+
 
 
     render() {
@@ -47,4 +33,4 @@ const mapStateToProps = (state: StateDataType) => ({
     smallPhoto: state.auth.photos.small
 })
 
-export default connect(mapStateToProps, { setAuthData, setUserPhoto , authMe, setLogOut})(HeaderContainer)
+export default connect(mapStateToProps, { setAuthData, setUserPhoto , setLogOut})(HeaderContainer)
