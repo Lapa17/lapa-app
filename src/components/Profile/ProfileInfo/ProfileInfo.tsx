@@ -5,6 +5,7 @@ import {APIProfileType, updateLargePhoto} from "../../../redux/profile-reduser";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 import { ChangeEvent } from "react";
+import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
 type ProfileInfoType = {
     profile: APIProfileType
@@ -27,7 +28,8 @@ const ProfileInfo = (props:ProfileInfoType) => {
     return (<div className={s.wrapper}>
             <Avatar imgAdress={props.profile.photos.large} />
             <ProfileDescription title={props.profile.fullName} description={props.profile.aboutMe}/>
-            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
+            <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             <input type='file' name="myImg" onChange={addPhoto}/>
             </div>)
     
