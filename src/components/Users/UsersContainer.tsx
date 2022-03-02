@@ -9,6 +9,14 @@ import {
 } from "../../redux/users-reduser";
 import Users, { NewUsersType } from "./Users";
 import React from "react";
+import {AppRootStateType} from "../../redux/redux-store";
+import {
+    getCurrentPage, getFollowInProgressData,
+    getIsFetchingData,
+    getPageSize,
+    getTotalUserCounter,
+    getUser
+} from "../../utilits/selectors/user-selector";
 
 
 export interface Items {
@@ -67,14 +75,14 @@ class UsersClassContainer extends React.Component<UsersComponentPropsType> {
 
 
 
-let mapStateProps = (state: StateDataType) => {
+let mapStateProps = (state: AppRootStateType) => {
     return {
-        users: state.users.users,
-        pageSize: state.users.pageSize,
-        totalUserCounter: state.users.totalUserCounter,
-        currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching,
-        followInProgress: state.users.followInProgress
+        users: getUser(state),
+        pageSize: getPageSize(state),
+        totalUserCounter: getTotalUserCounter(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetchingData(state),
+        followInProgress: getFollowInProgressData(state)
     }
 }
 
