@@ -11,7 +11,7 @@ import {addPost} from "../../../redux/profile-reduser";
 
 
 
-const Posts: React.FC<AddPostType> = ({addPost, myPost, newPost, posts, ...props}) => {
+const Posts: React.FC<AddPostType> = React.memo(({addPost, myPost, newPost, posts, ...props}) => {
 
   const postsElements = posts.map((m) => <Post key={m.id} message={m.postMessage} likes={m.likes} id={m.id} />)
 
@@ -22,8 +22,6 @@ const Posts: React.FC<AddPostType> = ({addPost, myPost, newPost, posts, ...props
       </div>
       <div className={s.item}>
         <PostForm addPost={addPost}/>
-        {/*<textarea placeholder="What's new?" onChange={changeTextAreaDataValue} value={postTextareaData} />*/}
-        {/*<button onClick={onAddPost}>{newPost}</button>*/}
       </div>
     </div>
     <div className={s.posts}>
@@ -31,6 +29,6 @@ const Posts: React.FC<AddPostType> = ({addPost, myPost, newPost, posts, ...props
 
     </div>
   </div>
-}
+})
 
 export default Posts;
