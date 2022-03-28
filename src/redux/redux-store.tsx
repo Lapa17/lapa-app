@@ -1,26 +1,35 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux'
-import {authReduser} from './auth-reduser';
-import dialogsReduser from './dialogs-reduser';
+import {AuthActionType, authReducer} from './auth-reducer';
+import dialogsReducer, {DialogsActionType} from './dialogs-reducer';
 import navbarRightReduser from './navbar-right-reduser';
-import {profileReduser} from './profile-reduser';
-import {usersReduser} from './users-reduser';
-import thunkMiddleware from 'redux-thunk'
-import { loginReduser } from './login-reduser';
-import { appReduser } from './app-reducer';
+import {ProfileActionType, profileReducer} from './profile-reducer';
+import {UsersActionType, usersReducer} from './users-reducer';
+import thunkMiddleware, { ThunkAction } from 'redux-thunk'
+import {LoginActionType, loginReducer} from './login-reducer';
+import {AppActionType, appReduser} from './app-reducer';
 
 
 const reducers = combineReducers({
-    profilePage:profileReduser,
-    dialogsPage:dialogsReduser,
+    profilePage:profileReducer,
+    dialogsPage:dialogsReducer,
     navbarRight:navbarRightReduser,
-    users:usersReduser,
-    auth:authReduser,
-    login:loginReduser,
+    users:usersReducer,
+    auth:authReducer,
+    login:loginReducer,
     app: appReduser
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 export type AppRootStateType = ReturnType<typeof reducers>
+
+export type GeneralAppActionType = AppActionType
+    | AuthActionType
+    | ProfileActionType
+    | DialogsActionType
+    | LoginActionType
+    | UsersActionType
+
+export type ThunkType = ThunkAction<void, AppRootStateType, unknown, GeneralAppActionType>
 
 export default store;

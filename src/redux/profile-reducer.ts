@@ -1,8 +1,6 @@
 import { v1 } from "uuid"
-import { ActionType, PostsDataType } from "./store"
+import { PostsDataType } from "./store"
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/usersAPI";
-import {toggleIsFollowingProgress, unFollow, UsersActionType} from "./users-reduser";
 import {profileAPI} from "../api/profileAPI";
 
 
@@ -73,7 +71,7 @@ const initialProfileState = {
     status:'',
 }
 
-export const profileReduser = (state: ProfileStateType = initialProfileState, action: ProfileActionType) => {
+export const profileReducer = (state: ProfileStateType = initialProfileState, action: ProfileActionType) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
@@ -102,43 +100,34 @@ export const profileReduser = (state: ProfileStateType = initialProfileState, ac
 }
 
 export const getProfile = (profileUserId: string) => {
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.getProfile(profileUserId).then(response => {
+    return async (dispatch: Dispatch<ProfileActionType>) => {
+        const response = await profileAPI.getProfile(profileUserId)
             dispatch(setUserProfile(response.data))
-        })
     }
 }
 
 export const getStatus = (profileUserId: string) => {
-
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.getProfileStatus(profileUserId).then(response => {
+    return async (dispatch: Dispatch<ProfileActionType>) => {
+        const response = await profileAPI.getProfileStatus(profileUserId)
             dispatch(setStatus(response.data))
-        })
     }
 }
 
 export const updateStatus = (status: string) => {
-
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.updateStatus(status).then(response => {
+    return async (dispatch: Dispatch<ProfileActionType>) => {
+       const response = await profileAPI.updateStatus(status)
             if (response.data.resultCode === 0){
                 dispatch(setStatus(status))
             }
-           
-        })
     }
 }
 
 export const updateLargePhoto = (photo: File) => {
-
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.updatePhoto(photo).then(response => {
+    return async (dispatch: Dispatch<ProfileActionType>) => {
+        const response = await profileAPI.updatePhoto(photo)
             if (response.data.resultCode === 0){
                 dispatch(updatePhoto(response.data.data.photos))
             }
-
-        })
     }
 }
 

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import PostsContainer from './Posts/PostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {APIProfileType} from '../../redux/profile-reduser';
+import {APIProfileType} from '../../redux/profile-reducer';
 
 
 

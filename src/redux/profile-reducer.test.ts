@@ -1,4 +1,4 @@
-import {addPostAC, deletePostAC, profileReduser, setStatus, setUserProfile, updatePhoto} from "./profile-reduser";
+import {addPostAC, deletePostAC, profileReducer, setStatus, setUserProfile, updatePhoto} from "./profile-reducer";
 import {v1} from "uuid";
 
 const State = {
@@ -18,14 +18,14 @@ const State = {
 
 test('New post should be added', () => {
     const action = addPostAC('Post for testing')
-    const newState = profileReduser(State, action)
+    const newState = profileReducer(State, action)
     expect(newState.posts.length).toBe(5);
     expect(newState.posts[4].postMessage).toBe('Post for testing')
 });
 
 test('After deleting post, numbers of posts should be decrement', () => {
     const action = deletePostAC(State.posts[0].id)
-    const newState = profileReduser(State, action)
+    const newState = profileReducer(State, action)
     expect(newState.posts.length).toBe(3);
     expect(newState.posts[0].postMessage).toBe("Let's go to learn a React")
 });
@@ -42,13 +42,13 @@ test('After setting user profile', () => {
         userId: 21095,
     }
     const action = setUserProfile(userProfile)
-    const newState = profileReduser(State, action)
+    const newState = profileReducer(State, action)
     expect(newState.profile.userId).toBe(21095);
     expect(newState.profile.fullName).toBe("Lapa17")
 });
 
 test('After setting status to profile', () => {
     const action = setStatus('Hello')
-    const newState = profileReduser(State, action)
+    const newState = profileReducer(State, action)
     expect(newState.status).toBe('Hello');
 });

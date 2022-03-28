@@ -1,7 +1,7 @@
 import * as axios from 'axios'
 import React from 'react';
 import { connect } from 'react-redux';
-import {AuthDataType, authMe, setAuthData, setLogOut, setUserPhoto} from '../../redux/auth-reduser';
+import {AuthDataType, authMe, setAuthData, setLogOut, setUserPhoto} from '../../redux/auth-reducer';
 import { StateDataType } from '../../redux/store';
 import Header from './Header';
 import {authAPI} from "../../api/authAPI";

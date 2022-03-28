@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   addPost,
-} from '../../../redux/profile-reduser';
+} from '../../../redux/profile-reducer';
 import { StateDataType } from '../../../redux/store';
 import Posts from './Posts';
 

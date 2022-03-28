@@ -1,9 +1,3 @@
-import {Dispatch} from "redux";
-import {usersAPI} from "../api/usersAPI";
-import {setCurrentPage, setUsers, toggleIsFetching, UsersActionType} from "./users-reduser";
-import {authAPI} from "../api/authAPI";
-import {profileAPI} from "../api/profileAPI";
-
 const SET_LOGIN = 'SET_LOGIN'
 
 
@@ -31,7 +25,7 @@ const initialProfileState = {
 
 export const setLoginData = (data: {login:string, password:string}) => ({ type: SET_LOGIN, data} as const)
 
-export const loginReduser = (state:LoginType  = initialProfileState, action:LoginActionType ) => {
+export const loginReducer = (state:LoginType  = initialProfileState, action:LoginActionType ) => {
     switch (action.type) {
         case SET_LOGIN: {
             return { ...state, data:action.data}

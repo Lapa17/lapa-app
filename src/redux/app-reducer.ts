@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
-import { AuthActionType, authMe } from "./auth-reduser";
+import { AuthActionType, authMe } from "./auth-reducer";
+import {ThunkType} from "./redux-store";
 
 const SET_INITIALIZED = 'SET_INITIALIZED'
 
@@ -29,15 +30,14 @@ export const appReduser = (state = initialAppState, action: AppActionType) => {
     }
 }
 
-export const initializedTC = () => {
-    return (dispatch: Dispatch<AppActionType>) => {
+export const initializedTC = ():ThunkType => {
+    return (dispatch: Dispatch) => {
         //@ts-ignore
       const promise = dispatch(authMe())
-      //@ts-ignore
       promise.then(()=>{
         dispatch(setInitialized(true))
       })
-       
+
     }
 }
 

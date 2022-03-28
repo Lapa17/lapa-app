@@ -6,7 +6,7 @@ import {
     setTotalUsersCount,
     toggleIsFollowingProgress,
     unFollow,
-} from "../../redux/users-reduser";
+} from "../../redux/users-reducer";
 import Users, { NewUsersType } from "./Users";
 import React from "react";
 import {AppRootStateType} from "../../redux/redux-store";

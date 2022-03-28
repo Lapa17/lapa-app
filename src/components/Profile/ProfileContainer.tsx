@@ -8,7 +8,7 @@ import {
   getStatus,
   setUserProfile, updateLargePhoto,
   updateStatus
-} from '../../redux/profile-reduser';
+} from '../../redux/profile-reducer';
 import { StateDataType } from '../../redux/store';
 import { RouteComponentProps, StaticContext, withRouter, WithRouterStatics } from 'react-router';
 import {profileAPI} from "../../api/profileAPI";

@@ -13,7 +13,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { render } from '@testing-library/react';
-import { authMe } from './redux/auth-reduser';
+import { authMe } from './redux/auth-reducer';
 import { connect, ConnectedComponent } from 'react-redux';
 import { compose } from 'redux';
 import { initializedTC } from './redux/app-reducer';

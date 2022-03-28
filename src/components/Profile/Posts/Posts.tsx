@@ -3,7 +3,7 @@ import { AddPostType} from '../../../redux/store';
 import Post from './Post/Post';
 import s from './Posts.module.css'
 import {PostForm} from "../../Forms/PostForm";
-import {addPost} from "../../../redux/profile-reduser";
+import {addPost} from "../../../redux/profile-reducer";
 
 
 

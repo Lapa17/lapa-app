@@ -1,10 +1,10 @@
 import { v1 } from "uuid"
 import { NewUsersType } from "../components/Users/Users"
-import { AuthDataType } from "./auth-reduser"
+import { AuthDataType } from "./auth-reducer"
 
-import  dialogsReduser  from "./dialogs-reduser"
-import { LoginType } from "./login-reduser"
-import {addPost, APIProfileType} from "./profile-reduser"
+import  dialogsReducer  from "./dialogs-reducer"
+import { LoginType } from "./login-reducer"
+import {addPost, APIProfileType} from "./profile-reducer"
 
 
 export type ReduxStoreType ={

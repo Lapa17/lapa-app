@@ -3,7 +3,7 @@ import { connect, ConnectedComponent } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
-import { addMessage } from '../../redux/dialogs-reduser'
+import { addMessage } from '../../redux/dialogs-reducer'
 import { ActionType, StateDataType } from '../../redux/store'
 import Dialogs from './Dialogs'
 

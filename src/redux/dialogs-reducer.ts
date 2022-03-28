@@ -6,7 +6,7 @@ const ADD_MESSAGE = 'ADD-MESSAGE'
 const MESSAGE_TEXTAREA_CHANGE = 'MESSAGE-TEXAREA-CHANGE'
 
 
-type DialogsActionType = AddMesageActionType 
+export type DialogsActionType = AddMesageActionType
 
 type AddMesageActionType = {
   type: typeof ADD_MESSAGE
@@ -35,7 +35,7 @@ const initialDialogState = {
 
 }
 
-const dialogsReduser = (state: DialogsType = initialDialogState, action: DialogsActionType) => {
+const dialogsReducer = (state: DialogsType = initialDialogState, action: DialogsActionType) => {
   switch (action.type) {
     case ADD_MESSAGE: {
       let newMessage = {
@@ -49,7 +49,7 @@ const dialogsReduser = (state: DialogsType = initialDialogState, action: Dialogs
       return state;
   }
 }
-export default dialogsReduser;
+export default dialogsReducer;
 
 
 export const AddMessage = (message:string) => {

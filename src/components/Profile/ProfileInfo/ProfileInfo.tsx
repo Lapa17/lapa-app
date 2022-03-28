@@ -1,7 +1,7 @@
 import Avatar from "./Avatar/Avatar";
 import s from '../Profile.module.css';
 import ProfileDescription from "./Description/Description";
-import {APIProfileType, updateLargePhoto} from "../../../redux/profile-reduser";
+import {APIProfileType, updateLargePhoto} from "../../../redux/profile-reducer";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 import { ChangeEvent } from "react";
