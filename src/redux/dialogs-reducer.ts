@@ -1,23 +1,17 @@
 import { Dispatch } from "redux"
 import { v1 } from "uuid"
-import { ActionType, DialogsType, } from "./store"
+import { DialogsType, } from "./store"
 
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const MESSAGE_TEXTAREA_CHANGE = 'MESSAGE-TEXAREA-CHANGE'
-
-
-export type DialogsActionType = AddMesageActionType
-
-type AddMesageActionType = {
-  type: typeof ADD_MESSAGE
-  message: string
-}
+const ADD_MESSAGE = 'lapa-app/dialogs-reducer/ADD-MESSAGE'
 
 
 
-// export const addMessageActionCreator = () => ({ type: ADD_MESSAGE, value: '' })
+export type DialogsActionType = AddMessageActionType
 
-export const addMessage = (message: string):AddMesageActionType => ({ type: ADD_MESSAGE, message })
+type AddMessageActionType = ReturnType<typeof addMessage>
+
+
+export const addMessage = (message: string) => ({ type: ADD_MESSAGE, message } as const)
 
 const initialDialogState = {
   dialogs: [

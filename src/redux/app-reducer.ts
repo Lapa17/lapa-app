@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import { AuthActionType, authMe } from "./auth-reducer";
 import {ThunkType} from "./redux-store";
 
-const SET_INITIALIZED = 'SET_INITIALIZED'
+const SET_INITIALIZED = 'lapa-app/app-reducer/SET_INITIALIZED'
 
 
 

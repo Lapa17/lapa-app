@@ -22,39 +22,25 @@ export type APIProfileType = {
     }
 }
 
-export type UserProfileACType = {
-    type: typeof SET_USER_PROFILE
-    profile: APIProfileType
-}
-export type UserStatusACType = {
-    type: typeof SET_STATUS
-    status: string
-}
-export type AddPostACType = {
-    type: typeof ADD_POST
-    post:string
-}
-
-export type UpdatePhotoACType = {
-    type: typeof UPDATE_PHOTO
-    photo:File
-}
-
-type DeletePostACType = ReturnType<typeof deletePostAC>
+export type UserProfileACType = ReturnType<typeof setUserProfile>
+export type UserStatusACType = ReturnType<typeof setStatus>
+export type AddPostACType = ReturnType<typeof addPostAC>
+export type UpdatePhotoACType = ReturnType<typeof updatePhoto>
+export type DeletePostACType = ReturnType<typeof deletePostAC>
 
 export type ProfileActionType = UserProfileACType | AddPostACType | UserStatusACType | UpdatePhotoACType | DeletePostACType
 
-const ADD_POST = 'ADD-POST'
-const DELETE_POST = 'DELETE-POST'
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
-const SET_STATUS = 'SET_STATUS'
-const UPDATE_PHOTO = 'UPDATE_PHOTO'
+const ADD_POST = 'lapa-app/profile-reducer/ADD-POST'
+const DELETE_POST = 'lapa-app/profile-reducer/DELETE-POST'
+const SET_USER_PROFILE = 'lapa-app/profile-reducer/SET_USER_PROFILE'
+const SET_STATUS = 'lapa-app/profile-reducer/SET_STATUS'
+const UPDATE_PHOTO = 'lapa-app/profile-reducer/UPDATE_PHOTO'
 
-export const addPostAC = (post:string):AddPostACType => ({ type: ADD_POST, post })
+export const addPostAC = (post:string) => ({ type: ADD_POST, post } as const)
 export const deletePostAC = (postId:string) => ({ type: DELETE_POST, postId } as const)
 export const setUserProfile = (profile: APIProfileType) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
-export const updatePhoto = (photo: File):UpdatePhotoACType=> ({ type: UPDATE_PHOTO, photo } )
+export const updatePhoto = (photo: File)=> ({ type: UPDATE_PHOTO, photo } as const)
 
 
 const initialProfileState = {

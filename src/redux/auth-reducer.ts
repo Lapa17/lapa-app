@@ -5,42 +5,18 @@ import { authAPI } from "../api/authAPI";
 import { profileAPI } from "../api/profileAPI";
 import {ThunkType} from "./redux-store";
 
-const SET_AUTH_DATA = 'SET_AUTH_DATA'
-const SET_USER_PHOTO = 'SET_USER_PHOTO'
-const SET_AUTH_CHANGE = 'SET_AUTH_CHANGE'
-const GET_LOGIN_ERROR = 'GET_LOGIN_ERROR'
+const SET_AUTH_DATA = 'lapa-app/auth-reducer/SET_AUTH_DATA'
+const SET_USER_PHOTO = 'lapa-app/auth-reducer/SET_USER_PHOTO'
+const SET_AUTH_CHANGE = 'lapa-app/auth-reducer/SET_AUTH_CHANGE'
+const GET_LOGIN_ERROR = 'lapa-app/auth-reducer/GET_LOGIN_ERROR'
 
 
 export type AuthActionType = AuthDataActionType | UserPhotoActionType | AuthChangeActionType | LoginErrorDataActionType
 
-export type LoginErrorDataActionType = { 
-    type: typeof GET_LOGIN_ERROR
-    message: string
-}
-
-export type AuthDataActionType = {
-    type: typeof SET_AUTH_DATA
-    data: TypeForAuthData
-}
-
-type TypeForAuthData = {
-    userId: number
-    login: string
-    email: string
-}
-
-export type UserPhotoActionType = {
-    type: typeof SET_USER_PHOTO
-    photos: {
-        large: string
-        small: string
-    }
-}
-
-export type AuthChangeActionType = {
-    type: typeof SET_AUTH_CHANGE
-    isAuth: boolean
-}
+export type LoginErrorDataActionType = ReturnType<typeof getLoginError>
+export type AuthDataActionType = ReturnType<typeof setAuthData>
+export type UserPhotoActionType = ReturnType<typeof setUserPhoto>
+export type AuthChangeActionType = ReturnType<typeof setAuthChange>
 
 export type AuthDataType = {
     userId: number
@@ -56,8 +32,9 @@ export type AuthDataType = {
 
 
 
-export const setAuthData = (userId: number, login: string, email: string): AuthDataActionType => ({ type: SET_AUTH_DATA, data: { userId, login, email } })
-export const setUserPhoto = (photos: { large: string, small: string }): UserPhotoActionType => ({ type: SET_USER_PHOTO, photos })
+export const setAuthData = (userId: number, login: string, email: string) => ({
+    type: SET_AUTH_DATA, data: { userId, login, email } } as const)
+export const setUserPhoto = (photos: { large: string, small: string }) => ({ type: SET_USER_PHOTO, photos } as const)
 export const setAuthChange = (isAuth: boolean) => ({ type: SET_AUTH_CHANGE, isAuth } as const)
 export const getLoginError = (message:string) => ({ type: GET_LOGIN_ERROR, message } as const)
 

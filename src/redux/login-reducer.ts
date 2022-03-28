@@ -1,13 +1,7 @@
-const SET_LOGIN = 'SET_LOGIN'
+const SET_LOGIN = 'lapa-app/login-reducer/SET_LOGIN'
 
 
-export type LoginActionType = {
-    type: typeof SET_LOGIN
-    data: {
-        login: string,
-        password: string
-    }
-}
+export type LoginActionType = ReturnType<typeof setLoginData>
 export type LoginType = {
     data: {
         login: string,
