@@ -3,10 +3,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { setAuth } from '../../redux/auth-reducer';
-import { setLoginData } from '../../redux/login-reducer';
 import { StateDataType } from '../../redux/store';
 import { loginningValidationSchema } from '../../utilits/validations/validationScheme';
 import { yupResolver } from '@hookform/resolvers/yup'
+import {setLoginData} from "../../redux/login-reducer";
 
 type Inputs = {
     login: string,
