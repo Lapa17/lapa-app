@@ -8,8 +8,8 @@ import {MessageForm} from "../Forms/MessageForm";
 
 const Dialogs: React.FC<PostMessageType> = ({ dialogs, messages, addMessage, textareaChange,  ...props }) => {
 
-    const dialogsElements = dialogs.map((dialogs) => <Dialog id={dialogs.id} name={dialogs.name} />)
-    const messageElements = messages.map((message) => <Message message={message.message} id={message.id} />)
+    const dialogsElements = dialogs.map((dialogs) => <Dialog key={dialogs.id} id={dialogs.id} name={dialogs.name} />)
+    const messageElements = messages.map((message) => <Message key={message.id} message={message.message} id={message.id} />)
 
 
 
