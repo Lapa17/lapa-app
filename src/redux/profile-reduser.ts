@@ -42,16 +42,18 @@ export type UpdatePhotoACType = {
     photo:File
 }
 
+type DeletePostACType = ReturnType<typeof deletePostAC>
 
-
-export type ProfileActionType = UserProfileACType | AddPostACType | UserStatusACType | UpdatePhotoACType
+export type ProfileActionType = UserProfileACType | AddPostACType | UserStatusACType | UpdatePhotoACType | DeletePostACType
 
 const ADD_POST = 'ADD-POST'
+const DELETE_POST = 'DELETE-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const UPDATE_PHOTO = 'UPDATE_PHOTO'
 
 export const addPostAC = (post:string):AddPostACType => ({ type: ADD_POST, post })
+export const deletePostAC = (postId:string) => ({ type: DELETE_POST, postId } as const)
 export const setUserProfile = (profile: APIProfileType) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
 export const updatePhoto = (photo: File):UpdatePhotoACType=> ({ type: UPDATE_PHOTO, photo } )
@@ -80,6 +82,9 @@ export const profileReduser = (state: ProfileStateType = initialProfileState, ac
                 likes: 0
             }
             return { ...state, posts: [...state.posts, newPost]}
+        }
+        case DELETE_POST:{
+            return {...state, posts: state.posts.filter(post => post.id !== action.postId)}
         }
         case SET_USER_PROFILE: {
             return { ...state, profile: action.profile }
@@ -129,7 +134,6 @@ export const updateLargePhoto = (photo: File) => {
 
     return (dispatch: Dispatch<ProfileActionType>) => {
         profileAPI.updatePhoto(photo).then(response => {
-            debugger
             if (response.data.resultCode === 0){
                 dispatch(updatePhoto(response.data.data.photos))
             }
