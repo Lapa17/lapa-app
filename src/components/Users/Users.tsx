@@ -4,7 +4,9 @@ import userPhoto from './../../assets/images/user.png'
 import React from "react";
 import Preloader from '../common/Preloader/Preloader';
 import { NavLink } from 'react-router-dom';
-import {bool} from "yup";
+import { bool } from "yup";
+import { Paginator } from '../common/Paginator/Paginator';
+import { User } from './User';
 
 
 
@@ -31,53 +33,29 @@ type UsersPropsType = {
     currentPage: number
     isFetching: boolean
     onPageClick: (currentPage: number) => void
-    toggleIsFollowingProgress: (isFetching:boolean, userId:number) => void
+    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
     followInProgress: Array<number>
     getFollow: (userId: number) => void
     getUnFollow: (userId: number) => void
 }
 
-const Users = (props: UsersPropsType) => {
-
-    let pagesCount = Math.ceil(props.totalUserCounter / 100 / props.pageSize)
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+const Users = ({ users,
+    pageSize,
+    totalUserCounter,
+    currentPage,
+    isFetching,
+    onPageClick,
+    toggleIsFollowingProgress,
+    followInProgress,
+    getFollow,
+    getUnFollow,
+}: UsersPropsType) => {
 
     return (<div>
-        {props.isFetching ? <Preloader /> : null}
-        {pages.map(p => {
-            return <span className={props.currentPage === p ? s.selected : ''} onClick={() => props.onPageClick(p)}>{p}</span>
-        })}
-        {props.users.map(u => {
-            return (<div className={s.wrapper}>
-                <div className={s.items}>
-                    <NavLink to={'/profile/' + u.id}>
-                        <img src={u.photos.small != null ? u.photos.small : userPhoto} />
-                    </NavLink>
-                    {u.followed
-                        ? <button disabled={props.followInProgress.some(id => id === u.id)} onClick={() => {
-                            props.getUnFollow(u.id)
-
-                        }}>Unfollow</button>
-                        : <button disabled={props.followInProgress.some(id => id === u.id)} onClick={() => {
-                            props.getFollow(u.id)
-                            
-                        }}>Follow</button>}
-
-                </div>
-                <div className={s.info}>
-                    <div>{u.name}</div>
-                    <div>{"u.city"}</div>
-                    <div>{"u.status"}</div>
-                    <div>{"u.country"}</div>
-
-                </div>
-
-            </div>)
-
-        })}
+        {isFetching ? <Preloader /> : null}
+        <Paginator pageSize={pageSize} totalUserCounter={totalUserCounter} currentPage={currentPage} onPageClick={onPageClick} />
+        {users.map(u => <User key={u.id} user={u} followInProgress={followInProgress} getFollow={getFollow} getUnFollow={getUnFollow} />
+        )}
     </div>
     )
 }
