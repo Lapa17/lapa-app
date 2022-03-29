@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux'
+import {applyMiddleware, combineReducers, createStore, compose} from 'redux'
 import {AuthActionType, authReducer} from './auth-reducer';
 import dialogsReducer, {DialogsActionType} from './dialogs-reducer';
 import navbarRightReduser from './navbar-right-reduser';
@@ -19,7 +19,12 @@ const reducers = combineReducers({
     app: appReduser
 })
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware))
+// let store = createStore(reducers, applyMiddleware(thunkMiddleware))
+//@ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers,composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+  ));
 
 export type AppRootStateType = ReturnType<typeof reducers>
 
