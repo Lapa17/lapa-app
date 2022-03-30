@@ -53,7 +53,7 @@ const Users = ({ users,
 
     return (<div>
         {isFetching ? <Preloader /> : null}
-        <Paginator pageSize={pageSize} totalUserCounter={totalUserCounter} currentPage={currentPage} onPageClick={onPageClick} />
+        <Paginator pageSize={pageSize} totalItemsCounter={totalUserCounter} currentPage={currentPage} onPageClick={onPageClick} />
         {users.map(u => <User key={u.id} user={u} followInProgress={followInProgress} getFollow={getFollow} getUnFollow={getUnFollow} />
         )}
     </div>

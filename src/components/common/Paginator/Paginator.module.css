@@ -1,3 +1,10 @@
 .selected{
     font-weight: bold;
 }
+
+.page {
+    border: 1px solid;
+    padding: 2px 6px;
+    margin: 1px;
+    display: inline-block;
+}

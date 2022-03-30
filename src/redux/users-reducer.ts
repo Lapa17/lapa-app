@@ -32,7 +32,7 @@ export type UsersActionType =
 
 const initialUsersState = {
     users: [],
-    pageSize: 5,
+    pageSize: 10,
     totalUserCounter: 0,
     currentPage: 1,
     isFetching: false,
