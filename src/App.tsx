@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import NavbarLeft from './components/NavbarLeft/NavbarLeft';
 import NavbarRight from './components/NavbarRight/NavbarRight';
@@ -7,7 +7,7 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { DialogsDataType, ReduxStoreType, StateDataType, store } from './redux/store';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+// import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -26,7 +26,7 @@ type AppPropsType = {
   initialized: boolean
 }
 
-
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 class App extends React.Component<AppPropsType> {
   componentDidMount() {
@@ -44,13 +44,15 @@ class App extends React.Component<AppPropsType> {
           <NavbarLeft />
           <NavbarRight friends={this.props.friends} />
           <div className='app-wrapper-content'>
+            <Suspense fallback={<Preloader />}>
             <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
             <Route path='/dialogs' render={() => <DialogsContainer />} />
             <Route path='/users' render={() => <UsersContainer />} />
             <Route path='/login' render={() => <Login />} />
             {/* <Route path='/news' render={() => <News />}/> 
-      <Route path='/music' render={() => <Music />}/> 
-      <Route path='/settings' render={() => <Settings />}/>       */}
+                <Route path='/music' render={() => <Music />}/>
+                <Route path='/settings' render={() => <Settings />}/>       */}
+            </Suspense>
           </div>
         </div>
       );
