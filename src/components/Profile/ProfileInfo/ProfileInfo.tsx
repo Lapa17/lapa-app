@@ -1,78 +1,169 @@
 import Avatar from "./Avatar/Avatar";
 import s from '../Profile.module.css';
-import ProfileDescription from "./Description/Description";
-import {APIProfileType, updateLargePhoto} from "../../../redux/profile-reducer";
+import { APIProfileType, updateLargePhoto } from "../../../redux/profile-reducer";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
-import {ChangeEvent, useState} from "react";
-import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
-import {UpdateProfileType} from "../../../api/profileAPI";
+import { ChangeEvent, useEffect, useState } from "react";
+import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks";
+import { UpdateProfileType } from "../../../api/profileAPI";
 
 type ProfileInfoType = {
     profile: APIProfileType
     status: string
     updateStatus: (status: string) => void
     updateLargePhoto: (photo: File) => void
-    updateProfile: (profile:UpdateProfileType)=>void
+    updateProfile: (profile: UpdateProfileType) => void
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
 
-    const [editMode, setEditMode] = useState(false)
-    const [value, setValue] = useState('')
-
-
     if (!props.profile) {
-        <Preloader/>
+        <Preloader />
     }
     const addPhoto = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             props.updateLargePhoto(e.target.files[0])
         }
     }
-    const onEditMode = () =>{
-        setEditMode(true)
-    }
-    const offEditMode = () => {
-        setEditMode(false)
-        debugger
-        props.updateProfile({
-            aboutMe: 'пытаюсь сделать форму для редактирования профиля',
-            userId: props.profile.userId,
-            fullName: props.profile.fullName,
-            lookingForAJobDescription:'asd',
-            lookingForAJob: true,
-            contacts:{
-                github: value
-            }
-        })
-    }
-    const onChangeInput = (e: any) => {
-        setValue(e.currentTarget.value)
-    }
+
+
 
 
     return (<div className={s.wrapper}>
-        <Avatar imgAdress={props.profile.photos.large}/>
-        <ProfileDescription title={props.profile.fullName} description={props.profile.aboutMe}/>
-        <div onDoubleClick={onEditMode}>
-            <strong>Github</strong>:
-            {!editMode && <span><a href={props.profile.contacts?.github} target={'_blank'}>
-                {props.profile.contacts?.github}</a></span>}
-            {editMode && <input type={"text"} value={value} onChange={onChangeInput} onBlur={offEditMode}/>}
-
-        </div>
-        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-        <input type='file' name="myImg" onChange={addPhoto}/>
+        <Avatar imgAdress={props.profile.photos.large} />
+        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
+        <input type='file' name="myImg" onChange={addPhoto} />
+        <ProfileData {...props.profile} updateProfile={props.updateProfile} />
     </div>)
-
-    // <div className={s.wrapper}>
-    //   <Avatar imgAdress='https://vjoy.cc/wp-content/uploads/2020/07/kartinki_muzhskie_na_avu_18_02210535.jpg' />
-    //   <ProfileDescription title='Pavel Laparevich' description='Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, repellat molestiae voluptate quas atque architecto praesentium! Tempore labore illum, necessitatibus fugiat voluptate, atque aspernatur totam vitae laborum, facere accusamus illo?' />
-    // </div>
-
 
 }
 
 
 export default ProfileInfo;
+
+type ProfileDataType = {
+    aboutMe: string
+    userId: number
+    fullName: string
+    lookingForAJobDescription: string
+    lookingForAJob: boolean
+    contacts: {
+        facebook?: string
+        github?: string
+        instagram?: string
+        mainLink?: string
+        twitter?: string
+        vk?: string
+        website?: string
+        youtube?: string
+    }
+    updateProfile: (profile: UpdateProfileType) => void
+}
+
+
+const ProfileData = ({ aboutMe, userId, fullName, lookingForAJob, lookingForAJobDescription, contacts, ...props }: ProfileDataType) => {
+
+    const [editMode, setEditMode] = useState(false)
+    const [profile, setProfile] = useState<UpdateProfileType>({
+        aboutMe,
+        userId,
+        fullName,
+        lookingForAJobDescription,
+        lookingForAJob,
+        contacts: {
+            github: contacts.github
+        }
+    })
+
+    useEffect(() => {
+        setProfile(
+            {
+                aboutMe,
+                userId,
+                fullName,
+                lookingForAJobDescription,
+                lookingForAJob,
+                contacts: {
+                    github: contacts.github
+                }
+
+            })
+    }, [aboutMe, userId, fullName, lookingForAJob, lookingForAJobDescription, contacts])
+
+    const onValueChange = (e: ChangeEvent<HTMLInputElement>, name: string) => {
+        switch (name) {
+            case "fullName": {
+                return setProfile({ ...profile, fullName: e.currentTarget.value })
+            }
+            case "aboutMe": {
+                return setProfile({ ...profile, aboutMe: e.currentTarget.value })
+            }
+            case "lookingForAJobDescription": {
+                return setProfile({ ...profile, lookingForAJobDescription: e.currentTarget.value })
+            }
+            case "lookingForAJob": {
+                return setProfile({ ...profile, lookingForAJob: e.currentTarget.checked })
+            }
+            case "contacts.github": {
+                return setProfile({ ...profile, contacts: { ...contacts, github: e.currentTarget.value } })
+            }
+            default: {
+                return profile
+            }
+        }
+    }
+
+    const onEditMode = () => {
+        setEditMode(true)
+    }
+    const offEditMode = () => {
+        setEditMode(false)
+        props.updateProfile({
+            aboutMe: profile.aboutMe,
+            userId: profile.userId,
+            fullName: profile.fullName,
+            lookingForAJobDescription: profile.lookingForAJobDescription,
+            lookingForAJob: profile.lookingForAJob,
+            contacts: {
+                github: profile.contacts.github
+            }
+        })
+    }
+
+    return (
+        <div>
+
+            {!editMode && <>
+                <div>
+                    About me: {aboutMe}
+                </div><div>
+                    Fullname: {fullName}
+                </div><div>
+                    lookingForAJobDescription: {lookingForAJobDescription}
+                </div><div>
+                    lookingForAJob: {lookingForAJob ? 'yes' : 'no'}
+                </div><div>
+                    contacts: <span><a href={contacts.github} target={'_blank'}>
+                        {contacts.github}</a></span>
+                </div>
+            </>}
+            {editMode && <>
+                <div>
+                    About me: <input type="text" value={profile.aboutMe} onChange={(e) => onValueChange(e, 'aboutMe')} />
+                </div><div>
+                    Fullname: <input type="text" value={profile.fullName} onChange={(e) => onValueChange(e, 'fullName')} />
+                </div><div>
+                    lookingForAJobDescription: <input type="text" value={profile.lookingForAJobDescription}
+                        onChange={(e) => onValueChange(e, 'lookingForAJobDescription')} />
+                </div><div>
+                    lookingForAJob: <input type='checkbox' checked={profile.lookingForAJob} onChange={(e) => onValueChange(e, "lookingForAJob")} />
+                </div><div>
+                    contacts: <input type="text" value={profile.contacts.github}
+                        onChange={(e) => onValueChange(e, 'contacts.github')} />
+                </div>
+
+            </>}
+            {editMode ? <button onClick={offEditMode}>Save</button> : <button onClick={onEditMode}>Edit</button>}
+        </div>
+    )
+}
