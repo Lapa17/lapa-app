@@ -1,7 +1,8 @@
 import { v1 } from "uuid"
 import { PostsDataType } from "./store"
 import {Dispatch} from "redux";
-import {profileAPI} from "../api/profileAPI";
+import {profileAPI, UpdateProfileType} from "../api/profileAPI";
+import {ThunkType} from "./redux-store";
 
 
 export type ProfileStateType = {
@@ -16,6 +17,16 @@ export type APIProfileType = {
     aboutMe: string
     userId: number
     fullName: string
+    contacts:{
+        facebook?: string
+        github?: string
+        instagram?: string
+        mainLink?: string
+        twitter?: string
+        vk?: string
+        website?: string
+        youtube?: string
+    }
     photos: {
         small: string
         large: string
@@ -52,7 +63,7 @@ const initialProfileState = {
     ],
     myPost: 'My posts',
     newPost: 'New post',
-    profile: { aboutMe: '', userId: 0, fullName: '', photos: { small: '', large: '' }
+    profile: { aboutMe: '', userId: 0, fullName: '', photos: { small: '', large: '' }, contacts: {}
     },
     status:'',
 }
@@ -120,5 +131,15 @@ export const updateLargePhoto = (photo: File) => {
 export const addPost = (post: string) => {
     return (dispatch: Dispatch<ProfileActionType>) => {
                 dispatch(addPostAC(post))
+    }
+}
+
+export const updateProfile = (profile: UpdateProfileType):ThunkType => {
+    return async (dispatch: Dispatch, getState) => {
+        const response = await profileAPI.updateProfile(profile)
+        if (response.data.resultCode === 0){
+            // @ts-ignore
+            dispatch(getProfile(getState().auth.userId))
+        }
     }
 }

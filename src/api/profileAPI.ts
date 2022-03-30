@@ -24,5 +24,27 @@ export const profileAPI = {
         return instance.put(`profile/photo`, formData , {headers:{
             "Content-type": "multipart/form-data"
         }})
+    },
+    updateProfile (profile: UpdateProfileType){
+        return instance.put(`profile`, profile)
+    },
+
+}
+
+export type UpdateProfileType = {
+    aboutMe: string
+    userId: number
+    fullName: string
+    lookingForAJobDescription: string
+    lookingForAJob: boolean
+    contacts:{
+        facebook?: string
+        github?: string
+        instagram?: string
+        mainLink?: string
+        twitter?: string
+        vk?: string
+        website?: string
+        youtube?: string
     }
 }

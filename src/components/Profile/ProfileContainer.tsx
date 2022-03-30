@@ -6,12 +6,12 @@ import {
   APIProfileType,
   getProfile,
   getStatus,
-  setUserProfile, updateLargePhoto,
+  setUserProfile, updateLargePhoto, updateProfile,
   updateStatus
 } from '../../redux/profile-reducer';
 import { StateDataType } from '../../redux/store';
 import { RouteComponentProps, StaticContext, withRouter, WithRouterStatics } from 'react-router';
-import {profileAPI} from "../../api/profileAPI";
+import {profileAPI, UpdateProfileType} from "../../api/profileAPI";
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
@@ -32,6 +32,7 @@ type RouterPropType = RouteComponentProps<UserId> & {
   getStatus:(profileUserId: string) => void
   updateStatus:(status:string)=> void
   updateLargePhoto:(photo: File)=> void
+  updateProfile:(profile:UpdateProfileType)=>void
 }
 
 class ProfileContainer extends React.Component<RouterPropType> {
@@ -53,6 +54,7 @@ class ProfileContainer extends React.Component<RouterPropType> {
         status={this.props.status}
         updateStatus={this.props.updateStatus}
         updateLargePhoto={this.props.updateLargePhoto}
+        updateProfile={this.props.updateProfile}
     />
   }
 }
@@ -65,7 +67,7 @@ let mapStateToProps= (state:StateDataType) => ({
 })
 
 export default compose<React.ComponentClass<Pick<RouteComponentProps<any, StaticContext, unknown>, never>, any> & WithRouterStatics<ConnectedComponent<(props: any) => JSX.Element, Omit<any, "isAuth" | "dispatch">>>>(
-  connect(mapStateToProps, {setUserProfile, getProfile, getStatus, updateStatus, updateLargePhoto}),
+  connect(mapStateToProps, {setUserProfile, getProfile, getStatus, updateStatus, updateLargePhoto, updateProfile}),
   withRouter,
   withAuthRedirect,
 )(ProfileContainer)

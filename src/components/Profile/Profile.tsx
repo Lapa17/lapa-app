@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import PostsContainer from './Posts/PostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {APIProfileType} from '../../redux/profile-reducer';
+import {UpdateProfileType} from "../../api/profileAPI";
 
 
 
@@ -11,6 +12,7 @@ type ProfilePropsType ={
   status: string
   updateStatus:(status:string)=> void
   updateLargePhoto: (photo:File)=> void
+  updateProfile: (profile:UpdateProfileType)=>void
 }
 
 
@@ -23,6 +25,7 @@ const Profile = (props:ProfilePropsType) => {
         status={props.status}
         updateStatus={props.updateStatus}
         updateLargePhoto={props.updateLargePhoto}
+        updateProfile={props.updateProfile}
     />
         <PostsContainer/>
   </div>
