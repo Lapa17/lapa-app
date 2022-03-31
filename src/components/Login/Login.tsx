@@ -6,12 +6,13 @@ import { setAuth } from '../../redux/auth-reducer';
 import { StateDataType } from '../../redux/store';
 import { loginningValidationSchema } from '../../utilits/validations/validationScheme';
 import { yupResolver } from '@hookform/resolvers/yup'
-import {setLoginData} from "../../redux/login-reducer";
+import {getCaptchaUrl, setLoginData} from "../../redux/login-reducer";
 
 type Inputs = {
     login: string,
     password: string,
     rememberMe: boolean
+    captcha?: string
 };
 
 type LoginPropsType = {
@@ -23,7 +24,9 @@ type LoginPropsType = {
         login: string,
         password: string,
     }) => void
-    setAuth: (email: string, password: string, rememberMe:boolean,) => void
+    setAuth: (email: string, password: string, rememberMe:boolean, captcha?: string) => void
+    getCaptchaUrl: ()=> void
+    captchaUrl: string
 }
 
 const Login: React.FC<LoginPropsType> = (props) => {
@@ -32,18 +35,19 @@ const Login: React.FC<LoginPropsType> = (props) => {
     });
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        loginRequest(data.login, data.password, data.rememberMe);
+        loginRequest(data.login, data.password, data.rememberMe, data.captcha);
         props.setLoginData(data)
     }
-    const loginRequest = (email: string, password: string, rememberMe:boolean) => {
-        props.setAuth(email, password, rememberMe)
+    const loginRequest = (email: string, password: string, rememberMe:boolean, captcha?:string) => {
+        props.setAuth(email, password, rememberMe,captcha)
     }
 
     if (props.isAuth) {
         return <Redirect to={'/profile'} />
     }
-
+    
     return (
+        
         <div>
             <h1>LOGIN PAGE</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -59,6 +63,10 @@ const Login: React.FC<LoginPropsType> = (props) => {
                 <div>
                     <input type='checkbox' {...register("rememberMe")} />
                 </div>
+                {props.captchaUrl && <div>
+                    <img src={props.captchaUrl} style={{width:'200px'}}/>
+                    <input type='text' {...register("captcha")}/>
+                </div>}
                 <div>
                     <input type="submit" />
                 </div>
@@ -72,9 +80,10 @@ let mapStateToProps = (state: StateDataType) => ({
     login: state.login.data.login,
     password: state.login.data.password,
     isAuth: state.auth.isAuth,
-    errorMessage: state.auth.errorMessage
+    errorMessage: state.auth.errorMessage,
+    captchaUrl: state.login.captchaUrl
 })
 
-export default connect(mapStateToProps, { setLoginData, setAuth })(Login);;
+export default connect(mapStateToProps, { setLoginData, setAuth, getCaptchaUrl })(Login);;
 
 

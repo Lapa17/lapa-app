@@ -1,9 +1,11 @@
+import {  getCaptchaUrl } from './login-reducer';
 import { Dispatch } from "redux";
 import { usersAPI } from "../api/usersAPI";
 import { setCurrentPage, setUsers, toggleIsFetching, UsersActionType } from "./users-reducer";
 import { authAPI } from "../api/authAPI";
 import { profileAPI } from "../api/profileAPI";
-import {ThunkType} from "./redux-store";
+import { ThunkType} from "./redux-store";
+import { ThunkDispatch } from 'redux-thunk';
 
 const SET_AUTH_DATA = 'lapa-app/auth-reducer/SET_AUTH_DATA'
 const SET_USER_PHOTO = 'lapa-app/auth-reducer/SET_USER_PHOTO'
@@ -72,24 +74,27 @@ export const authReducer = (state: AuthDataType = initialProfileState, action: A
 
 export const authMe = ():ThunkType => {
     return async (dispatch: Dispatch<AuthActionType>) => {
-        const data = await authAPI.getAuth();
-            if (data.resultCode === 0) {
-                const { id, login, email } = data.data
-                dispatch(setAuthData(id, login, email))
-                const response = await profileAPI.getProfile(id)
-                    dispatch(setUserPhoto(response.data.photos))
-            }
-            return data
+            const data = await authAPI.getAuth();
+                if (data.resultCode === 0) {
+                    const { id, login, email } = data.data
+                    dispatch(setAuthData(id, login, email))
+                    const response = await profileAPI.getProfile(id)
+                        dispatch(setUserPhoto(response.data.photos))
+                }
+                return data
     }
 }
 
-export const setAuth = (email: string, password: string, rememberMe:boolean):ThunkType => {
-    return async (dispatch: Dispatch<AuthActionType>) => {
-       const res = await authAPI.logining({ email, password})
+export const setAuth = (email: string, password: string, rememberMe:boolean, captcha?: string):ThunkType => {
+    return async (dispatch) => {
+       const res = await authAPI.logining({ email, password, rememberMe, captcha})
             if (res.data.data.userId === 21095) {
                 dispatch(setAuthChange(true))
             }
-            if (res.data.resultCode === 1){
+            else{
+                if(res.data.resultCode === 10){
+                    dispatch(getCaptchaUrl())
+                }
                 dispatch(getLoginError(res.data.messages[0]))
             }
     }

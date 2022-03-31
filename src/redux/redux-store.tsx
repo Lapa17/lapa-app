@@ -4,7 +4,7 @@ import dialogsReducer, {DialogsActionType} from './dialogs-reducer';
 import navbarRightReduser from './navbar-right-reduser';
 import {ProfileActionType, profileReducer} from './profile-reducer';
 import {UsersActionType, usersReducer} from './users-reducer';
-import thunkMiddleware, { ThunkAction } from 'redux-thunk'
+import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import {LoginActionType, loginReducer} from './login-reducer';
 import {AppActionType, appReduser} from './app-reducer';
 
