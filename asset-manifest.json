@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/lapa-app/static/css/main.10e3d0a2.chunk.css",
+    "main.js": "/lapa-app/static/js/main.17ea514a.chunk.js",
+    "main.js.map": "/lapa-app/static/js/main.17ea514a.chunk.js.map",
+    "runtime-main.js": "/lapa-app/static/js/runtime-main.c754b849.js",
+    "runtime-main.js.map": "/lapa-app/static/js/runtime-main.c754b849.js.map",
+    "static/js/2.03190e26.chunk.js": "/lapa-app/static/js/2.03190e26.chunk.js",
+    "static/js/2.03190e26.chunk.js.map": "/lapa-app/static/js/2.03190e26.chunk.js.map",
+    "static/css/3.2dcef5bb.chunk.css": "/lapa-app/static/css/3.2dcef5bb.chunk.css",
+    "static/js/3.cdf3696e.chunk.js": "/lapa-app/static/js/3.cdf3696e.chunk.js",
+    "static/js/3.cdf3696e.chunk.js.map": "/lapa-app/static/js/3.cdf3696e.chunk.js.map",
+    "static/js/4.956b699f.chunk.js": "/lapa-app/static/js/4.956b699f.chunk.js",
+    "static/js/4.956b699f.chunk.js.map": "/lapa-app/static/js/4.956b699f.chunk.js.map",
+    "index.html": "/lapa-app/index.html",
+    "static/css/3.2dcef5bb.chunk.css.map": "/lapa-app/static/css/3.2dcef5bb.chunk.css.map",
+    "static/css/main.10e3d0a2.chunk.css.map": "/lapa-app/static/css/main.10e3d0a2.chunk.css.map",
+    "static/js/2.03190e26.chunk.js.LICENSE.txt": "/lapa-app/static/js/2.03190e26.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/lapa-app/static/media/Circe-Light.e4ca0f7a.eot",
+    "static/media/loader.07928bad.gif": "/lapa-app/static/media/loader.07928bad.gif",
+    "static/media/user.3b87c899.png": "/lapa-app/static/media/user.3b87c899.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c754b849.js",
+    "static/js/2.03190e26.chunk.js",
+    "static/css/main.10e3d0a2.chunk.css",
+    "static/js/main.17ea514a.chunk.js"
+  ]
+}
