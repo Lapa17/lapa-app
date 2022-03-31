@@ -32,8 +32,7 @@ export const appReduser = (state = initialAppState, action: AppActionType) => {
 
 export const initializedTC = ():ThunkType => {
     return (dispatch: Dispatch) => {
-        //@ts-ignore
-      const promise = dispatch(authMe())
+      const promise = dispatch<any>(authMe())
       promise.then(()=>{
         dispatch(setInitialized(true))
       })

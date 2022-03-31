@@ -47,11 +47,15 @@ export const loginReducer = (state:LoginType  = initialProfileState, action:Logi
 
 export const getCaptchaUrl = ():ThunkType => {
     return async (dispatch: Dispatch) => {
+        try{
        const res = await authAPI.getCaptcha()
             if (res.data.url) {
                 dispatch(setCaptchaUrl(res.data.url))
             }
-           
+        }
+        catch (error){
+            
+        }
     }
 }
 

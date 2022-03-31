@@ -74,6 +74,7 @@ export const authReducer = (state: AuthDataType = initialProfileState, action: A
 
 export const authMe = ():ThunkType => {
     return async (dispatch: Dispatch<AuthActionType>) => {
+        try {
             const data = await authAPI.getAuth();
                 if (data.resultCode === 0) {
                     const { id, login, email } = data.data
@@ -82,11 +83,16 @@ export const authMe = ():ThunkType => {
                         dispatch(setUserPhoto(response.data.photos))
                 }
                 return data
+            }
+            catch (error){
+
+            }
     }
 }
 
 export const setAuth = (email: string, password: string, rememberMe:boolean, captcha?: string):ThunkType => {
     return async (dispatch) => {
+        try {
        const res = await authAPI.logining({ email, password, rememberMe, captcha})
             if (res.data.data.userId === 21095) {
                 dispatch(setAuthChange(true))
@@ -97,14 +103,23 @@ export const setAuth = (email: string, password: string, rememberMe:boolean, cap
                 }
                 dispatch(getLoginError(res.data.messages[0]))
             }
+        }
+        catch (error){
+
+        }
     }
 }
 
 export const setLogOut = ():ThunkType => {
     return async (dispatch: Dispatch<AuthActionType>) => {
+        try{
        const res = await authAPI.setUnlogging()
             if (res.data.resultCode === 0) {
                 dispatch(setAuthChange(false))
             }
+        }
+        catch(error){
+            
+        }
     }
 }

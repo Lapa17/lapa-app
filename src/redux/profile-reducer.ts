@@ -106,14 +106,14 @@ export const profileReducer = (state: ProfileStateType = initialProfileState, ac
     }
 }
 
-export const getProfile = (profileUserId: string) => {
+export const getProfile = (profileUserId: number) => {
     return async (dispatch: Dispatch<ProfileActionType>) => {
         const response = await profileAPI.getProfile(profileUserId)
             dispatch(setUserProfile(response.data))
     }
 }
 
-export const getStatus = (profileUserId: string) => {
+export const getStatus = (profileUserId: number) => {
     return async (dispatch: Dispatch<ProfileActionType>) => {
         const response = await profileAPI.getProfileStatus(profileUserId)
             dispatch(setStatus(response.data))
@@ -145,11 +145,10 @@ export const addPost = (post: string) => {
 }
 
 export const updateProfile = (profile: UpdateProfileType):ThunkType => {
-    return async (dispatch: Dispatch, getState) => {
+    return async (dispatch, getState) => {
         const response = await profileAPI.updateProfile(profile)
         if (response.data.resultCode === 0){
             dispatch(updateProfileAC(profile))
-            // @ts-ignore
             dispatch(getProfile(getState().auth.userId))
         }
     }
