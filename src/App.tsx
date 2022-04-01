@@ -2,25 +2,17 @@ import React, { Suspense } from 'react';
 import './App.css';
 import NavbarLeft from './components/NavbarLeft/NavbarLeft';
 import NavbarRight from './components/NavbarRight/NavbarRight';
-import { BrowserRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
-import { DialogsDataType, ReduxStoreType, StateDataType, store } from './redux/store';
-// import DialogsContainer from './components/Dialogs/DialogsContainer';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
+import { DialogsDataType} from './redux/store';
 import Login from './components/Login/Login';
-import { render } from '@testing-library/react';
-import { authMe } from './redux/auth-reducer';
 import { connect, ConnectedComponent } from 'react-redux';
 import { compose } from 'redux';
 import { initializedTC } from './redux/app-reducer';
 import { AppRootStateType } from './redux/redux-store';
 import Preloader from './components/common/Preloader/Preloader';
 import Profile from "./components/Profile/Profile";
-// import Dialogs from "./components/Dialogs/Dialogs";
 import {Header} from './components/Header/Header';
+import Users from "./components/Users/Users";
 
 type AppPropsType = {
   initializedTC: () => void
@@ -60,7 +52,7 @@ class App extends React.Component<AppPropsType> {
             <Switch>
             <Route path='/profile/:userId?' render={() => <Profile />} />
             <Route path='/dialogs' render={() => <Dialogs />} />
-            <Route path='/users' render={() => <UsersContainer />} />
+            <Route path='/users' render={() => <Users />} />
             <Route path='/login' render={() => <Login />} />
               <Route path='/' render={() => <Redirect to={'/profile'} />} />
             <Route exact path='*' render={() => <div>404 PAGE NOT FOUND</div>} />

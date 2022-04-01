@@ -52,18 +52,7 @@ class UsersClassContainer extends React.Component<UsersComponentPropsType> {
     }
 
     render() {
-        return <Users users={this.props.users}
-            pageSize={this.props.pageSize}
-            totalUserCounter={this.props.totalUserCounter}
-            currentPage={this.props.currentPage}
-            onPageClick={this.onPageClick}
-            isFetching={this.props.isFetching}
-            toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
-            followInProgress={this.props.followInProgress}
-                      getFollow={this.props.getFollow}
-                      getUnFollow={this.props.getUnFollow}
-
-        />
+        return <Users />
     }
 }
 
