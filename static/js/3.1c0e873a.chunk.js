@@ -1,0 +1,2 @@
+(this["webpackJsonplapa-app"]=this["webpackJsonplapa-app"]||[]).push([[3],{278:function(a,t,s){"use strict";s.r(t);var e=s(9),n=s(43),i=s(2),u=s(10),c=s(1),o=function(a){return{isAuth:a.auth.isAuth}},p=s(67),r=s(125),b=Object(n.c)(Object(e.b)((function(a){return{dialogs:a.dialogsPage.dialogs,messages:a.dialogsPage.messages}}),{addMessage:p.a}),(function(a){return Object(e.b)(o)((function(t){return t.isAuth?Object(c.jsx)(a,Object(i.a)({},t)):Object(c.jsx)(u.a,{to:"/login"})}))}))(r.a);t.default=b}}]);
+//# sourceMappingURL=3.1c0e873a.chunk.js.map
