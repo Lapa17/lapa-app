@@ -104,6 +104,7 @@ export type PostMesageType = {
   message: string;
   likes: number
   id: string
+  profile: APIProfileType
 }
 
 export type TextAreaDataType = {
@@ -137,6 +138,7 @@ export type AddPostType = {
   newPost: string;
   posts: Array<PostsDataType>
   addPost:(post:string)=> void
+  profile: APIProfileType
 
 }
 export type UsersStateType ={

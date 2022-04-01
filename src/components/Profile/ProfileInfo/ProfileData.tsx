@@ -1,7 +1,14 @@
-import {useDispatch} from "react-redux";
-import {ChangeEvent, useEffect, useState} from "react";
-import {UpdateProfileType} from "../../../api/profileAPI";
-import {updateProfile} from "../../../redux/profile-reducer";
+import { useDispatch } from "react-redux";
+import { ChangeEvent, useEffect, useState } from "react";
+import { UpdateProfileType } from "../../../api/profileAPI";
+import { updateProfile } from "../../../redux/profile-reducer";
+import { Card } from 'antd';
+import { Checkbox, Radio, Typography, Divider } from 'antd';
+import { CheckOutlined, HighlightOutlined, SmileOutlined, SmileFilled, EditOutlined } from '@ant-design/icons';
+
+import { Button } from 'antd';
+
+
 
 type ProfileDataType = {
     aboutMe: string
@@ -23,6 +30,9 @@ type ProfileDataType = {
 
 
 export const ProfileData = ({ aboutMe, userId, fullName, lookingForAJob, lookingForAJobDescription, contacts, ...props }: ProfileDataType) => {
+
+    const { Meta } = Card;
+    const { Paragraph } = Typography;
 
     const dispatch = useDispatch()
     const [editMode, setEditMode] = useState(false)
@@ -95,37 +105,36 @@ export const ProfileData = ({ aboutMe, userId, fullName, lookingForAJob, looking
     return (
         <div>
 
-            {!editMode && <>
-                <div>
-                    About me: {aboutMe}
-                </div><div>
-                Fullname: {fullName}
-            </div><div>
-                lookingForAJobDescription: {lookingForAJobDescription}
-            </div><div>
-                lookingForAJob: {lookingForAJob ? 'yes' : 'no'}
-            </div><div>
-                contacts: <span><a href={contacts.github} target={'_blank'}>
-                        {contacts.github}</a></span>
-            </div>
-            </>}
-            {editMode && <>
-                <div>
-                    About me: <input type="text" value={profile.aboutMe} onChange={(e) => onValueChange(e, 'aboutMe')} />
-                </div><div>
+            {!editMode && <Card style={{margin:'10px', borderRadius: '5px'}} title={<span>{fullName}<EditOutlined onClick={onEditMode}></EditOutlined></span>} hoverable>
+                <Meta title={aboutMe} description={`I'm ${lookingForAJobDescription} and ${lookingForAJob ? 'find' : 'dont find'} a job`} />
+                <Meta title={<span><a href={contacts.github} target={'_blank'}>
+                    {contacts.github}</a></span>} />
+            </Card>}
+            {editMode && <Card style={{margin:'10px', borderRadius: '5px'}} title={<span><div>
                 Fullname: <input type="text" value={profile.fullName} onChange={(e) => onValueChange(e, 'fullName')} />
-            </div><div>
-                lookingForAJobDescription: <input type="text" value={profile.lookingForAJobDescription}
-                                                  onChange={(e) => onValueChange(e, 'lookingForAJobDescription')} />
-            </div><div>
-                lookingForAJob: <input type='checkbox' checked={profile.lookingForAJob} onChange={(e) => onValueChange(e, "lookingForAJob")} />
-            </div><div>
-                contacts: <input type="text" value={profile.contacts.github}
-                                 onChange={(e) => onValueChange(e, 'contacts.github')} />
-            </div>
+            </div><Button onClick={offEditMode}>Save</Button></span>} hoverable>
 
-            </>}
-            {editMode ? <button onClick={offEditMode}>Save</button> : <button onClick={onEditMode}>Edit</button>}
+                <Meta title={<div>
+                    About me: <input type="text" value={profile.aboutMe} onChange={(e) => onValueChange(e, 'aboutMe')} />
+                </div>} description={<div>I'm {<span>
+                    lookingForAJobDescription: <input type="text" value={profile.lookingForAJobDescription}
+                        onChange={(e) => onValueChange(e, 'lookingForAJobDescription')} />
+                </span>} and {<span>
+                    lookingForAJob: <input type='checkbox' checked={profile.lookingForAJob} onChange={(e) => onValueChange(e, "lookingForAJob")} />
+                </span>} a job </div>} />
+
+                <Meta title={<span><a href={contacts.github} target={'_blank'}>
+                    {<div>
+                        contacts: <input type="text" value={profile.contacts.github}
+                            onChange={(e) => onValueChange(e, 'contacts.github')} />
+                    </div>}</a></span>} />
+
+
+
+
+
+            </Card>}
+
         </div>
     )
 }

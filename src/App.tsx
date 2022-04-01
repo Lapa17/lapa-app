@@ -17,6 +17,7 @@ import 'antd/dist/antd.css';
 import {Button, Col, Layout, Menu, Row} from "antd";
 import {BarChartOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import Navigation from "./components/NavbarLeft/Navigations/Navigation/Navigation";
+import logo from './assets/images/lapa-logo.png'
 
 type AppPropsType = {
     initializedTC: () => void

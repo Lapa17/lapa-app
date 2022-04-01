@@ -1,0 +1,39 @@
+.comment{
+    border: 1px solid rgba(0,0,0,.06);
+}
+
+.formTextarea{
+    width: 100%;
+    border-radius: 2px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+    background: #fff;
+    outline: none;
+    border-color: #d9d9d9;
+}
+
+.formTextarea:focus-visible{
+    outline: 2px solid #40a9ff;
+}
+
+.formButton{
+    border: 1px solid transparent;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background: #fff;
+    outline: none;
+    height: 40px;
+    padding: 6.4px 15px;
+    font-size: 16px;
+    border-radius: 2px;
+    border-color: #d9d9d9;
+}
+
+.formButton:hover{
+    color: #40a9ff;
+    border-color: #40a9ff;
+    border: 1px solid;
+}

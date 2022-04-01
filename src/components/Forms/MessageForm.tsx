@@ -1,7 +1,7 @@
 import {ErrorMessage, Field, Form, Formik, FormikHelpers} from "formik";
 import React from "react";
 import {messageValidationSchema} from "../../utilits/validations/validationScheme";
-import {addMessage, addMessageTC} from "../../redux/dialogs-reducer";
+import {addMessage} from "../../redux/dialogs-reducer";
 import {useDispatch} from "react-redux";
 
 type MessageFormValueType = {

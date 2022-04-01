@@ -24,7 +24,7 @@ export const User = ({user,followInProgress }: UserPropsType) => {
         <div className={s.wrapper}>
             <div className={s.items}>
                 <NavLink to={'/profile/' + user.id}>
-                    <img src={user.photos.small != null ? user.photos.small : userPhoto} />
+                    <img className={s.img} src={user.photos.small != null ? user.photos.small : userPhoto} />
                 </NavLink>
                 {user.followed
                     ? <button disabled={followInProgress.some(id => id === user.id)} onClick={() => {

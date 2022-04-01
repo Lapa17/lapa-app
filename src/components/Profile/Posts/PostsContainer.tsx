@@ -14,7 +14,7 @@ const mapStateProps = (state:StateDataType) =>{
     myPost:state.profilePage.myPost,
     newPost:state.profilePage.newPost,
     posts: state.profilePage.posts,
-
+    profile: state.profilePage.profile
   }
 }
 
