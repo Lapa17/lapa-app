@@ -1,14 +1,14 @@
 import React from 'react';
 import { PostMesageType } from '../../../../redux/store';
-import s from './Post.module.css'
+import {Demo} from "../Posts";
+import {Col} from "antd";
 
 
 const Post:React.FC<PostMesageType> = React.memo((props) => { 
-  return <div className={s.item} key={props.id}>
-     <div className={s.postMessage}>{props.message}</div>
-     <div className={s.postLikes}>Likes: {props.likes}</div>
-    </div>
-  
+  return <Col span={6}>
+      <Demo author={'asd'} avatar={'asda'} content={props.message}/>
+  </Col>
+
 })
 
 export default Post;

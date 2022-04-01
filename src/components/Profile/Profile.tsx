@@ -1,8 +1,7 @@
-import React, {ReactNode, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import PostsContainer from './Posts/PostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {APIProfileType, getProfile, getStatus} from '../../redux/profile-reducer';
-import {UpdateProfileType} from "../../api/profileAPI";
+import {getProfile, getStatus} from '../../redux/profile-reducer';
 import {useDispatch, useSelector} from "react-redux";
 import { useAppSelector} from "../../redux/redux-store";
 import {
@@ -12,10 +11,15 @@ import {
   selectProfileStatus
 } from "../../utilits/selectors/profile-selector";
 import {Redirect, useParams} from "react-router-dom";
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+
+
 
 
 
 const Profile = () => {
+
+
 
   const dispatch = useDispatch()
   const isAuth = useAppSelector(selectIsAuth)
@@ -37,13 +41,11 @@ const Profile = () => {
     return <Redirect to={'/login'}/>
   }
 
-  return <div>
-    <ProfileInfo
-        profile={profile}
-        status={status}
-    />
-        <PostsContainer/>
-  </div>
+  return (
+      <div>
+      <ProfileInfo profile={profile} status={status}/>
+      <PostsContainer/>
+  </div>)
 }
 
 export default Profile;

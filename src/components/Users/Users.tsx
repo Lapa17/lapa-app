@@ -1,10 +1,5 @@
-import s from './Users.module.css'
-import * as axios from 'axios'
-import userPhoto from './../../assets/images/user.png'
 import React, {useEffect} from "react";
 import Preloader from '../common/Preloader/Preloader';
-import { NavLink } from 'react-router-dom';
-import { bool } from "yup";
 import { Paginator } from '../common/Paginator/Paginator';
 import { User } from './User';
 import {
