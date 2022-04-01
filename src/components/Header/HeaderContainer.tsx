@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {AuthDataType, authMe, setAuthData, setLogOut, setUserPhoto} from '../../redux/auth-reducer';
 import { StateDataType } from '../../redux/store';
-import Header from './Header';
 import {authAPI} from "../../api/authAPI";
 import {profileAPI} from "../../api/profileAPI";
 
@@ -23,7 +22,7 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType>  {
 
 
     render() {
-        return <Header {...this.props} login={this.props.login} isAuth={this.props.isAuth} smallPhoto={this.props.smallPhoto} setLogOut={this.props.setLogOut}/>
+        return <div >asda</div>
     }
 }
 

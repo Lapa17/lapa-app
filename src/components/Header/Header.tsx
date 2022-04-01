@@ -1,39 +1,36 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { authAPI } from '../../api/authAPI';
 import s from './Header.module.css'
 import Logo from './Logo/Logo';
 import Search from './Search/Search';
 import Widgets from './Widgets/Widgets';
+import {useAppSelector} from "../../redux/redux-store";
+import {selectIsAuth, selectLogin, selectSmallPhoto} from "../../utilits/selectors/profile-selector";
+import {useDispatch} from "react-redux";
+import { setLogOut } from '../../redux/auth-reducer';
 
+export const Header = () => {
 
-type HeaderPropsType = {
-    children?: React.ReactNode
-    login: string
-    isAuth: boolean
-    smallPhoto: string
-    setLogOut: ()=> void
-}
-
-const Header = ({setLogOut, ...props}: HeaderPropsType) => {
+    const dispatch = useDispatch()
+    const login = useAppSelector(selectLogin)
+    const isAuth = useAppSelector(selectIsAuth)
+    const smallPhoto = useAppSelector(selectSmallPhoto)
 
     const logOut = () => {
-        setLogOut()
+        dispatch(setLogOut())
     }
 
 
     return <header className={s.header}>
         <Logo />
         <Search />
-        {props.isAuth ?
+        {isAuth ?
             <div className={s.widgets}>
-                {props.login}
-                <Widgets smallPhoto={props.smallPhoto} />
+                {login}
+                <Widgets smallPhoto={smallPhoto} />
                 <button onClick={logOut}>Log out</button>
             </div>
             : <NavLink to={'/login'}>Login</NavLink>}
 
     </header>
 }
-
-export default Header;

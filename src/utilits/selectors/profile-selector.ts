@@ -17,3 +17,11 @@ export const selectProfileStatus = (state:AppRootStateType)=> {
     return state.profilePage.status
 }
 
+export const selectLogin = (state:AppRootStateType)=> {
+    return state.auth.login
+}
+
+export const selectSmallPhoto = (state:AppRootStateType)=> {
+    return state.auth.photos.small
+}
+
