@@ -1,11 +1,11 @@
-import {  getCaptchaUrl } from './login-reducer';
-import { Dispatch } from "redux";
-import { usersAPI } from "../api/usersAPI";
-import { setCurrentPage, setUsers, toggleIsFetching, UsersActionType } from "./users-reducer";
-import { authAPI } from "../api/authAPI";
-import { profileAPI } from "../api/profileAPI";
-import { ThunkType} from "./redux-store";
-import { ThunkDispatch } from 'redux-thunk';
+import {getCaptchaUrl} from './login-reducer';
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/usersAPI";
+import {setCurrentPage, setUsers, toggleIsFetching, UsersActionType} from "./users-reducer";
+import {authAPI} from "../api/authAPI";
+import {profileAPI} from "../api/profileAPI";
+import {ThunkType} from "./redux-store";
+import {ThunkDispatch} from 'redux-thunk';
 
 const SET_AUTH_DATA = 'lapa-app/auth-reducer/SET_AUTH_DATA'
 const SET_USER_PHOTO = 'lapa-app/auth-reducer/SET_USER_PHOTO'
@@ -29,16 +29,16 @@ export type AuthDataType = {
         large: string
         small: string
     }
-    errorMessage?:string
+    errorMessage?: string
 }
 
 
-
 export const setAuthData = (userId: number, login: string, email: string) => ({
-    type: SET_AUTH_DATA, data: { userId, login, email } } as const)
-export const setUserPhoto = (photos: { large: string, small: string }) => ({ type: SET_USER_PHOTO, photos } as const)
-export const setAuthChange = (isAuth: boolean) => ({ type: SET_AUTH_CHANGE, isAuth } as const)
-export const getLoginError = (message:string) => ({ type: GET_LOGIN_ERROR, message } as const)
+    type: SET_AUTH_DATA, data: {userId, login, email}
+} as const)
+export const setUserPhoto = (photos: { large: string, small: string }) => ({type: SET_USER_PHOTO, photos} as const)
+export const setAuthChange = (isAuth: boolean) => ({type: SET_AUTH_CHANGE, isAuth} as const)
+export const getLoginError = (message: string) => ({type: GET_LOGIN_ERROR, message} as const)
 
 
 const initialProfileState = {
@@ -55,14 +55,14 @@ const initialProfileState = {
 export const authReducer = (state: AuthDataType = initialProfileState, action: AuthActionType) => {
     switch (action.type) {
         case SET_AUTH_DATA: {
-            return { ...state, ...action.data, isAuth: true }
+            return {...state, ...action.data, isAuth: true}
         }
         case SET_USER_PHOTO: {
-            return { ...state, photos: { ...action.photos } }
+            return {...state, photos: {...action.photos}}
 
         }
         case SET_AUTH_CHANGE: {
-            return { ...state, isAuth: action.isAuth }
+            return {...state, isAuth: action.isAuth}
         }
         case GET_LOGIN_ERROR: {
             return {...state, errorMessage: action.message}
@@ -72,54 +72,50 @@ export const authReducer = (state: AuthDataType = initialProfileState, action: A
     }
 }
 
-export const authMe = ():ThunkType => {
+export const authMe = (): ThunkType => {
     return async (dispatch: Dispatch<AuthActionType>) => {
         try {
             const data = await authAPI.getAuth();
-                if (data.resultCode === 0) {
-                    const { id, login, email } = data.data
-                    dispatch(setAuthData(id, login, email))
-                    const response = await profileAPI.getProfile(id)
-                        dispatch(setUserPhoto(response.data.photos))
-                }
-                return data
+            if (data.resultCode === 0) {
+                const {id, login, email} = data.data
+                dispatch(setAuthData(id, login, email))
+                const response = await profileAPI.getProfile(id)
+                dispatch(setUserPhoto(response.data.photos))
             }
-            catch (error){
+            return data
+        } catch (error) {
 
-            }
+        }
     }
 }
 
-export const setAuth = (email: string, password: string, rememberMe:boolean, captcha?: string):ThunkType => {
+export const setAuth = (email: string, password: string, rememberMe: boolean, captcha?: string): ThunkType => {
     return async (dispatch) => {
         try {
-       const res = await authAPI.logining({ email, password, rememberMe, captcha})
-            if (res.data.data.userId === 21095) {
+            const res = await authAPI.logining({email, password, rememberMe, captcha})
+            if (res.data.data.userId) {
                 dispatch(setAuthChange(true))
-            }
-            else{
-                if(res.data.resultCode === 10){
+            } else {
+                if (res.data.resultCode === 10) {
                     dispatch(getCaptchaUrl())
                 }
                 dispatch(getLoginError(res.data.messages[0]))
             }
-        }
-        catch (error){
+        } catch (error) {
 
         }
     }
 }
 
-export const setLogOut = ():ThunkType => {
+export const setLogOut = (): ThunkType => {
     return async (dispatch: Dispatch<AuthActionType>) => {
-        try{
-       const res = await authAPI.setUnlogging()
+        try {
+            const res = await authAPI.setUnlogging()
             if (res.data.resultCode === 0) {
                 dispatch(setAuthChange(false))
             }
-        }
-        catch(error){
-            
+        } catch (error) {
+
         }
     }
 }

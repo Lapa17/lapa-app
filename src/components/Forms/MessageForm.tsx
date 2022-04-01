@@ -1,17 +1,17 @@
 import {ErrorMessage, Field, Form, Formik, FormikHelpers} from "formik";
 import React from "react";
 import {messageValidationSchema} from "../../utilits/validations/validationScheme";
+import {addMessage, addMessageTC} from "../../redux/dialogs-reducer";
+import {useDispatch} from "react-redux";
 
 type MessageFormValueType = {
     message: string
 }
-type MessageFormType = {
-    addMessage: (message: string) => void
-}
-export const MessageForm = ({addMessage, ...props}: MessageFormType) => {
 
+export const MessageForm = () => {
+    const dispatch = useDispatch()
     const formSubmit = (values: MessageFormValueType, {setSubmitting}: FormikHelpers<{ message: string; }>) => {
-        addMessage(values.message)
+        dispatch(addMessage(values.message))
         setSubmitting(false);
 
     }

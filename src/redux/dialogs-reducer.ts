@@ -46,7 +46,7 @@ const dialogsReducer = (state: DialogsType = initialDialogState, action: Dialogs
 export default dialogsReducer;
 
 
-export const AddMessage = (message:string) => {
+export const addMessageTC = (message:string) => {
   return (dispatch: Dispatch<DialogsActionType>) => {
     dispatch(addMessage(message))
   }
