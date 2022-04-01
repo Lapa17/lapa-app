@@ -57,7 +57,7 @@ export const updatePhoto = (photo: File)=> ({ type: UPDATE_PHOTO, photo } as con
 export const updateProfileAC = (profile: UpdateProfileType)=> ({ type: UPDATE_PROFILE, profile } as const)
 
 
-const initialProfileState = {
+const initialProfileState:ProfileStateType = {
     posts: [
         { id: v1(), postMessage: "Hi, I'm Pavel", likes: 10 },
         { id: v1(), postMessage: "Let's go to learn a React", likes: 9 },
@@ -76,7 +76,7 @@ const initialProfileState = {
     status:'',
 }
 
-export const profileReducer = (state: ProfileStateType = initialProfileState, action: ProfileActionType) => {
+export const profileReducer = (state = initialProfileState, action: ProfileActionType) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {

@@ -2,11 +2,12 @@ import {applyMiddleware, combineReducers, createStore, compose} from 'redux'
 import {AuthActionType, authReducer} from './auth-reducer';
 import dialogsReducer, {DialogsActionType} from './dialogs-reducer';
 import navbarRightReduser from './navbar-right-reduser';
-import {ProfileActionType, profileReducer} from './profile-reducer';
+import {APIProfileType, ProfileActionType, profileReducer} from './profile-reducer';
 import {UsersActionType, usersReducer} from './users-reducer';
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import {LoginActionType, loginReducer} from './login-reducer';
 import {AppActionType, appReduser} from './app-reducer';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 
 const reducers = combineReducers({
@@ -35,6 +36,9 @@ export type GeneralAppActionType = AppActionType
     | LoginActionType
     | UsersActionType
 
-export type ThunkType = ThunkAction<void, AppRootStateType, unknown, GeneralAppActionType>
+export type ThunkType = ThunkAction<any, AppRootStateType, unknown, GeneralAppActionType>
+export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 
 export default store;
+
+

@@ -19,6 +19,7 @@ import { compose } from 'redux';
 import { initializedTC } from './redux/app-reducer';
 import { AppRootStateType } from './redux/redux-store';
 import Preloader from './components/common/Preloader/Preloader';
+import Profile from "./components/Profile/Profile";
 
 type AppPropsType = {
   initializedTC: () => void
@@ -56,7 +57,8 @@ class App extends React.Component<AppPropsType> {
           <div className='app-wrapper-content'>
             <Suspense fallback={<Preloader />}>
             <Switch>
-            <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
+            {/*<Route path='/profile/:userId?' render={() => <ProfileContainer />} />*/}
+            <Route path='/profile/:userId?' render={() => <Profile />} />
             <Route path='/dialogs' render={() => <DialogsContainer />} />
             <Route path='/users' render={() => <UsersContainer />} />
             <Route path='/login' render={() => <Login />} />

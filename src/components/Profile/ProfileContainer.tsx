@@ -48,14 +48,15 @@ class ProfileContainer extends React.Component<RouterPropType> {
 
   render()
   {
-    return <Profile
-        {...this.props}
-        profile={this.props.profile}
-        status={this.props.status}
-        updateStatus={this.props.updateStatus}
-        updateLargePhoto={this.props.updateLargePhoto}
-        updateProfile={this.props.updateProfile}
-    />
+    // return <Profile
+    //     {...this.props}
+    //     profile={this.props.profile}
+    //     status={this.props.status}
+    //     updateStatus={this.props.updateStatus}
+    //     updateLargePhoto={this.props.updateLargePhoto}
+    //     updateProfile={this.props.updateProfile}
+    // />
+    return <div>asda</div>
   }
 }
 

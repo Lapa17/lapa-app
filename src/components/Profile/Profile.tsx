@@ -1,31 +1,40 @@
-import React, { ReactNode } from 'react';
+import React, {ReactNode, useEffect} from 'react';
 import PostsContainer from './Posts/PostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {APIProfileType} from '../../redux/profile-reducer';
+import {APIProfileType, getProfile, getStatus} from '../../redux/profile-reducer';
 import {UpdateProfileType} from "../../api/profileAPI";
+import {useDispatch, useSelector} from "react-redux";
+import { useAppSelector} from "../../redux/redux-store";
+import {selectIsAuth, selectProfile, selectProfileStatus} from "../../utilits/selectors/profile-selector";
+import {Redirect, useParams} from "react-router-dom";
 
 
 
-type ProfilePropsType ={
-  children?: ReactNode
-  profile:APIProfileType
-  status: string
-  updateStatus:(status:string)=> void
-  updateLargePhoto: (photo:File)=> void
-  updateProfile: (profile:UpdateProfileType)=>void
-}
+const Profile = () => {
 
+  const dispatch = useDispatch()
+  const isAuth = useAppSelector(selectIsAuth)
+  const profile = useAppSelector(selectProfile)
+  const status = useAppSelector(selectProfileStatus)
+  let {userId}:any = useParams()
 
+  useEffect(()=>{
+  if(isAuth){
+    if(!userId){
+      userId = '21095'
+    }
+    dispatch(getProfile(userId))
+    dispatch(getStatus(userId))
+  }}, [userId])
 
-const Profile = (props:ProfilePropsType) => {
- 
+  if (!isAuth) {
+    return <Redirect to={'/login'}/>
+  }
+
   return <div>
     <ProfileInfo
-        profile={props.profile}
-        status={props.status}
-        updateStatus={props.updateStatus}
-        updateLargePhoto={props.updateLargePhoto}
-        updateProfile={props.updateProfile}
+        profile={profile}
+        status={status}
     />
         <PostsContainer/>
   </div>
