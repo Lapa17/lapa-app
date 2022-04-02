@@ -34,24 +34,23 @@ const ProfileInfo = (props: ProfileInfoType) => {
 
     return (<div className={s.wrapper}>
 
-        <Row gutter={[8, 8]}>
+        <Row >
             <Col xs={{ span: 24, offset: 1 }}
                 md={{ span: 18, offset: 1 }}
                 lg={{ span: 10, offset: 1 }}
-                xl={{ span: 8, offset: 1 }}>
-                <Card hoverable
-                    cover={<img alt="example" src={props.profile.photos.large}
-                    style={{borderRadius: '5px'}} />}
+                xl={{ span: 8, offset: 1 }}
+                style={{boxShadow:'rgb(0 0 0 / 50%) 1px 2px 10px -5px', borderRadius: '10px', paddingTop:'30px', marginBottom:'10px', background:'#f5f6f7'}}
                 >
-                    <Button icon={<DownloadOutlined />} size={'large'} onClick={() => inRef && inRef.current && inRef.current.click()}>Add image</Button>
+                <Row justify="center" ><Image src={props.profile.photos.large} style={{borderRadius:'10px'}}/></Row>
+                <Row justify="center" style={{padding: '30px'}}>
+                    <Button type='primary' icon={<DownloadOutlined />}  size={'large'} onClick={() => inRef && inRef.current && inRef.current.click()}>Add image</Button>
                     <input
                         ref={inRef}
                         type={'file'}
                         style={{ display: 'none' }}
                         onChange={addPhoto}
                     />
-
-                </Card>
+                    </Row>
             </Col>
 
             <Col xs={{ span: 24, offset: 1 }}
@@ -61,8 +60,8 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 
                 >
                 <ProfileData {...props.profile} />
-                <Card hoverable style={{margin:'10px', borderRadius: '5px'}}><ProfileStatusWithHooks status={props.status} /></Card>
-                <Card style={{margin:'10px', borderRadius: '5px'}} hoverable>
+                <Card hoverable style={{marginBottom:'10px',boxShadow: 'rgb(0 0 0 / 50%) -6px 5px 10px -5px'}}><ProfileStatusWithHooks status={props.status} /></Card>
+                <Card style={{boxShadow:'rgb(0 0 0 / 50%) -6px 5px 10px -5px', marginBottom:'10px'}} hoverable>
                     <PostForm />
                 </Card>
             </Col>

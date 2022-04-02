@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import './App.css';
+// import './App.css';
 import NavbarLeft from './components/NavbarLeft/NavbarLeft';
 import NavbarRight from './components/NavbarRight/NavbarRight';
 import {NavLink, Redirect, Route, Switch, withRouter} from 'react-router-dom'
@@ -14,6 +14,7 @@ import Profile from "./components/Profile/Profile";
 import {HeaderRC} from './components/Header/Header';
 import Users from "./components/Users/Users";
 import 'antd/dist/antd.css';
+import './App.less'
 import {Button, Col, Layout, Menu, Row} from "antd";
 import {BarChartOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import Navigation from "./components/NavbarLeft/Navigations/Navigation/Navigation";
@@ -59,10 +60,11 @@ class App extends React.Component<AppPropsType> {
                     left: 0,
                     top: 0,
                     bottom: 0,
+                    boxShadow:'rgb(0 0 0 / 50%) 3px 4px 10px -5px',
                 }}
                 >
                     <div className="logo"/>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+                    <Menu mode="inline" defaultSelectedKeys={['4']}>
                         <Menu.Item key="1" icon={<UserOutlined/>}>
                             <NavLink to={'/profile'}>Profile</NavLink>
                         </Menu.Item>
@@ -78,7 +80,7 @@ class App extends React.Component<AppPropsType> {
                 <Layout className="site-layout" style={{marginLeft: 200}}>
                     <HeaderRC/>
                     <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
-                        <div className="site-layout-background" style={{padding: 24, textAlign: 'center'}}>
+                        <div className="site-layout-background" style={{padding: 50}}>
                             <Suspense fallback={<Preloader/>}>
                                 <Switch>
                                     <Route path='/profile/:userId?' render={() => <Profile/>}/>

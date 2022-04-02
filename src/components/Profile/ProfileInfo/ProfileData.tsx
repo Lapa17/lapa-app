@@ -105,35 +105,45 @@ export const ProfileData = ({ aboutMe, userId, fullName, lookingForAJob, looking
     return (
         <div>
 
-            {!editMode && <Card style={{margin:'10px', borderRadius: '5px'}} title={<span>{fullName}<EditOutlined onClick={onEditMode}></EditOutlined></span>} hoverable>
-                <Meta title={aboutMe} description={`I'm ${lookingForAJobDescription} and ${lookingForAJob ? 'find' : 'dont find'} a job`} />
-                <Meta title={<span><a href={contacts.github} target={'_blank'}>
-                    {contacts.github}</a></span>} />
-            </Card>}
-            {editMode && <Card style={{margin:'10px', borderRadius: '5px'}} title={<span><div>
-                Fullname: <input type="text" value={profile.fullName} onChange={(e) => onValueChange(e, 'fullName')} />
-            </div><Button onClick={offEditMode}>Save</Button></span>} hoverable>
+            {!editMode &&
+                <Card
+                    style={{ marginBottom: '10px', boxShadow:'rgb(0 0 0 / 50%) -6px 5px 10px -5px' }}
+                    title={<span>{fullName}<EditOutlined onClick={onEditMode}></EditOutlined></span>}
+                    hoverable>
+                    <Meta
+                        title={aboutMe}
+                        description={`I'm ${lookingForAJobDescription} and ${lookingForAJob ? 'find' : 'dont find'} a job`} />
+                    <Meta
+                        title={<span><a href={contacts.github} target={'_blank'}>
+                            {contacts.github}</a></span>} />
+                </Card>}
+            {editMode &&
+                <Card style={{ margin: '10px', borderRadius: '5px' }}
+                    title={<span><div>
+                        Fullname: <input type="text" value={profile.fullName} onChange={(e) => onValueChange(e, 'fullName')} />
+                    </div><Button onClick={offEditMode}>Save</Button></span>}
+                    hoverable>
 
-                <Meta title={<div>
-                    About me: <input type="text" value={profile.aboutMe} onChange={(e) => onValueChange(e, 'aboutMe')} />
-                </div>} description={<div>I'm {<span>
-                    lookingForAJobDescription: <input type="text" value={profile.lookingForAJobDescription}
-                        onChange={(e) => onValueChange(e, 'lookingForAJobDescription')} />
-                </span>} and {<span>
-                    lookingForAJob: <input type='checkbox' checked={profile.lookingForAJob} onChange={(e) => onValueChange(e, "lookingForAJob")} />
-                </span>} a job </div>} />
+                    <Meta
+                        title={<div>
+                            About me: <input type="text" value={profile.aboutMe} onChange={(e) => onValueChange(e, 'aboutMe')} />
+                        </div>}
+                        description={<div>I'm {<span>
+                            lookingForAJobDescription: <input type="text" value={profile.lookingForAJobDescription}
+                                onChange={(e) => onValueChange(e, 'lookingForAJobDescription')} />
+                        </span>} and {<span>
+                            lookingForAJob: <input type='checkbox' checked={profile.lookingForAJob} onChange={(e) => onValueChange(e, "lookingForAJob")} />
+                        </span>} a job </div>} />
 
-                <Meta title={<span><a href={contacts.github} target={'_blank'}>
-                    {<div>
-                        contacts: <input type="text" value={profile.contacts.github}
-                            onChange={(e) => onValueChange(e, 'contacts.github')} />
-                    </div>}</a></span>} />
+                    <Meta
+                        title={<span><a href={contacts.github} target={'_blank'}>
+                            {<div>
+                                contacts: <input type="text" value={profile.contacts.github}
+                                    onChange={(e) => onValueChange(e, 'contacts.github')} />
+                            </div>}</a></span>} />
 
 
-
-
-
-            </Card>}
+                </Card>}
 
         </div>
     )

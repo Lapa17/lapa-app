@@ -5,7 +5,7 @@ import { PostComment } from './PostComment';
 
 
 const Post:React.FC<PostMesageType> = React.memo((props) => { 
-  return <Col className="gutter-row" 
+  return <Col
   xs={{ span: 24, offset: 1 }} 
   md={{span: 10, offset: 1}} 
   lg={{ span: 7, offset: 1 }}

@@ -24,16 +24,14 @@ export const HeaderRC = () => {
 
 
     return (
-        <Header className="site-layout-background" style={{padding: 0}}>
-            <Col>
+        <Header style={{padding: 0, boxShadow: 'rgb(0 0 0 / 50%) -5px 8px 10px -5px', position:'fixed', right:0, zIndex:20, minWidth:300, textAlign:'center',borderRadius: 10}}>
                 {isAuth ? <Row>
-                        <Col span={10}></Col>
-                        <Col span={2}>{login}</Col>
-                        <Col span={6}> <Widgets smallPhoto={smallPhoto}/></Col>
-                        <Col span={4}><Button onClick={logOut}>Log out</Button></Col>
+                        <Col span={8}>{login}</Col>
+                        <Col span={8}> <Widgets smallPhoto={smallPhoto}/></Col>
+                        <Col span={8}><Button type='primary' onClick={logOut}>Log out</Button></Col>
                     </Row>
-                    : <Col span={4}><NavLink to={'/login'}>Login</NavLink></Col>}
-            </Col>
+                    : <Col span={24}><NavLink to={'/login'}>Login</NavLink></Col>}
+
         </Header>
     )
 

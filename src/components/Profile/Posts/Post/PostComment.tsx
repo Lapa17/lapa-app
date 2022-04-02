@@ -53,6 +53,7 @@ export const PostComment = (props: CommentPropsType) => {
                     {props.content}
                 </p>
             }
+            style={{boxShadow:'rgb(0 0 0 / 50%) -6px 5px 10px -5px'}}
             
             // datetime={
             //     <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
