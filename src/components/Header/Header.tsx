@@ -24,7 +24,7 @@ export const HeaderRC = () => {
 
 
     return (
-        <Header style={{padding: 0, boxShadow: 'rgb(0 0 0 / 50%) -5px 8px 10px -5px', position:'fixed', right:0, zIndex:20, minWidth:300, textAlign:'center',borderRadius: 10}}>
+        <Header style={{padding: 0, boxShadow: 'rgb(0 0 0 / 50%) -5px 8px 10px -5px', position:'fixed', right:0, zIndex:20, minWidth:300, textAlign:'center',borderRadius: 10, margin:5}}>
                 {isAuth ? <Row>
                         <Col span={8}>{login}</Col>
                         <Col span={8}> <Widgets smallPhoto={smallPhoto}/></Col>

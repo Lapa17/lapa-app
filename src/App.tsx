@@ -1,22 +1,22 @@
-import React, {Suspense} from 'react';
+import React, { Suspense } from 'react';
 // import './App.css';
 import NavbarLeft from './components/NavbarLeft/NavbarLeft';
 import NavbarRight from './components/NavbarRight/NavbarRight';
-import {NavLink, Redirect, Route, Switch, withRouter} from 'react-router-dom'
-import {DialogsDataType} from './redux/store';
+import { NavLink, Redirect, Route, Switch, withRouter } from 'react-router-dom'
+import { DialogsDataType } from './redux/store';
 import Login from './components/Login/Login';
-import {connect, ConnectedComponent} from 'react-redux';
-import {compose} from 'redux';
-import {initializedTC} from './redux/app-reducer';
-import {AppRootStateType} from './redux/redux-store';
+import { connect, ConnectedComponent } from 'react-redux';
+import { compose } from 'redux';
+import { initializedTC } from './redux/app-reducer';
+import { AppRootStateType } from './redux/redux-store';
 import Preloader from './components/common/Preloader/Preloader';
 import Profile from "./components/Profile/Profile";
-import {HeaderRC} from './components/Header/Header';
+import { HeaderRC } from './components/Header/Header';
 import Users from "./components/Users/Users";
 import 'antd/dist/antd.css';
 import './App.less'
-import {Button, Col, Layout, Menu, Row} from "antd";
-import {BarChartOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
+import { Button, Col, Layout, Menu, Row } from "antd";
+import { BarChartOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import Navigation from "./components/NavbarLeft/Navigations/Navigation/Navigation";
 import logo from './assets/images/lapa-logo.png'
 
@@ -46,49 +46,44 @@ class App extends React.Component<AppPropsType> {
 
     render() {
         if (!this.props.initialized) {
-            return <Preloader/>
+            return <Preloader />
         }
-        const {Header, Content, Footer, Sider} = Layout;
+        const { Header, Content, Footer, Sider } = Layout;
 
         return (
 
             <Layout hasSider>
-                <Sider style={{
-                    overflow: 'auto',
-                    height: '100vh',
-                    position: 'fixed',
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    boxShadow:'rgb(0 0 0 / 50%) 3px 4px 10px -5px',
-                }}
+                <Sider 
+                    breakpoint="md"
+                    collapsedWidth="0"
+                    className='sider'
                 >
-                    <div className="logo"/>
+                    <div className="logo" />
                     <Menu mode="inline" defaultSelectedKeys={['4']}>
-                        <Menu.Item key="1" icon={<UserOutlined/>}>
+                        <Menu.Item key="1" icon={<UserOutlined />}>
                             <NavLink to={'/profile'}>Profile</NavLink>
                         </Menu.Item>
-                        <Menu.Item key="2" icon={<VideoCameraOutlined/>}>
+                        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
                             <NavLink to={'/dialogs'}>Dialogs</NavLink>
                         </Menu.Item>
-                        <Menu.Item key="3" icon={<UploadOutlined/>}>
+                        <Menu.Item key="3" icon={<UploadOutlined />}>
                             <NavLink to={'/users'}>Users</NavLink>
                         </Menu.Item>
                     </Menu>
                 </Sider>
 
-                <Layout className="site-layout" style={{marginLeft: 200}}>
-                    <HeaderRC/>
-                    <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
-                        <div className="site-layout-background" style={{padding: 50}}>
-                            <Suspense fallback={<Preloader/>}>
+                <Layout className="site-layout">
+                    <HeaderRC />
+                    <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+                        <div className="site-layout-background" style={{ padding: '50px 20px' }}>
+                            <Suspense fallback={<Preloader />}>
                                 <Switch>
-                                    <Route path='/profile/:userId?' render={() => <Profile/>}/>
-                                    <Route path='/dialogs' render={() => <Dialogs/>}/>
-                                    <Route path='/users' render={() => <Users/>}/>
-                                    <Route path='/login' render={() => <Login/>}/>
-                                    <Route path='/' render={() => <Redirect to={'/profile'}/>}/>
-                                    <Route exact path='*' render={() => <div>404 PAGE NOT FOUND</div>}/>
+                                    <Route path='/profile/:userId?' render={() => <Profile />} />
+                                    <Route path='/dialogs' render={() => <Dialogs />} />
+                                    <Route path='/users' render={() => <Users />} />
+                                    <Route path='/login' render={() => <Login />} />
+                                    <Route path='/' render={() => <Redirect to={'/profile'} />} />
+                                    <Route exact path='*' render={() => <div>404 PAGE NOT FOUND</div>} />
                                 </Switch>
                             </Suspense>
                         </div>
@@ -105,5 +100,5 @@ const mapStateToProps = (state: AppRootStateType) => ({
     initialized: state.app.initialized
 })
 
-export default compose<ConnectedComponent<(props: any) => JSX.Element, Omit<any, "isAuth" | "dispatch">>>(withRouter, connect(mapStateToProps, {initializedTC}))(App)
+export default compose<ConnectedComponent<(props: any) => JSX.Element, Omit<any, "isAuth" | "dispatch">>>(withRouter, connect(mapStateToProps, { initializedTC }))(App)
 

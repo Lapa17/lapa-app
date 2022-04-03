@@ -12,9 +12,7 @@ const Posts: React.FC<AddPostType> = React.memo(({addPost, myPost, newPost, post
     const postsElements = posts.map((m) => <Post profile={profile} key={m.id} message={m.postMessage} likes={m.likes} id={m.id}/>)
 
     return <div>
-            <Row  gutter={[8, 8]}>
                 {postsElements}
-            </Row>
     </div>
 })
 

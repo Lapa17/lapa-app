@@ -9,3 +9,39 @@
   font-style: normal;
   }
 
+// Mode: Tablet
+@tablet: 768px;
+@tablet-area: 750px;
+
+// Mode: Desktop
+@desktop: 1024px;
+@desktop-area: 970px;
+
+// Area site
+.sider {
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 21;
+}
+.sider > .ant-layout-sider-zero-width-trigger.ant-layout-sider-zero-width-trigger-left{
+  background: #AB97F3;
+}
+
+@media (min-width: @tablet) {
+  .sider {
+    width: @tablet-area;
+  }
+}
+
+@media (min-width: @desktop) {
+  .sider {
+    width: @desktop-area;
+    overflow: 'auto';
+    height: '100vh';
+    position: 'fixed';
+    left: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: 'rgb(0 0 0 / 50%) 3px 4px 10px -5px';
+  }
+}

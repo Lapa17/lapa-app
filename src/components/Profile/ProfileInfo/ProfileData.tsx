@@ -106,22 +106,25 @@ export const ProfileData = ({ aboutMe, userId, fullName, lookingForAJob, looking
         <div>
 
             {!editMode &&
+            <>
                 <Card
-                    style={{ marginBottom: '10px', boxShadow:'rgb(0 0 0 / 50%) -6px 5px 10px -5px' }}
-                    title={<span>{fullName}<EditOutlined onClick={onEditMode}></EditOutlined></span>}
+                    style={{ marginBottom: '10px', boxShadow:'rgb(0 0 0 / 50%) -6px 5px 10px -5px'}}
+                    title={<span style={{fontSize:20}}>{fullName}<EditOutlined onClick={onEditMode}></EditOutlined></span>}
                     hoverable>
                     <Meta
                         title={aboutMe}
-                        description={`I'm ${lookingForAJobDescription} and ${lookingForAJob ? 'find' : 'dont find'} a job`} />
-                    <Meta
-                        title={<span><a href={contacts.github} target={'_blank'}>
-                            {contacts.github}</a></span>} />
-                </Card>}
+                        description={`I'm ${lookingForAJobDescription} and ${lookingForAJob ? 'find' : 'dont find'} a job`} />                        
+                </Card>
+                <Card title='Contacts:' style={{ marginBottom: '10px', boxShadow:'rgb(0 0 0 / 50%) -6px 5px 10px -5px' }} >
+                    <Meta title={<span><a href={contacts.github} target={'_blank'}>
+                {contacts.github}</a></span>}/>
+                </Card>
+                </>}
             {editMode &&
                 <Card style={{ margin: '10px', borderRadius: '5px' }}
-                    title={<span><div>
+                    title={<span>
                         Fullname: <input type="text" value={profile.fullName} onChange={(e) => onValueChange(e, 'fullName')} />
-                    </div><Button onClick={offEditMode}>Save</Button></span>}
+                    <Button type="primary" onClick={offEditMode}>Save</Button></span>}
                     hoverable>
 
                     <Meta

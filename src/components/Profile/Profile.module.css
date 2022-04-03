@@ -1,0 +1,10 @@
+  @media (max-width: 990px) {
+    .avatarCard{
+      display: none;
+    }
+  }
+  
+  .avatarCard{
+    box-shadow: rgb(0 0 0 / 50%) 5px 6px 10px -5px;
+    text-align: center;
+  }

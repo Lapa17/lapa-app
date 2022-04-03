@@ -47,7 +47,7 @@ const Profile = () => {
     <div>
       <Space direction="vertical" size="middle" style={{ display: 'flex' }} >
         <ProfileInfo profile={profile} status={status} />
-        <PostsContainer />
+        
       </Space>
     </div>)
 }

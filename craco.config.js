@@ -15,7 +15,8 @@ module.exports = {
             '@layout-sider-background':'linear-gradient(180deg, rgba(245,246,247,1) 25%, rgba(215,237,252,1) 65%)',
             '@menu-bg':'rgba(245,246,247,1)',
             '@btn-border-radius-base':'10px',
-            '@card-background':'#f5f6f7'
+            '@card-background':'#f5f6f7',
+            '@layout-trigger-background':'#AB97F3'
           },
             javascriptEnabled: true,
           },
