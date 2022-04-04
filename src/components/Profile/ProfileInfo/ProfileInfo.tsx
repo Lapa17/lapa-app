@@ -67,7 +67,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
             >
                 <ProfileData {...props.profile} />
                 <Card style={{ boxShadow: 'rgb(0 0 0 / 50%) -6px 5px 10px -5px', marginBottom: '10px' }} hoverable>
-                    <PostForm />
+                    <PostForm post={''}/>
                 </Card>
             </Col>
 
