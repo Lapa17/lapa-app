@@ -10,10 +10,11 @@ import { EditOutlined, EllipsisOutlined, SettingOutlined } from "@ant-design/ico
 import { Image } from 'antd';
 import { Button, Space, Badge  } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-import { PostForm } from '../../Forms/PostForm';
+
 import PostsContainer from '../Posts/PostsContainer';
 import { UserOutlined } from '@ant-design/icons';
 import { profile } from 'console';
+import { PostForm } from '../../Forms/PostForm';
 
 
 type ProfileInfoType = {
@@ -66,8 +67,9 @@ const ProfileInfo = (props: ProfileInfoType) => {
 
             >
                 <ProfileData {...props.profile} />
-                <Card style={{ boxShadow: 'rgb(0 0 0 / 50%) -6px 5px 10px -5px', marginBottom: '10px' }} hoverable>
-                    <PostForm post={''}/>
+                <Card style={{ boxShadow: 'rgb(0 0 0 / 50%) -6px 5px 10px -5px', marginBottom: '10px' }} hoverable
+                >
+                    <PostForm />
                 </Card>
             </Col>
 

@@ -16,7 +16,8 @@ module.exports = {
             '@menu-bg':'rgba(245,246,247,1)',
             '@btn-border-radius-base':'10px',
             '@card-background':'#f5f6f7',
-            '@layout-trigger-background':'#AB97F3'
+            '@layout-trigger-background':'#AB97F3',
+            '@card-padding-base': '20px'
           },
             javascriptEnabled: true,
           },
