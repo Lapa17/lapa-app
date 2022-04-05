@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import Preloader from '../common/Preloader/Preloader';
-import { Paginator } from '../common/Paginator/Paginator';
-import { User } from './User';
+import {Paginator} from '../common/Paginator/Paginator';
+import {User} from './User';
 import {
     getCurrentPage, getFollowInProgressData,
     getIsFetchingData,
@@ -10,8 +10,9 @@ import {
     getUser
 } from "../../utilits/selectors/user-selector";
 import {useAppSelector} from "../../redux/redux-store";
-import {getPage, getUsers } from '../../redux/users-reducer';
+import {getPage, getUsers} from '../../redux/users-reducer';
 import {useDispatch} from "react-redux";
+import {Row} from "antd";
 
 
 type PhotosType = {
@@ -30,15 +31,15 @@ export type NewUsersType = {
 
 
 const Users = () => {
-        const dispatch = useDispatch()
-        const users = useAppSelector(getUser)
-        const pageSize = useAppSelector(getPageSize)
-        const totalUserCounter = useAppSelector(getTotalUserCounter)
-        const currentPage = useAppSelector(getCurrentPage)
-        const isFetching = useAppSelector(getIsFetchingData)
-        const followInProgress = useAppSelector(getFollowInProgressData)
+    const dispatch = useDispatch()
+    const users = useAppSelector(getUser)
+    const pageSize = useAppSelector(getPageSize)
+    const totalUserCounter = useAppSelector(getTotalUserCounter)
+    const currentPage = useAppSelector(getCurrentPage)
+    const isFetching = useAppSelector(getIsFetchingData)
+    const followInProgress = useAppSelector(getFollowInProgressData)
 
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(getUsers(currentPage, pageSize))
     }, [])
 
@@ -47,11 +48,18 @@ const Users = () => {
     }
 
     return (<div>
-        {isFetching ? <Preloader /> : null}
-        <Paginator pageSize={pageSize} totalItemsCounter={totalUserCounter} currentPage={currentPage} onPageClick={onPageClick} />
-        {users.map(u => <User key={u.id} user={u} followInProgress={followInProgress} />
-        )}
-    </div >
+            {isFetching ? <Preloader/> : null}
+
+            <Row justify={'center'}>
+                {users.map(u => <User key={u.id} user={u} followInProgress={followInProgress}/>)}
+            </Row>
+            <Row justify={'center'}>
+                <Paginator pageSize={pageSize}
+                           totalItemsCounter={totalUserCounter}
+                           currentPage={currentPage}
+                           onPageClick={onPageClick}/>
+            </Row>
+        </div>
     )
 }
 

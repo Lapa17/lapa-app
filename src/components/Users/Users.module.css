@@ -5,19 +5,14 @@
 }
 
 .img {
-    width: 50px;
+    width: 70px;
 }
 
 .info{
-    display: grid;
-    grid-template-columns: 8fr 2fr;
-    width: 90%;
-    border: 1px solid ;
-    padding: 5px;
+    padding: 10px;
 }
 
 .items{
-    border: 1px solid ;
     display: grid;
     justify-items: center;
     align-items: center;

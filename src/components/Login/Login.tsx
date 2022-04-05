@@ -7,7 +7,7 @@ import { StateDataType } from '../../redux/store';
 import { loginningValidationSchema } from '../../utilits/validations/validationScheme';
 import { yupResolver } from '@hookform/resolvers/yup'
 import {getCaptchaUrl, setLoginData} from "../../redux/login-reducer";
-import {Button, Card, Col, Form, Input, Row} from "antd";
+import {Button, Card, Checkbox, Col, Form, Input, Row} from "antd";
 
 type Inputs = {
     login: string,
@@ -64,7 +64,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
                     <Input name="password" placeholder={'Password'}/>
                 </Form.Item>
                 <Form.Item name="rememberMe">
-                  <span>Remember me</span>  <Input type='checkbox' name="rememberMe" />
+                    <Checkbox name="rememberMe">Remember me</Checkbox>
                 </Form.Item>
                 {props.captchaUrl && <Form.Item name="captcha">
                     <img src={props.captchaUrl} style={{width:'200px'}}/>

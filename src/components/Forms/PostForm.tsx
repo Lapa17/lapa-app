@@ -1,19 +1,10 @@
-import { ErrorMessage, Field, Formik, FormikErrors, FormikHelpers, FormikProps, useFormik, withFormik } from "formik";
-import * as yup from 'yup'
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { postValidationSchema } from "../../utilits/validations/validationScheme";
 import { addPost } from "../../redux/profile-reducer";
 import { useDispatch } from "react-redux";
 import s from '../Profile/Posts/Posts.module.css'
 import { Col, Row } from "antd";
 import { Form, Input, Button, message, Checkbox } from 'antd';
-
-type PostFormValueType = {
-    post: string
-}
-
-
-
+import {SendOutlined} from '@ant-design/icons'
 
 export const PostForm = () => {
 
@@ -60,8 +51,8 @@ export const PostForm = () => {
                         lg={{ span: 5, offset: 1 }}
                         xl={{ span: 5, offset: 1 }}>
                     <Form.Item style={{marginBottom: 0}}>
-                        <Button type="primary" htmlType="submit" >
-                            Add post
+                        <Button type="primary" htmlType="submit" icon={<SendOutlined className={s.buttonImg}/>}>
+                            <span className={s.buttonText}>Add post</span>
                         </Button>
                     </Form.Item>
                 </Col>

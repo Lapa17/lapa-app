@@ -1,7 +1,5 @@
 import React, { Suspense } from 'react';
 // import './App.css';
-import NavbarLeft from './components/NavbarLeft/NavbarLeft';
-import NavbarRight from './components/NavbarRight/NavbarRight';
 import { NavLink, Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import { DialogsDataType } from './redux/store';
 import Login from './components/Login/Login';
@@ -15,10 +13,8 @@ import { HeaderRC } from './components/Header/Header';
 import Users from "./components/Users/Users";
 import 'antd/dist/antd.css';
 import './App.less'
-import { Button, Col, Layout, Menu, Row } from "antd";
-import { BarChartOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
-import Navigation from "./components/NavbarLeft/Navigations/Navigation/Navigation";
-import logo from './assets/images/lapa-logo.png'
+import { Layout, Menu} from "antd";
+import { UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 
 type AppPropsType = {
     initializedTC: () => void
@@ -48,7 +44,7 @@ class App extends React.Component<AppPropsType> {
         if (!this.props.initialized) {
             return <Preloader />
         }
-        const { Header, Content, Footer, Sider } = Layout;
+        const { Content, Footer, Sider } = Layout;
 
         return (
 
@@ -88,7 +84,7 @@ class App extends React.Component<AppPropsType> {
                             </Suspense>
                         </div>
                     </Content>
-                    <Footer style={{background:'linear-gradient(5deg, #d7edfc 30%, #ffecb2 60%)'}}>Designed by me</Footer>
+                    <Footer style={{background:'linear-gradient(5deg, #d7edfc 30%, #ffecb2 60%)'}}>Designed by Lapa17</Footer>
                 </Layout>
 
             </Layout>

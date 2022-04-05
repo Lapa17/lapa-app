@@ -1,19 +1,16 @@
 import s from '../Profile.module.css';
 import { APIProfileType, updateLargePhoto } from "../../../redux/profile-reducer";
 import Preloader from "../../common/Preloader/Preloader";
-import { ChangeEvent, MouseEventHandler, useRef } from "react";
+import { ChangeEvent, useRef } from "react";
 import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks";
 import { useDispatch } from "react-redux";
 import { ProfileData } from "./ProfileData";
 import { Avatar, Card, Col, Row } from "antd";
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from "@ant-design/icons";
 import { Image } from 'antd';
 import { Button, Space, Badge  } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 
 import PostsContainer from '../Posts/PostsContainer';
-import { UserOutlined } from '@ant-design/icons';
-import { profile } from 'console';
 import { PostForm } from '../../Forms/PostForm';
 
 
