@@ -32,7 +32,10 @@ const Profile = () => {
   useEffect(() => {
     if (isAuth) {
       if (!userId) {
-        userId = mainUserId
+        if(mainUserId !== 0){
+          userId = mainUserId
+        }
+        else userId = 21095
       }
       dispatch(getProfile(userId))
       dispatch(getStatus(userId))

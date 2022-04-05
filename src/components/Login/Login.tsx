@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { StateDataType } from '../../redux/store';
 import { loginningValidationSchema } from '../../utilits/validations/validationScheme';
 import { yupResolver } from '@hookform/resolvers/yup'
 import {getCaptchaUrl, setLoginData} from "../../redux/login-reducer";
+import {Button, Card, Col, Form, Input, Row} from "antd";
 
 type Inputs = {
     login: string,
@@ -30,10 +31,10 @@ type LoginPropsType = {
 }
 
 const Login: React.FC<LoginPropsType> = (props) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
-        resolver: yupResolver (loginningValidationSchema)
-    });
-
+    // const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
+    //     resolver: yupResolver (loginningValidationSchema)
+    // });
+    const [form] = Form.useForm()
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         loginRequest(data.login, data.password, data.rememberMe, data.captcha);
         props.setLoginData(data)
@@ -45,33 +46,39 @@ const Login: React.FC<LoginPropsType> = (props) => {
     if (props.isAuth) {
         return <Redirect to={'/profile'} />
     }
-    
+    // {pattern: /^[A-Za-z]+$/i , message: 'Incorrect symbols'},
     return (
-        
-        <div>
+        <Row justify={"center"} style={{height:'90vh'}}>
+        <Col xs={{ span: 23, offset: 1 }}
+             md={{ span: 23, offset: 1 }}
+             lg={{ span: 8, offset: 1 }}
+             xl={{ span: 8, offset: 1 }}>
+            <Card style={{boxShadow: 'rgb(0 0 0 / 50%) 5px 6px 10px -5px', textAlign:"center"}}>
             <h1>LOGIN PAGE</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <input defaultValue={''} {...register("login", { required: true, pattern: /^[A-Za-z]+$/i })} />
-                </div>
-                {props.errorMessage && <span>{props.errorMessage}</span>}
-                {errors.login && <span>This field is required</span>}
-                <div>
-                    <input defaultValue={''} type='password' {...register("password", { required: true })} />
-                </div>
-                {errors.password && <span>{errors.password.message}</span>}
-                <div>
-                    <input type='checkbox' {...register("rememberMe")} />
-                </div>
-                {props.captchaUrl && <div>
+            <Form onFinish={onSubmit} form={form}>
+                <Form.Item name="login" rules={[{required: true, message:'You need to write your Email'},
+                    {type:'email', message: 'Must be Email' }]}>
+                    <Input name="login" placeholder={'Email'}/>
+                </Form.Item>
+                <Form.Item name="password" rules={[{required: true, message:'You need to write your password'}]}>
+                    <Input name="password" placeholder={'Password'}/>
+                </Form.Item>
+                <Form.Item name="rememberMe">
+                  <span>Remember me</span>  <Input type='checkbox' name="rememberMe" />
+                </Form.Item>
+                {props.captchaUrl && <Form.Item name="captcha">
                     <img src={props.captchaUrl} style={{width:'200px'}}/>
-                    <input type='text' {...register("captcha")}/>
-                </div>}
-                <div>
-                    <input type="submit" />
-                </div>
-            </form>
-        </div>
+                    <Input type='text' name="captcha"/>
+                </Form.Item>}
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                        Submit
+                    </Button>
+                </Form.Item>
+            </Form>
+            </Card>
+        </Col>
+        </Row>
     )
 }
 

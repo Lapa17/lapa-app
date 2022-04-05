@@ -75,7 +75,7 @@ class App extends React.Component<AppPropsType> {
                 <Layout className="site-layout">
                     <HeaderRC />
                     <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-                        <div className="site-layout-background" style={{ padding: '50px 20px' }}>
+                        <div className="site-layout-background" style={{ padding: '60px 20px' }}>
                             <Suspense fallback={<Preloader />}>
                                 <Switch>
                                     <Route path='/profile/:userId?' render={() => <Profile />} />
@@ -88,7 +88,9 @@ class App extends React.Component<AppPropsType> {
                             </Suspense>
                         </div>
                     </Content>
+                    <Footer style={{background:'linear-gradient(5deg, #d7edfc 30%, #ffecb2 60%)'}}>Designed by me</Footer>
                 </Layout>
+
             </Layout>
         );
     }
