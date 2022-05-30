@@ -6,6 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import TagManager from 'react-gtm-module';
+
+const tagManagerArgs = {
+  gtmId: 'GTM-WF95T4J'
+}
+
+TagManager.initialize(tagManagerArgs)
 
 
   ReactDOM.render(
