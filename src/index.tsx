@@ -7,12 +7,16 @@ import store from './redux/redux-store';
 import {BrowserRouter, HashRouter} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import TagManager from 'react-gtm-module';
+import ReactGA from 'react-ga';
 
-const tagManagerArgs = {
-  gtmId: 'GTM-WF95T4J'
-}
+// const tagManagerArgs = {
+//   gtmId: 'GTM-WF95T4J'
+// }
+// TagManager.initialize(tagManagerArgs)
 
-TagManager.initialize(tagManagerArgs)
+const TRACKING_ID = "UA-156420292-2";
+ReactGA.initialize(TRACKING_ID);
+
 
 
   ReactDOM.render(

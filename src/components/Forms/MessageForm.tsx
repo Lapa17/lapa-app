@@ -3,14 +3,18 @@ import React from "react";
 import {messageValidationSchema} from "../../utilits/validations/validationScheme";
 import {addMessage} from "../../redux/dialogs-reducer";
 import {useDispatch} from "react-redux";
+import useAnalyticsEventTracker from "../../utilits/ga/useAnalyticsEventTracker";
 
 type MessageFormValueType = {
     message: string
 }
 
 export const MessageForm = () => {
+
+    const gaEventTracker = useAnalyticsEventTracker('Contact us')
     const dispatch = useDispatch()
     const formSubmit = (values: MessageFormValueType, {setSubmitting}: FormikHelpers<{ message: string; }>) => {
+        gaEventTracker('call')
         dispatch(addMessage(values.message))
         setSubmitting(false);
 

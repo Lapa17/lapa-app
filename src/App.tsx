@@ -15,6 +15,7 @@ import 'antd/dist/antd.css';
 import './App.less'
 import { Layout, Menu} from "antd";
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import ReactGA from 'react-ga';
 
 type AppPropsType = {
     initializedTC: () => void
@@ -34,6 +35,7 @@ class App extends React.Component<AppPropsType> {
     componentDidMount() {
         this.props.initializedTC()
         window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
+        ReactGA.pageview(window.location.pathname + window.location.search);
     }
 
     componentWillUnmount() {
