@@ -11,10 +11,10 @@ type MessageFormValueType = {
 
 export const MessageForm = () => {
 
-    const gaEventTracker = useAnalyticsEventTracker('Contact us')
+    const gaEventTracker = useAnalyticsEventTracker('Message form')
     const dispatch = useDispatch()
     const formSubmit = (values: MessageFormValueType, {setSubmitting}: FormikHelpers<{ message: string; }>) => {
-        gaEventTracker('call')
+        gaEventTracker('add message', values.message)
         dispatch(addMessage(values.message))
         setSubmitting(false);
 

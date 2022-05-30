@@ -13,6 +13,8 @@ import {useAppSelector} from "../../redux/redux-store";
 import {getPage, getUsers} from '../../redux/users-reducer';
 import {useDispatch} from "react-redux";
 import {Row} from "antd";
+import VisibilitySensor from 'react-visibility-sensor'
+import useAnalyticsEventTracker from "../../utilits/ga/useAnalyticsEventTracker";
 
 
 type PhotosType = {
@@ -38,6 +40,7 @@ const Users = () => {
     const currentPage = useAppSelector(getCurrentPage)
     const isFetching = useAppSelector(getIsFetchingData)
     const followInProgress = useAppSelector(getFollowInProgressData)
+    const gaEventTracker = useAnalyticsEventTracker('Pagination visibility')
 
     useEffect(() => {
         dispatch(getUsers(currentPage, pageSize))
@@ -47,6 +50,12 @@ const Users = () => {
         dispatch(getPage(currentPage, pageSize))
     }
 
+    const paginationVisibleChange = (visible: boolean) => {
+        if (visible) {
+            gaEventTracker('pagination became visible')
+        }
+    }
+
     return (<div>
             {isFetching ? <Preloader/> : null}
 
@@ -54,11 +63,13 @@ const Users = () => {
                 {users.map(u => <User key={u.id} user={u} followInProgress={followInProgress}/>)}
             </Row>
             <Row justify={'center'}>
+                <VisibilitySensor onChange={paginationVisibleChange}>
                 <Paginator pageSize={pageSize}
                            totalItemsCounter={totalUserCounter}
                            currentPage={currentPage}
                            onPageClick={onPageClick}/>
-            </Row>
+                </VisibilitySensor>
+                </Row>
         </div>
     )
 }

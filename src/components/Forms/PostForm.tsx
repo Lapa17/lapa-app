@@ -5,6 +5,7 @@ import s from '../Profile/Posts/Posts.module.css'
 import { Col, Row } from "antd";
 import { Form, Input, Button, message, Checkbox } from 'antd';
 import {SendOutlined} from '@ant-design/icons'
+import useAnalyticsEventTracker from "../../utilits/ga/useAnalyticsEventTracker";
 
 export const PostForm = () => {
 
@@ -19,7 +20,7 @@ export const PostForm = () => {
     const { TextArea } = Input;
     const dispatch = useDispatch()
     const formSubmit = (values: { post: string }) => {
-        console.log('Success:', values);
+        gaEventTracker('Add post', values.post)
         dispatch(addPost(values.post))
         form.resetFields()
     }
@@ -31,7 +32,7 @@ export const PostForm = () => {
         form.setFieldsValue({ post: e.currentTarget.value })
     }
 
-    const addPostClass = `addPost`
+    const gaEventTracker = useAnalyticsEventTracker('Post form')
 
     return (
         <Form onFinish={formSubmit} form={form}
@@ -53,7 +54,7 @@ export const PostForm = () => {
                         lg={{ span: 5, offset: 1 }}
                         xl={{ span: 5, offset: 1 }}>
                     <Form.Item style={{marginBottom: 0}}>
-                        <Button type="primary" className={addPostClass} htmlType="submit" icon={<SendOutlined className={s.buttonImg}/>}>
+                        <Button type="primary" htmlType="submit" icon={<SendOutlined className={s.buttonImg}/>}>
                             <span className={s.buttonText}>Add post</span>
                         </Button>
                     </Form.Item>

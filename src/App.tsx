@@ -16,6 +16,7 @@ import './App.less'
 import { Layout, Menu} from "antd";
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import ReactGA from 'react-ga';
+import GoogleAnalyticsPageview from "./utilits/ga/GoogleAnalyticsPageview";
 
 type AppPropsType = {
     initializedTC: () => void
@@ -88,7 +89,7 @@ class App extends React.Component<AppPropsType> {
                     </Content>
                     <Footer style={{background:'linear-gradient(5deg, #d7edfc 30%, #ffecb2 60%)'}}>Designed by Lapa17</Footer>
                 </Layout>
-
+                <GoogleAnalyticsPageview />
             </Layout>
         );
     }
