@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/lapa-app/static/css/main.cad6e312.chunk.css",
-    "main.js": "/lapa-app/static/js/main.a9bc0584.chunk.js",
-    "main.js.map": "/lapa-app/static/js/main.a9bc0584.chunk.js.map",
+    "main.js": "/lapa-app/static/js/main.bc1385d1.chunk.js",
+    "main.js.map": "/lapa-app/static/js/main.bc1385d1.chunk.js.map",
     "runtime-main.js": "/lapa-app/static/js/runtime-main.3266b40c.js",
     "runtime-main.js.map": "/lapa-app/static/js/runtime-main.3266b40c.js.map",
     "static/css/2.fe5ac6bf.chunk.css": "/lapa-app/static/css/2.fe5ac6bf.chunk.css",
@@ -29,6 +29,6 @@
     "static/css/2.fe5ac6bf.chunk.css",
     "static/js/2.82706a1e.chunk.js",
     "static/css/main.cad6e312.chunk.css",
-    "static/js/main.a9bc0584.chunk.js"
+    "static/js/main.bc1385d1.chunk.js"
   ]
 }
