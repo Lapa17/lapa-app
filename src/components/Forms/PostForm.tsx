@@ -31,7 +31,7 @@ export const PostForm = () => {
         form.setFieldsValue({ post: e.currentTarget.value })
     }
 
-    const addPostClass = `${s.buttonText} addPost`
+    const addPostClass = `addPost`
 
     return (
         <Form onFinish={formSubmit} form={form}
@@ -53,8 +53,8 @@ export const PostForm = () => {
                         lg={{ span: 5, offset: 1 }}
                         xl={{ span: 5, offset: 1 }}>
                     <Form.Item style={{marginBottom: 0}}>
-                        <Button type="primary" htmlType="submit" icon={<SendOutlined className={s.buttonImg}/>}>
-                            <span className={addPostClass}>Add post</span>
+                        <Button type="primary" className={addPostClass} htmlType="submit" icon={<SendOutlined className={s.buttonImg}/>}>
+                            <span className={s.buttonText}>Add post</span>
                         </Button>
                     </Form.Item>
                 </Col>
